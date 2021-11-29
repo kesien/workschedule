@@ -1,0 +1,70 @@
+<ngx-spinner></ngx-spinner>
+<div class="container">
+  <h4 class="text-center mb-5">Profil beállítások</h4>
+  <div *ngIf="user" class="row justify-content-center">
+    <div class="col-12 col-md-6 col-ld-4">
+      <form #userForm="ngForm" (ngSubmit)="updateInfo()">
+        <div class="mb-3">
+          <label for="username" class="form-label">Felhasználónév</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            placeholder="Felhasználónév"
+            required
+            name="userName"
+            [(ngModel)]="user.userName"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Név</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Név"
+            required
+            name="name"
+            [(ngModel)]="user.name"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Új jelszó</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="Új jelszó"
+            required
+            name="password"
+            [(ngModel)]="user.password"
+            #password
+          />
+        </div>
+        <div class="mb-3">
+          <label for="passwordre" class="form-label"
+            >Új jelszó mégegyszer</label
+          >
+          <input
+            type="password"
+            class="form-control"
+            id="passwordre"
+            required
+            name="passwordre"
+            placeholder="Kérlek add meg az új jelszavad mégegyszer"
+            #passwordRepeat
+          />
+        </div>
+        <div class="d-grid">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!userForm.valid"
+          >
+            Mentés
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,495 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --color-primary: #34495e;
+  --color-primary-light: hsl(210, 29%, 60%);
+  --color-primary-dark: #2c3e50;
+  --color-secondary: #ecf0f1;
+  --color-secondary-dark: #bdc3c7;
+  --color-white: #fff;
+  --color-green: #2ecc71;
+  --color-green-light: hsl(145, 63%, 80%);
+  --color-green-dark: #27ae60;
+  --color-light-grey: #d8d8d8;
+  --color-red: #e74c3c;
+  --color-blue: #2980b9;
+}
+
+.calendar__table {
+  max-width: 100%;
+  display: -ms-grid;
+  display: flex;
+  flex-direction: column;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.calendar__header {
+  display: flex;
+}
+
+.calendar__row {
+  display: flex;
+}
+
+.calendar__row > *:not(:first-child) {
+  flex: 1;
+}
+
+@media (max-width: 68.75em) {
+  .calendar__table {
+    font-size: 14px;
+    -ms-grid-columns: 7% (13.28%) [7];
+    grid-template-columns: 7% repeat(7, 13.28%);
+  }
+}
+
+@media (max-width: 40.625em) {
+  .calendar__table {
+    -ms-grid-rows: 12.5rem;
+    grid-template-rows: 12.5rem;
+    grid-auto-rows: 12.5rem;
+    -ms-grid-columns: 100%;
+    grid-template-columns: 100%;
+    row-gap: 1.25rem;
+    overflow: hidden;
+  }
+}
+
+.calendar__day {
+  width: 100%;
+  height: 8.75rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+.calendar__day--hours {
+  flex: 0.3;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--color-white);
+  background-color: var(--color-green);
+  width: 100%;
+  justify-self: stretch;
+}
+
+.calendar__day--half {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.calendar__day--half:nth-of-type(even) {
+  background-color: var(--color-green-dark);
+}
+
+.calendar__day--empty {
+  font-size: 2.62rem;
+  color: var(--color-white);
+  background-color: var(--color-red);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  height: 100%;
+  border-bottom: 1px solid black;
+}
+
+@media (max-width: 68.75em) {
+  .calendar__day--empty {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 40.625em) {
+  .calendar__day--empty {
+    display: none !important;
+  }
+}
+
+.calendar__daynumber {
+  font-size: 3.12rem;
+  font-weight: 400;
+  color: var(--color-primary-dark);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  opacity: 0.1;
+  z-index: 15;
+}
+
+@media (max-width: 68.75em) {
+  .calendar__daynumber {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 40.625em) {
+  .calendar__daynumber {
+    display: none !important;
+  }
+}
+
+.calendar__personholiday {
+  font-size: 11px;
+  text-align: center;
+  color: var(--color-green-dark);
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@media (max-width: 40.625em) {
+  .calendar__personholiday {
+    height: 2.5rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-right: 0.62rem;
+    font-size: 12px;
+    font-weight: 300;
+  }
+}
+
+.calendar__800,
+.calendar__930 {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: space-evenly;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media (max-width: 68.75em) {
+  .calendar__800,
+  .calendar__930 {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 40.625em) {
+  .calendar__800,
+  .calendar__930 {
+    position: relative;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding-left: 30%;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 40.625em) {
+  .calendar__800::before,
+  .calendar__930::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 20%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: var(--color-secondary);
+    font-weight: 700;
+  }
+}
+
+.calendar__800 {
+  background-color: var(--color-secondary);
+  padding-top: 5px;
+}
+
+@media (max-width: 40.625em) {
+  .calendar__800 {
+    margin-top: 2.5rem;
+  }
+}
+
+@media (max-width: 40.625em) {
+  .calendar__800::before {
+    content: "8:00";
+    background-color: var(--color-green);
+  }
+}
+
+.calendar__930 {
+  background-color: var(--color-secondary-dark);
+}
+
+@media (max-width: 40.625em) {
+  .calendar__930::before {
+    content: "9:30";
+    background-color: var(--color-green-dark);
+  }
+}
+
+.calendar__selectable,
+.calendar__editable {
+  position: relative;
+  cursor: pointer;
+}
+
+.calendar__plus-icon,
+.calendar__edit-icon {
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  z-index: 20;
+}
+
+.calendar__edit-icon {
+  display: none;
+  right: 0;
+  top: 0;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  color: var(--color-green);
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.calendar__edit-icon:hover {
+  color: var(--color-green-dark);
+}
+
+.calendar__plus-icon {
+  font-size: 3rem;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  height: 7rem;
+  width: 7rem;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#2ecc71),
+    to(#27ae60)
+  );
+  background: linear-gradient(to bottom, #2ecc71, #27ae60);
+  border-radius: 50%;
+  -webkit-box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 40.625em) {
+  .calendar__plus-icon {
+    margin-left: 10%;
+    margin-top: 2rem;
+  }
+}
+
+.calendar__selectable:hover .calendar__plus-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  opacity: 1;
+  -webkit-box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.4);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.calendar__weekend {
+  background-color: var(--color-blue);
+  position: relative;
+  height: 8.75rem;
+  border-bottom: 1px solid black;
+}
+
+@media (max-width: 40.625em) {
+  .calendar__weekend {
+    display: none !important;
+  }
+}
+
+.calendar__weekend .calendar__daynumber {
+  color: var(--color-secondary);
+  opacity: 0.7;
+}
+
+.calendar__holiday {
+  background-color: var(--color-red);
+  position: relative;
+  color: var(--color-secondary);
+  font-size: 2.62rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  height: 8.75rem;
+  border-bottom: 1px solid black;
+}
+
+@media (max-width: 68.75em) {
+  .calendar__holiday {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 40.625em) {
+  .calendar__holiday {
+    padding-top: 2.5rem;
+    font-size: 3.12rem;
+  }
+}
+
+.calendar__holiday > .calendar__800 {
+  border-bottom: none;
+}
+
+.cell {
+  display: flex;
+  flex: 2;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cell:first-child {
+  border-left: 1px solid var(--color-primary);
+}
+
+@media (max-width: 40.625em) {
+  .cell::before {
+    content: attr(data-realdate) " " attr(data-dayname);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-left: 1rem;
+    width: 100%;
+    height: 2.5rem;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    font-weight: 700;
+  }
+}
+
+@media (max-width: 40.625em) {
+  .cell {
+    position: relative;
+  }
+}
+
+.cell--header {
+  font-size: 14px;
+  font-weight: 700;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 0.62rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex: 1;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.cell--header:first-child {
+  flex: 0.3;
+}
+
+@media (max-width: 68.75em) {
+  .cell--header {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 40.625em) {
+  .cell--header {
+    display: none;
+  }
+}
+
+@media (max-width: 40.625em) {
+  .cell--hours {
+    display: none;
+  }
+}
+
+.request {
+  color: var(--color-red);
+  font-weight: 700;
+}
+
+.name {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  position: relative;
+  z-index: 30;
+  -webkit-animation: fadeIn 0.2s ease;
+  animation: fadeIn 0.2s ease;
+  display: inline-block;
+  font-size: 14px;
+}

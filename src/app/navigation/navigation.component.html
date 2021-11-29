@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+  <div class="container">
+    <a class="navbar-brand" routerLink="">BeosztásV2</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['']" routerLinkActive="active"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/requests']"
+            routerLinkActive="active"
+            >Kérések</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/profile']"
+            routerLinkActive="active"
+            >Profil</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/schedule']"
+            routerLinkActive="active"
+            >Beosztás</a
+          >
+        </li>
+        <li
+          class="nav-item"
+          *ngIf="
+            loggedIn() && authService.decodedToken?.role === 'Administrator'
+          "
+        >
+          <a
+            class="nav-link"
+            [routerLink]="['/admin']"
+            routerLinkActive="active"
+            >Adminisztráció</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="loggedIn()" class="d-flex">
+      <div class="navbar-text">
+        Üdv, {{ authService.decodedToken?.unique_name | titlecase }}
+      </div>
+      <a class="btn btn-danger" (click)="logout()"
+        ><i class="fa fa-sign-out"></i> Kijelentkezés</a
+      >
+    </div>
+  </div>
+</nav>
