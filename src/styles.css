@@ -56,7 +56,7 @@
 
 .calendar__day {
   width: 100%;
-  height: 8.75rem;
+  height: 10rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -86,7 +86,8 @@
 
 .calendar__day--half {
   width: 100%;
-  height: 100%;
+  flex-wrap: wrap;
+  flex: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -191,6 +192,7 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  padding: 0 10px;
 }
 
 @media (max-width: 68.75em) {
@@ -353,7 +355,7 @@
 .calendar__weekend {
   background-color: var(--color-blue);
   position: relative;
-  height: 8.75rem;
+  height: 10rem;
   border-bottom: 1px solid black;
 }
 
@@ -374,7 +376,7 @@
   color: var(--color-secondary);
   font-size: 2.62rem;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-  height: 8.75rem;
+  height: 10rem;
   border-bottom: 1px solid black;
 }
 

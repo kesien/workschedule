@@ -7,4 +7,5 @@ export interface Schedule {
   days: Day[];
   summaries: Summary[];
   numOfWorkDay: number;
+  isSaved: boolean;
 }

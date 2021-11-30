@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseApiUrl: 'https://workschedule-flying.herokuapp.com/api/',
+  baseApiUrl: 'https://localhost:7040/api/',
 };
 
 /*

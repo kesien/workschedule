@@ -51,8 +51,11 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['workschedule-flying.herokuapp.com'],
-        disallowedRoutes: ['workschedule-flying.herokuapp.com/api/auth'],
+        allowedDomains: ['workschedule-flying.herokuapp.com', 'localhost:7040'],
+        disallowedRoutes: [
+          'workschedule-flying.herokuapp.com/api/auth',
+          'localhost:7040/api/auth',
+        ],
       },
     }),
     HttpClientModule,

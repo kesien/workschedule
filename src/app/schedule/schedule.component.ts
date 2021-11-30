@@ -21,6 +21,7 @@ export class ScheduleComponent implements OnInit {
   years = Array(10)
     .fill(2021)
     .map((x, y) => x + y);
+  editMode = false;
 
   months: string[] = [
     'Január',
@@ -83,6 +84,10 @@ export class ScheduleComponent implements OnInit {
     let day = date.getDay();
     if (day == 0) day = 7; // make Sunday (0) the last day
     return day - 1;
+  }
+
+  enableEditMode() {
+    this.editMode = true;
   }
 
   generateRows() {

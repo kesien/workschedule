@@ -8,9 +8,8 @@ import { ScheduleDay } from '../row.model';
 })
 export class ScheduleRowComponent implements OnInit {
   @Input() days?: ScheduleDay[];
+  @Input() editMode = false;
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.days);
-  }
+  ngOnInit(): void {}
 }

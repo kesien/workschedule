@@ -3,5 +3,9 @@
     <div class="calendar__day--half">8:00</div>
     <div class="calendar__day--half">9:30</div>
   </div>
-  <app-schedule-day *ngFor="let day of days" [day]="day"></app-schedule-day>
+  <app-schedule-day
+    *ngFor="let day of days"
+    [day]="day"
+    [editMode]="editMode"
+  ></app-schedule-day>
 </div>

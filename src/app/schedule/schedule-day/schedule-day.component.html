@@ -20,6 +20,11 @@
         *ngFor="let user of day.day.usersScheduledForMorning"
         [ngClass]="{ request: user.isRequest }"
       >
+        <i
+          class="fa fa-arrow-down text-danger"
+          *ngIf="editMode"
+          (click)="downArrowClicked(user)"
+        ></i>
         {{ user.userName }}
       </span>
     </div>
@@ -29,6 +34,11 @@
         *ngFor="let user of day.day.usersScheduledForForenoon"
         [ngClass]="{ request: user.isRequest }"
       >
+        <i
+          class="fa fa-arrow-up text-success"
+          *ngIf="editMode"
+          (click)="upArrowClicked(user)"
+        ></i>
         {{ user.userName }}
       </span>
     </div>

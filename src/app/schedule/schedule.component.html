@@ -56,6 +56,7 @@
       <app-schedule-row
         *ngFor="let row of rows"
         [days]="row.days"
+        [editMode]="editMode"
       ></app-schedule-row>
     </div>
   </div>
@@ -63,7 +64,15 @@
     class="row justify-content-end mt-3"
     *ngIf="this.authService.decodedToken?.role === 'Administrator'"
   >
-    <div class="col-3">
+    <div class="col-3" *ngIf="schedule.isSaved">
+      <div class="d-grid">
+        <button class="btn btn-warning btn-lg" (click)="enableEditMode()">
+          <i class="fa fa-edit"></i>
+          Szerkesztés
+        </button>
+      </div>
+    </div>
+    <div class="col-3" *ngIf="!schedule.isSaved">
       <div class="d-grid">
         <button class="btn btn-success btn-lg" (click)="createSchedule()">
           Kiállít
