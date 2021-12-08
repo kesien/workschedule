@@ -18,7 +18,7 @@ export class UserService {
   }
 
   updateUser(user: User) {
-    return this.http.put(this.baseUrl + `/${user.userId}`, user);
+    return this.http.put(this.baseUrl + `/${user.id}`, user);
   }
 
   getAllUser() {
@@ -27,5 +27,9 @@ export class UserService {
 
   deleteUser(id: string) {
     return this.http.delete(this.baseUrl + `/${id}`);
+  }
+
+  createUser(user: User) {
+    return this.http.post(this.baseUrl, user);
   }
 }

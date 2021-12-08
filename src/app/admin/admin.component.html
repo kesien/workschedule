@@ -3,71 +3,69 @@
     <div class="col-auto">
       <h3>Felhasználók</h3>
     </div>
-    <hr />
   </div>
   <div class="row justify-content-center">
     <div class="col-lg-6 col-12">
-      <table class="table table-striped" *ngIf="users">
-        <thead>
-          <tr>
-            <th>Felhasználónév</th>
-            <th>Név</th>
-            <th class="text-center">Admin</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of users">
-            <td>{{ user.userName }}</td>
-            <td>{{ user.name }}</td>
-            <td class="text-center">
-              <i class="fa fa-ban text-danger" *ngIf="user.role == 0"></i>
-              <i class="fa fa-check text-success" *ngIf="user.role == 1"></i>
-            </td>
-            <td class="text-center">
-              <div
-                class="btn-group"
-                *ngIf="user.userId != this.authService.decodedToken?.nameid"
-              >
-                <a class="btn btn-success"><i class="fa fa-edit"></i></a>
-                <a class="btn btn-danger" (click)="deleteUser(user)"
-                  ><i class="fa fa-trash"></i
-                ></a>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <app-users
+        [users]="users"
+        (onDeleteUser)="deleteUser($event)"
+        (onEditUser)="editUser($event)"
+      ></app-users>
+      <div
+        class="row justify-content-center"
+        *ngIf="createNewUserMode || editUserMode"
+      >
+        <div class="col-12 col-md-4 col-lg-6">
+          <app-new-user
+            *ngIf="createNewUserMode"
+            (cancelNewUserMode)="cancel()"
+            (onCreateNewUser)="createNewUser($event)"
+          ></app-new-user>
+          <app-edit-user
+            *ngIf="editUserMode"
+            [user]="selectedUser"
+            (onCancel)="cancel()"
+            (onSave)="saveEditChanges($event)"
+          ></app-edit-user>
+        </div>
+      </div>
+      <div class="text-end mt-3" *ngIf="!createNewUserMode && !editUserMode">
+        <button class="btn btn-success" (click)="createNewUserMode = true">
+          <i class="fa fa-plus"></i> Új
+        </button>
+      </div>
     </div>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col-12 col-md-6 col-lg-2 d-grid"></div>
   </div>
   <div class="row">
     <div class="col-auto">
-      <h3>Fix ünnepnapok</h3>
+      <h3>Ünnepnapok</h3>
     </div>
-    <hr />
   </div>
   <div class="row justify-content-center">
     <div class="col-lg-6 col-12">
-      <table class="table table-striped" *ngIf="holidays">
-        <thead>
-          <tr>
-            <th>Hónap</th>
-            <th>Nap</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let holiday of holidays">
-            <td>{{ months[holiday.month - 1] }}</td>
-            <td>{{ holiday.day }}</td>
-            <td class="text-center">
-              <a class="btn btn-danger" (click)="deleteHoliday(holiday)"
-                ><i class="fa fa-trash"></i
-              ></a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <app-holidays
+        [holidays]="holidays"
+        [filter]="filter"
+        [years]="years"
+        (onFilterChanged)="filterHolidays()"
+        (onDeleteHoliday)="deleteHoliday($event)"
+      ></app-holidays>
+      <div class="row justify-content-center mb-5" *ngIf="createNewHolidayMode">
+        <div class="col-12 col-md-4 col-lg-6">
+          <app-new-holiday
+            (onCancelNewHolidayMode)="cancel()"
+            (onCreateNewHoliday)="createNewHoliday($event)"
+          ></app-new-holiday>
+        </div>
+      </div>
+      <div class="text-end mt-3" *ngIf="!createNewHolidayMode">
+        <button class="btn btn-success" (click)="createNewHolidayMode = true">
+          <i class="fa fa-plus"></i> Új
+        </button>
+      </div>
     </div>
   </div>
 </div>

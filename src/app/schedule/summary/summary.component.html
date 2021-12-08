@@ -1,0 +1,18 @@
+<table class="table table-striped" *ngIf="summaries">
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>8:00</th>
+      <th>9:30</th>
+      <th>Szabadság</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let summary of summaries">
+      <td>{{ summary.name }}</td>
+      <td>{{ summary.morning }}</td>
+      <td>{{ summary.forenoon }}</td>
+      <td>{{ summary.holiday }}</td>
+    </tr>
+  </tbody>
+</table>

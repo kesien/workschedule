@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AlertService } from '../_services/alert.service';
 import { AuthService } from '../_services/auth.service';
 
@@ -28,8 +29,7 @@ export class LoginComponent implements OnInit {
         this.alertService.error(error);
       },
       () => {
-        this.router.navigate(['/']);
-        this.cancel();
+        this.router.navigate(['/schedule']);
       }
     );
   }

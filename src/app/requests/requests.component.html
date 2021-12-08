@@ -12,11 +12,14 @@
           <th>
             Év
             <select
-              class="form-control"
+              class="form-select"
               (change)="getAllRequestsForUser()"
               [(ngModel)]="filter.year"
               name="year"
             >
+              <option *ngIf="years.length === 0">
+                {{ date.getFullYear() }}
+              </option>
               <option
                 *ngFor="let year of years"
                 [ngValue]="year"
@@ -29,7 +32,7 @@
           <th>
             Hónap
             <select
-              class="form-control"
+              class="form-select"
               (change)="getAllRequestsForUser()"
               [(ngModel)]="filter.month"
               name="month"

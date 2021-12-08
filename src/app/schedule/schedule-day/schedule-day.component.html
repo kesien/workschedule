@@ -22,11 +22,11 @@
       >
         <i
           class="fa fa-arrow-down text-danger"
-          *ngIf="editMode"
+          *ngIf="editMode && !user.isRequest"
           (click)="downArrowClicked(user)"
         ></i>
-        {{ user.userName }}
-      </span>
+        {{ user.name }}</span
+      >
     </div>
     <div class="calendar__930">
       <span
@@ -36,11 +36,11 @@
       >
         <i
           class="fa fa-arrow-up text-success"
-          *ngIf="editMode"
+          *ngIf="editMode && !user.isRequest"
           (click)="upArrowClicked(user)"
         ></i>
-        {{ user.userName }}
-      </span>
+        {{ user.name }}</span
+      >
     </div>
     <span class="calendar__daynumber">{{ day.day?.date | date: "dd" }}</span>
   </div>

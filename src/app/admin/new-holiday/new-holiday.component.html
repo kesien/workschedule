@@ -1,0 +1,33 @@
+<form #newHolidayForm="ngForm" (ngSubmit)="createNewHoliday()">
+  <div class="mb-3">
+    <label for="date" class="form-label">Dátum</label>
+    <input
+      type="date"
+      class="form-control"
+      id="date"
+      name="date"
+      [(ngModel)]="holiday.date"
+      required
+    />
+  </div>
+  <div class="mb-3 form-check">
+    <label for="isfix" class="form-label">Fix ünnepnap?</label>
+    <input
+      type="checkbox"
+      class="form-check-input"
+      id="isfix"
+      name="isFix"
+      [(ngModel)]="holiday.isFix"
+    />
+  </div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+    <button class="btn btn-primary" (click)="cancel()">Mégse</button>
+    <button
+      type="submit"
+      class="btn btn-success"
+      [disabled]="!newHolidayForm.valid"
+    >
+      Mentés
+    </button>
+  </div>
+</form>

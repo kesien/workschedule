@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Holiday } from '../_models/holiday.model';
 import { User } from '../_models/user.model';
@@ -5,6 +6,7 @@ import { AlertService } from '../_services/alert.service';
 import { AuthService } from '../_services/auth.service';
 import { HolidayService } from '../_services/holiday.service';
 import { UserService } from '../_services/user.service';
+import { months } from '../_shared/months.data';
 
 @Component({
   selector: 'app-admin',
@@ -13,21 +15,18 @@ import { UserService } from '../_services/user.service';
 })
 export class AdminComponent implements OnInit {
   users?: User[];
+  selectedUser?: User;
   holidays?: Holiday[];
-  months: string[] = [
-    'Január',
-    'Február',
-    'Mácrius',
-    'Április',
-    'Május',
-    'Június',
-    'Július',
-    'Augusztus',
-    'Szeptember',
-    'Október',
-    'November',
-    'December',
-  ];
+  months = months;
+  createNewUserMode = false;
+  createNewHolidayMode = false;
+  editUserMode = false;
+  date = new Date();
+  filter = {
+    year: 0,
+    month: 0,
+  };
+  years: number[] = [];
 
   constructor(
     private usersService: UserService,
@@ -50,30 +49,104 @@ export class AdminComponent implements OnInit {
 
   getHolidays() {
     this.holidayService.getAllHolidays().subscribe(
-      (response) => (this.holidays = response as Holiday[]),
-      (error) => this.alertService.error(error)
+      (response) => {
+        this.holidays = response as Holiday[];
+      },
+      (error) => this.alertService.error(error),
+      () => this.populateYears()
     );
   }
 
+  filterHolidays() {
+    this.holidayService
+      .getHolidaysByFilter(this.filter.year, this.filter.month)
+      .subscribe(
+        (response) => (this.holidays = response as Holiday[]),
+        (error) => this.alertService.error(error)
+      );
+  }
+
   deleteHoliday(holiday: Holiday) {
-    if (holiday.id) {
-      this.holidayService.delete(holiday.id).subscribe(
+    if (confirm(`Biztos, hogy törlöd ezt az ünnepet?`)) {
+      if (holiday.id) {
+        this.holidayService.delete(holiday.id).subscribe(
+          (response) => {
+            this.alertService.success('Sikeres törlés!');
+            this.holidays = this.holidays?.filter((h) => h != holiday);
+          },
+          (error) => this.alertService.error(error),
+          () => {
+            this.populateYears();
+          }
+        );
+      }
+    }
+  }
+
+  deleteUser(user: User) {
+    if (confirm('Biztos, hogy törlöd a ' + user.userName + ' felhasználót?')) {
+      this.usersService.deleteUser(user.id).subscribe(
         (response) => {
           this.alertService.success('Sikeres törlés!');
-          this.holidays = this.holidays?.filter((h) => h != holiday);
+          this.users = this.users?.filter((u) => u != user);
         },
         (error) => this.alertService.error(error)
       );
     }
   }
 
-  deleteUser(user: User) {
-    this.usersService.deleteUser(user.userId).subscribe(
+  createNewUser(user: User) {
+    this.usersService.createUser(user).subscribe(
       (response) => {
-        this.alertService.success('Sikeres törlés!');
-        this.users = this.users?.filter((u) => u != user);
+        this.alertService.success('Új felhasználó létrehozva!');
+        this.users?.push(response as User);
       },
-      (error) => this.alertService.error(error)
+      (error) => this.alertService.error(error),
+      () => this.cancel()
     );
+  }
+
+  createNewHoliday(holiday: Holiday) {
+    this.holidayService.createNewHoliday(holiday).subscribe(
+      (response) => {
+        this.alertService.success('Új ünnep hozzáadva!');
+        this.holidays?.push(response as Holiday);
+      },
+      (error) => this.alertService.error(error),
+      () => {
+        this.cancel();
+        this.populateYears();
+      }
+    );
+  }
+
+  populateYears() {
+    this.years = [];
+    this.holidays?.forEach((holiday) => {
+      if (holiday.year) {
+        if (this.years.indexOf(holiday.year) < 0) {
+          this.years.push(holiday.year);
+        }
+      }
+    });
+  }
+
+  editUser(user: User) {
+    this.selectedUser = user;
+    this.editUserMode = true;
+  }
+
+  saveEditChanges(user: User) {
+    this.usersService.updateUser(user).subscribe(
+      (response) => this.alertService.success('Sikeres frissítés!'),
+      (error) => this.alertService.error(error),
+      () => this.cancel()
+    );
+  }
+
+  cancel() {
+    this.editUserMode = false;
+    this.createNewUserMode = false;
+    this.createNewHolidayMode = false;
   }
 }

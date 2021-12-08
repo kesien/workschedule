@@ -1,0 +1,53 @@
+<form #newUserForm="ngForm" (ngSubmit)="createNewUser()">
+  <div class="mb-3">
+    <label for="username" class="form-label">Felhasználónév</label>
+    <input
+      type="text"
+      class="form-control"
+      id="username"
+      name="userName"
+      [(ngModel)]="user.userName"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Név</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="name"
+      [(ngModel)]="user.name"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Jelszó</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      name="password"
+      [(ngModel)]="user.password"
+      minlength="6"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="type">Típus</label>
+    <select name="role" id="type" class="form-control" [(ngModel)]="user.role">
+      <option [ngValue]="0">Felhasználó</option>
+      <option [ngValue]="1">Adminisztrátor</option>
+    </select>
+  </div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+    <button class="btn btn-primary" (click)="cancel()">Mégse</button>
+    <button
+      type="submit"
+      class="btn btn-success"
+      [disabled]="!newUserForm.valid"
+    >
+      Mentés
+    </button>
+  </div>
+</form>

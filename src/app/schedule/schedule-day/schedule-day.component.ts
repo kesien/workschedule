@@ -18,21 +18,19 @@ export class ScheduleDayComponent implements OnInit {
 
   downArrowClicked(user: User) {
     if (this.day.day) {
-      this.day.day.usersScheduledForMorning =
-        this.day.day.usersScheduledForMorning.filter(
-          (schedule) => schedule.userId !== user.userId
-        );
+      const index = this.day.day.usersScheduledForMorning.indexOf(user);
+      this.day.day.usersScheduledForMorning.splice(index, 1);
       this.day.day.usersScheduledForForenoon.push(user);
     }
+    this.arrowClick.emit(this.day.day);
   }
 
   upArrowClicked(user: User) {
     if (this.day.day) {
-      this.day.day.usersScheduledForForenoon =
-        this.day.day.usersScheduledForForenoon.filter(
-          (schedule) => schedule.userId !== user.userId
-        );
+      const index = this.day.day.usersScheduledForForenoon.indexOf(user);
+      this.day.day.usersScheduledForForenoon.splice(index, 1);
       this.day.day.usersScheduledForMorning.push(user);
     }
+    this.arrowClick.emit(this.day.day);
   }
 }

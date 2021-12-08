@@ -57,6 +57,7 @@
         *ngFor="let row of rows"
         [days]="row.days"
         [editMode]="editMode"
+        (arrowClick)="dayChanged($event)"
       ></app-schedule-row>
     </div>
   </div>
@@ -64,20 +65,56 @@
     class="row justify-content-end mt-3"
     *ngIf="this.authService.decodedToken?.role === 'Administrator'"
   >
-    <div class="col-3" *ngIf="schedule.isSaved">
-      <div class="d-grid">
-        <button class="btn btn-warning btn-lg" (click)="enableEditMode()">
+    <div class="col-12 col-lg-3 col-md-6" *ngIf="schedule.isSaved">
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button
+          class="btn btn-primary btn-lg"
+          (click)="enableEditMode()"
+          *ngIf="!editMode"
+        >
           <i class="fa fa-edit"></i>
           Szerkesztés
         </button>
+        <button
+          class="btn btn-danger btn-lg"
+          (click)="deleteSchedule()"
+          *ngIf="!editMode"
+        >
+          <i class="fa fa-trash"></i>
+          Törlés
+        </button>
+        <button
+          class="btn btn-primary btn-lg"
+          (click)="getSchedule()"
+          *ngIf="editMode"
+        >
+          <i class="fa fa-close"></i>
+          Mégse
+        </button>
+        <button
+          class="btn btn-success btn-lg"
+          (click)="saveChanges()"
+          *ngIf="editMode"
+        >
+          <i class="fa fa-save"></i>
+          Mentés
+        </button>
       </div>
     </div>
-    <div class="col-3" *ngIf="!schedule.isSaved">
+    <div class="col-12 col-lg-3 col-md-6" *ngIf="!schedule.isSaved">
       <div class="d-grid">
         <button class="btn btn-success btn-lg" (click)="createSchedule()">
           Kiállít
         </button>
       </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 col-lg-4">
+      <app-summary
+        [summaries]="schedule.summaries"
+        *ngIf="schedule.isSaved"
+      ></app-summary>
     </div>
   </div>
 </div>

@@ -1,9 +1,8 @@
-<ngx-spinner></ngx-spinner>
 <div class="container">
   <h4 class="text-center mb-5">Profil beállítások</h4>
   <div *ngIf="user" class="row justify-content-center">
     <div class="col-12 col-md-6 col-ld-4">
-      <form #userForm="ngForm" (ngSubmit)="updateInfo()">
+      <form [formGroup]="userForm" (ngSubmit)="updateInfo()">
         <div class="mb-3">
           <label for="username" class="form-label">Felhasználónév</label>
           <input
@@ -11,9 +10,8 @@
             class="form-control"
             id="username"
             placeholder="Felhasználónév"
-            required
             name="userName"
-            [(ngModel)]="user.userName"
+            formControlName="userName"
           />
         </div>
         <div class="mb-3">
@@ -23,9 +21,8 @@
             class="form-control"
             id="name"
             placeholder="Név"
-            required
             name="name"
-            [(ngModel)]="user.name"
+            formControlName="name"
           />
         </div>
         <div class="mb-3">
@@ -35,9 +32,9 @@
             class="form-control"
             id="password"
             placeholder="Új jelszó"
-            required
             name="password"
-            [(ngModel)]="user.password"
+            minlength="6"
+            formControlName="password"
             #password
           />
         </div>
@@ -49,9 +46,9 @@
             type="password"
             class="form-control"
             id="passwordre"
-            required
             name="passwordre"
             placeholder="Kérlek add meg az új jelszavad mégegyszer"
+            formControlName="confirmPassword"
             #passwordRepeat
           />
         </div>

@@ -36,4 +36,10 @@ export class AuthService {
     }
     return false;
   }
+
+  setName(name: string) {
+    if (this.decodedToken) {
+      this.decodedToken.unique_name = name;
+    }
+  }
 }

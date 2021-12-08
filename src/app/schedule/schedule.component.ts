@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Day } from '../_models/day.model';
 import { Schedule } from '../_models/schedule.model';
 import { AlertService } from '../_services/alert.service';
 import { AuthService } from '../_services/auth.service';
 import { ScheduleService } from '../_services/schedule.service';
+import { months } from '../_shared/months.data';
 import { DayType, Row, ScheduleDay } from './row.model';
 
 @Component({
@@ -22,26 +22,13 @@ export class ScheduleComponent implements OnInit {
     .fill(2021)
     .map((x, y) => x + y);
   editMode = false;
+  changes: Day[] = [];
 
-  months: string[] = [
-    'Január',
-    'Február',
-    'Mácrius',
-    'Április',
-    'Május',
-    'Június',
-    'Július',
-    'Augusztus',
-    'Szeptember',
-    'Október',
-    'November',
-    'December',
-  ];
+  months = months;
 
   constructor(
     private alertService: AlertService,
     private scheduleService: ScheduleService,
-    private ngxSpinner: NgxSpinnerService,
     public authService: AuthService
   ) {}
 
@@ -50,7 +37,6 @@ export class ScheduleComponent implements OnInit {
   }
 
   getSchedule() {
-    this.ngxSpinner.show();
     this.scheduleService.getSchedule(this.year, this.month).subscribe(
       (response) => {
         this.schedule = response as Schedule;
@@ -58,26 +44,34 @@ export class ScheduleComponent implements OnInit {
       (error) => this.alertService.error(error),
       () => {
         this.generateRows();
-        this.ngxSpinner.hide();
       }
     );
   }
 
   createSchedule() {
-    this.ngxSpinner.show();
-    this.scheduleService.createSchedule(this.schedule).subscribe(
+    this.scheduleService.createSchedule(this.year, this.month).subscribe(
       (response) => {
         this.schedule = response as Schedule;
       },
       (error) => {
         this.alertService.error(error);
-        this.ngxSpinner.hide();
       },
       () => {
         this.generateRows();
-        this.ngxSpinner.hide();
       }
     );
+  }
+
+  deleteSchedule() {
+    if (confirm(`Biztos, hogy törlöd ezt a beosztást?`)) {
+      if (this.schedule.id) {
+        this.scheduleService.deleteSchedule(this.schedule.id).subscribe(
+          (response) => this.alertService.success('Sikeres törlés!'),
+          (error) => this.alertService.error(error),
+          () => this.getSchedule()
+        );
+      }
+    }
   }
 
   getDay(date: Date) {
@@ -123,5 +117,32 @@ export class ScheduleComponent implements OnInit {
       rows.push(new Row(days));
     }
     this.rows = rows;
+  }
+
+  dayChanged(day: Day) {
+    if (this.changes.indexOf(day) < 0) {
+      this.changes.push(day);
+    }
+  }
+
+  saveChanges() {
+    if (this.changes.length && this.schedule.id) {
+      this.scheduleService
+        .updateSchedule(this.schedule.id, this.changes)
+        .subscribe(
+          (response) => {
+            this.schedule = response as Schedule;
+
+            this.alertService.success('Sikeres frissítés!');
+          },
+          (error) => this.alertService.error(error),
+          () => {
+            this.editMode = false;
+            this.changes = [];
+          }
+        );
+    } else {
+      this.editMode = false;
+    }
   }
 }

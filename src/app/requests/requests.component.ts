@@ -5,6 +5,7 @@ import { AuthService } from '../_services/auth.service';
 import { Request } from './request.model';
 import { ThrowStmt } from '@angular/compiler';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { months } from '../_shared/months.data';
 
 @Component({
   selector: 'app-requests',
@@ -25,27 +26,13 @@ export class RequestsComponent implements OnInit {
   createMode = false;
 
   years: any[] = [];
-  months: string[] = [
-    'Január',
-    'Február',
-    'Mácrius',
-    'Április',
-    'Május',
-    'Június',
-    'Július',
-    'Augusztus',
-    'Szeptember',
-    'Október',
-    'November',
-    'December',
-  ];
+  months = months;
 
   allRequests: Request[] = [];
   constructor(
     private authService: AuthService,
     private requestsService: RequestsService,
-    private alertService: AlertService,
-    private ngxSpinner: NgxSpinnerService
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -72,7 +59,6 @@ export class RequestsComponent implements OnInit {
   }
 
   getAllRequestsForUser() {
-    this.ngxSpinner.show();
     this.requestsService
       .getRequestsForUser(
         this.filter.userId,
@@ -93,8 +79,7 @@ export class RequestsComponent implements OnInit {
         },
         (error) => {
           this.alertService.error(error);
-        },
-        () => this.ngxSpinner.hide()
+        }
       );
   }
 

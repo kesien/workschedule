@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Day } from 'src/app/_models/day.model';
 import { ScheduleDay } from '../row.model';
 
 @Component({
@@ -9,7 +10,12 @@ import { ScheduleDay } from '../row.model';
 export class ScheduleRowComponent implements OnInit {
   @Input() days?: ScheduleDay[];
   @Input() editMode = false;
+  @Output() arrowClick = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}
+
+  arrowClicked(day: Day) {
+    this.arrowClick.emit(day);
+  }
 }
