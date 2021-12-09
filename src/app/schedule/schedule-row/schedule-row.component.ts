@@ -8,8 +8,9 @@ import { ScheduleDay } from '../row.model';
   styleUrls: ['./schedule-row.component.css'],
 })
 export class ScheduleRowComponent implements OnInit {
-  @Input() days?: ScheduleDay[];
+  @Input() days!: ScheduleDay[];
   @Input() editMode = false;
+  @Input() mobile = false;
   @Output() arrowClick = new EventEmitter();
   constructor() {}
 
@@ -17,5 +18,16 @@ export class ScheduleRowComponent implements OnInit {
 
   arrowClicked(day: Day) {
     this.arrowClick.emit(day);
+  }
+
+  shouldDisplay(day: Day | null) {
+    if (this.mobile) {
+      if (day == null || day.isWeekend) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    return true;
   }
 }

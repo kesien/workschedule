@@ -1,9 +1,11 @@
-<div class="cell calendar__day--empty" *ngIf="day.day == null">
+<div class="cell calendar__day--empty" *ngIf="day.type === 0">
   <i class="fa fa-ban"></i>
 </div>
 <div
   class="cell"
   *ngIf="day.day != null && !day.day.isWeekend && !day.day.isHoliday"
+  [attr.data-realdate]="day.day.date | date"
+  [attr.data-dayname]="getDay(day.day.date.toString())"
 >
   <div class="calendar__day">
     <div class="calendar__personholiday">
@@ -18,7 +20,10 @@
       <span
         class="name"
         *ngFor="let user of day.day.usersScheduledForMorning"
-        [ngClass]="{ request: user.isRequest }"
+        [ngClass]="{
+          request: user.isRequest,
+          isme: user.id === authService.decodedToken?.nameid
+        }"
       >
         <i
           class="fa fa-arrow-down text-danger"
@@ -52,7 +57,9 @@
 </div>
 <div
   class="cell calendar__holiday"
-  *ngIf="!day.day?.isWeekend && day.day?.isHoliday"
+  *ngIf="!day.day?.isWeekend && day.day?.isHoliday && day.day"
+  [attr.data-realdate]="day.day?.date | date"
+  [attr.data-dayname]="getDay(day.day.date.toString())"
 >
   <i class="fa fa-smile-o"></i>
 </div>

@@ -28,6 +28,7 @@ import { HolidaysComponent } from './admin/holidays/holidays.component';
 import { UsersComponent } from './admin/users/users.component';
 import { SummaryComponent } from './schedule/summary/summary.component';
 import { EditUserComponent } from './admin/edit-user/edit-user.component';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -75,6 +76,7 @@ export function tokenGetter() {
     FormsModule,
     NgxSpinnerModule,
     ReactiveFormsModule,
+    CollapseModule.forRoot(),
   ],
   providers: [
     ErrorInterceptorProvider,

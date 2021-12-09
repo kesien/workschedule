@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Day } from '../_models/day.model';
 import { Schedule } from '../_models/schedule.model';
 import { AlertService } from '../_services/alert.service';
@@ -23,7 +23,7 @@ export class ScheduleComponent implements OnInit {
     .map((x, y) => x + y);
   editMode = false;
   changes: Day[] = [];
-
+  mobile = false;
   months = months;
 
   constructor(
@@ -34,6 +34,18 @@ export class ScheduleComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSchedule();
+    if (window.screen.width <= 650) {
+      this.mobile = true;
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    if (event.target.innerWidth <= 650) {
+      this.mobile = true;
+    } else {
+      this.mobile = false;
+    }
   }
 
   getSchedule() {
@@ -144,5 +156,10 @@ export class ScheduleComponent implements OnInit {
     } else {
       this.editMode = false;
     }
+  }
+
+  cancel() {
+    this.editMode = false;
+    this.getSchedule();
   }
 }

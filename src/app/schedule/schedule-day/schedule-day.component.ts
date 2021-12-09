@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/_models/user.model';
+import { AuthService } from 'src/app/_services/auth.service';
 import { ScheduleDay } from '../row.model';
 
 @Component({
@@ -11,8 +12,17 @@ export class ScheduleDayComponent implements OnInit {
   @Input() day!: ScheduleDay;
   @Input() editMode!: boolean;
   @Output() arrowClick = new EventEmitter();
+  days = [
+    'Vasárnap',
+    'Hétfő',
+    'Kedd',
+    'Szerda',
+    'Csütörtök',
+    'Péntek',
+    'Szombat',
+  ];
 
-  constructor() {}
+  constructor(public authService: AuthService) {}
 
   ngOnInit(): void {}
 
@@ -32,5 +42,10 @@ export class ScheduleDayComponent implements OnInit {
       this.day.day.usersScheduledForMorning.push(user);
     }
     this.arrowClick.emit(this.day.day);
+  }
+
+  getDay(date: string) {
+    const d = new Date(date);
+    return this.days[d.getDay()];
   }
 }

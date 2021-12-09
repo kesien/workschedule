@@ -9,6 +9,7 @@ import { AuthService } from '../_services/auth.service';
   styleUrls: ['./navigation.component.css'],
 })
 export class NavigationComponent implements OnInit {
+  isCollapsed = true;
   constructor(
     public authService: AuthService,
     private alertService: AlertService,
