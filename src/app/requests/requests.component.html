@@ -19,7 +19,7 @@
             Év
             <select
               class="form-select-sm"
-              (change)="getAllRequestsForUser()"
+              (change)="filterRequests()"
               [(ngModel)]="filter.year"
               name="year"
             >
@@ -39,14 +39,14 @@
             Hónap
             <select
               class="form-select-sm"
-              (change)="getAllRequestsForUser()"
+              (change)="filterRequests()"
               [(ngModel)]="filter.month"
               name="month"
             >
+              <option [ngValue]="0">Összes</option>
               <option
                 *ngFor="let month of months"
                 [ngValue]="months.indexOf(month) + 1"
-                [selected]="isCurrentMonth(months.indexOf(month))"
               >
                 {{ month }}
               </option>
@@ -58,7 +58,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let request of allRequests">
+        <tr *ngFor="let request of filteredRequests()">
           <td>{{ request.date | date: "yyyy" }}</td>
           <td>{{ request.date | date: "MM" }}</td>
           <td>{{ request.date | date: "dd" }}</td>
@@ -69,7 +69,7 @@
             </a>
           </td>
         </tr>
-        <tr *ngIf="allRequests.length === 0">
+        <tr *ngIf="filteredRequests().length === 0">
           <td colspan="5">
             <h5 class="text-center m-4">Nincsenek kéréseid erre a hónapra.</h5>
           </td>

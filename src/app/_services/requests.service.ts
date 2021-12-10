@@ -16,6 +16,10 @@ export class RequestsService {
     );
   }
 
+  getAllRequestsForUser(id: string) {
+    return this.http.get(this.baseUrl + `/user/${id}`);
+  }
+
   createNewRequest(data: Request) {
     return this.http.post(this.baseUrl, data);
   }

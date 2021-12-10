@@ -9,4 +9,5 @@ export interface Schedule {
   summaries: Summary[];
   numOfWorkDay: number;
   isSaved: boolean;
+  wordFile?: string;
 }

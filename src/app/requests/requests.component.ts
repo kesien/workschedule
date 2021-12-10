@@ -17,7 +17,7 @@ export class RequestsComponent implements OnInit {
   filter = {
     userId: '',
     year: this.date.getFullYear(),
-    month: this.date.getMonth() + 1,
+    month: 0,
   };
   model: Request = {
     date: '',
@@ -25,7 +25,7 @@ export class RequestsComponent implements OnInit {
   };
   createMode = false;
 
-  years: any[] = [];
+  years: any[] = [this.date.getFullYear()];
   months = months;
 
   allRequests: Request[] = [];
@@ -49,6 +49,11 @@ export class RequestsComponent implements OnInit {
       (error) => this.alertService.error(error),
       () => {
         this.getAllRequestsForUser();
+        const year = new Date(this.model.date).getFullYear();
+        if (this.years.indexOf(year) < 0) {
+          this.years.push(year);
+        }
+        this.years.push();
         this.cancel(false);
       }
     );
@@ -58,7 +63,7 @@ export class RequestsComponent implements OnInit {
     this.createMode = cancelCreateMode;
   }
 
-  getAllRequestsForUser() {
+  filterRequests() {
     this.requestsService
       .getRequestsForUser(
         this.filter.userId,
@@ -68,19 +73,36 @@ export class RequestsComponent implements OnInit {
       .subscribe(
         (response) => {
           this.allRequests = response as Request[];
-
-          this.allRequests.forEach((request) => {
-            const year = this.getYear(request.date);
-
-            if (this.years.indexOf(year) < 0) {
-              this.years.push(year);
-            }
-          });
         },
         (error) => {
           this.alertService.error(error);
         }
       );
+  }
+
+  getAllRequestsForUser() {
+    this.requestsService.getAllRequestsForUser(this.filter.userId).subscribe(
+      (response) => {
+        this.allRequests = response as Request[];
+
+        this.allRequests.forEach((request) => {
+          const year = this.getYear(request.date);
+
+          if (this.years.indexOf(year) < 0) {
+            this.years.push(year);
+          }
+        });
+      },
+      (error) => {
+        this.alertService.error(error);
+      }
+    );
+  }
+
+  filteredRequests() {
+    return this.allRequests.filter(
+      (request) => this.getYear(request.date) == this.filter.year
+    );
   }
 
   deleteRequest(request: Request) {
@@ -89,7 +111,16 @@ export class RequestsComponent implements OnInit {
         this.alertService.success('Sikeres törlés!');
         this.allRequests = this.allRequests.filter((req) => req !== request);
       },
-      (error) => this.alertService.error(error)
+      (error) => this.alertService.error(error),
+      () => {
+        if (
+          this.allRequests.filter(
+            (r) => this.getYear(r.date) === this.getYear(request.date)
+          ).length === 0
+        ) {
+          this.years.splice(this.years.indexOf(this.getYear(request.date), 1));
+        }
+      }
     );
   }
 

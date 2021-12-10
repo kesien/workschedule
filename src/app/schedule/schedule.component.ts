@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Day } from '../_models/day.model';
 import { Schedule } from '../_models/schedule.model';
 import { AlertService } from '../_services/alert.service';
@@ -14,6 +15,7 @@ import { DayType, Row, ScheduleDay } from './row.model';
 })
 export class ScheduleComponent implements OnInit {
   date = new Date();
+  fileUrl = environment.baseApiUrl + 'files/';
   year = this.date.getFullYear();
   month = this.date.getMonth() + 1;
   schedule!: Schedule;

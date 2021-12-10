@@ -12,7 +12,7 @@ export class NewRequestComponent implements OnInit {
   @Output() onCancel = new EventEmitter();
   requestTypes = [
     { type: '8:00', value: 0 },
-    { type: '9:00', value: 1 },
+    { type: '9:30', value: 1 },
     { type: 'Szabadság', value: 2 },
   ];
   constructor() {}
