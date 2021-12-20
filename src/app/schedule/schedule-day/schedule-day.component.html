@@ -37,7 +37,10 @@
       <span
         class="name"
         *ngFor="let user of day.day.usersScheduledForForenoon"
-        [ngClass]="{ request: user.isRequest }"
+        [ngClass]="{
+          request: user.isRequest,
+          isme: user.id === authService.decodedToken?.nameid
+        }"
       >
         <i
           class="fa fa-arrow-up text-success"
