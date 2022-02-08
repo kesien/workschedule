@@ -29,6 +29,8 @@ import { UsersComponent } from './admin/users/users.component';
 import { SummaryComponent } from './schedule/summary/summary.component';
 import { EditUserComponent } from './admin/edit-user/edit-user.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -77,6 +79,12 @@ export function tokenGetter() {
     NgxSpinnerModule,
     ReactiveFormsModule,
     CollapseModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [
     ErrorInterceptorProvider,

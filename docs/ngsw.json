@@ -1,0 +1,99 @@
+{
+  "configVersion": 1,
+  "timestamp": 1644335491568,
+  "index": "https://kesien.github.io/workschedule/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://kesien.github.io/workschedule/favicon.ico",
+        "https://kesien.github.io/workschedule/index.html",
+        "https://kesien.github.io/workschedule/main.a74ef66341f31ab5bcb4.js",
+        "https://kesien.github.io/workschedule/manifest.webmanifest",
+        "https://kesien.github.io/workschedule/polyfills.c61b654fd37595717487.js",
+        "https://kesien.github.io/workschedule/runtime.f3d2e03c396667049274.js",
+        "https://kesien.github.io/workschedule/styles.2647be48b4b61750cc1c.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://kesien.github.io/workschedule/assets/icons/icon-128x128.png",
+        "https://kesien.github.io/workschedule/assets/icons/icon-144x144.png",
+        "https://kesien.github.io/workschedule/assets/icons/icon-152x152.png",
+        "https://kesien.github.io/workschedule/assets/icons/icon-192x192.png",
+        "https://kesien.github.io/workschedule/assets/icons/icon-384x384.png",
+        "https://kesien.github.io/workschedule/assets/icons/icon-512x512.png",
+        "https://kesien.github.io/workschedule/assets/icons/icon-72x72.png",
+        "https://kesien.github.io/workschedule/assets/icons/icon-96x96.png",
+        "https://kesien.github.io/workschedule/assets/images/workschedule-logos.jpeg",
+        "https://kesien.github.io/workschedule/assets/images/workschedule-logos_black.png",
+        "https://kesien.github.io/workschedule/assets/images/workschedule-logos_transparent.png",
+        "https://kesien.github.io/workschedule/assets/images/workschedule-logos_transparent_brand.png",
+        "https://kesien.github.io/workschedule/assets/images/workschedule-logos_white.png",
+        "https://kesien.github.io/workschedule/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+        "https://kesien.github.io/workschedule/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+        "https://kesien.github.io/workschedule/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+        "https://kesien.github.io/workschedule/fontawesome-webfont.f691f37e57f04c152e23.woff"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://kesien.github.io/workschedule/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "https://kesien.github.io/workschedule/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "https://kesien.github.io/workschedule/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "https://kesien.github.io/workschedule/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "https://kesien.github.io/workschedule/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "https://kesien.github.io/workschedule/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "https://kesien.github.io/workschedule/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "https://kesien.github.io/workschedule/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "https://kesien.github.io/workschedule/assets/images/workschedule-logos.jpeg": "63f69442128068dd97478cca527df8f7c2ebe27d",
+    "https://kesien.github.io/workschedule/assets/images/workschedule-logos_black.png": "a889124cae7af73cddf844a25640fc4c1c6f6b3d",
+    "https://kesien.github.io/workschedule/assets/images/workschedule-logos_transparent.png": "77da6c18ae900fd72f7911b90ec0939ab9050baf",
+    "https://kesien.github.io/workschedule/assets/images/workschedule-logos_transparent_brand.png": "aeeaa558af116e7d8be4848374d217504534f9e7",
+    "https://kesien.github.io/workschedule/assets/images/workschedule-logos_white.png": "c88968b95a8bfa10efd86a7cbab955a3f2356c31",
+    "https://kesien.github.io/workschedule/favicon.ico": "2053d55cb03bf1514e98bb5063a5d9b5520ce49f",
+    "https://kesien.github.io/workschedule/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf": "13b1eab65a983c7a73bc7997c479d66943f7c6cb",
+    "https://kesien.github.io/workschedule/fontawesome-webfont.20fd1704ea223900efa9.woff2": "d6f48cba7d076fb6f2fd6ba993a75b9dc1ecbf0c",
+    "https://kesien.github.io/workschedule/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg": "98a8aa5cf7d62c2eff5f07ede8d844b874ef06ed",
+    "https://kesien.github.io/workschedule/fontawesome-webfont.f691f37e57f04c152e23.woff": "28b782240b3e76db824e12c02754a9731a167527",
+    "https://kesien.github.io/workschedule/index.html": "fffa44f863ce8e07c190ad029ef624e7657facf0",
+    "https://kesien.github.io/workschedule/main.a74ef66341f31ab5bcb4.js": "97a73cd4575803feb4ed04fb4f01572ffac52d60",
+    "https://kesien.github.io/workschedule/manifest.webmanifest": "d4454fd2c8c756f21d718cdfc67a0d59542b5fd7",
+    "https://kesien.github.io/workschedule/polyfills.c61b654fd37595717487.js": "5044b379d2b82994e450d0cb91f03247559bf2ed",
+    "https://kesien.github.io/workschedule/runtime.f3d2e03c396667049274.js": "475537b5b283a1cc5de63e35922c86107b8031be",
+    "https://kesien.github.io/workschedule/styles.2647be48b4b61750cc1c.css": "9aa759627858b08f13a915fee8303cb0fd9cf2e6"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
