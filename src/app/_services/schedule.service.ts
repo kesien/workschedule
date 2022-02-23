@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Day } from '../_models/day.model';
@@ -12,18 +12,26 @@ export class ScheduleService {
   constructor(private http: HttpClient) {}
 
   getSchedule(year: number, month: number) {
-    return this.http.get(this.baseUrl + `?year=${year}&month=${month}`);
+    return this.http.get(this.baseUrl + `/${year}/${month}`);
   }
 
-  createSchedule(year: number, month: number) {
-    return this.http.post(this.baseUrl, { year, month });
+  createSchedule(userId: string, year: number, month: number) {
+    return this.http.post(this.baseUrl, { userId, year, month });
   }
 
   deleteSchedule(id: string) {
-    return this.http.delete(this.baseUrl + `/${id}`);
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        id: id
+      },
+    };
+    return this.http.delete(this.baseUrl, options);
   }
 
-  updateSchedule(id: string, days: Day[]) {
-    return this.http.put(this.baseUrl + `/${id}`, days);
+  updateSchedule(userId: string, id: string, days: Day[]) {
+    return this.http.put(this.baseUrl, { userId, id, days });
   }
 }

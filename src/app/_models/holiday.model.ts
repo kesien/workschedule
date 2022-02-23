@@ -1,6 +1,6 @@
 export interface Holiday {
   id?: string;
-  year?: number;
+  year: number;
   month: number;
   day: number;
   isFix: boolean;

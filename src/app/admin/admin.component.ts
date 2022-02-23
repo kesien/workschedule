@@ -43,7 +43,11 @@ export class AdminComponent implements OnInit {
   getUsers() {
     this.usersService.getAllUser().subscribe(
       (response) => (this.users = response as User[]),
-      (error) => this.alertService.error(error)
+      (error) => {
+        for (let message of error.Messages) {
+          this.alertService.error(message)
+        }
+      }
     );
   }
 
@@ -52,7 +56,11 @@ export class AdminComponent implements OnInit {
       (response) => {
         this.holidays = response as Holiday[];
       },
-      (error) => this.alertService.error(error),
+      (error) => {
+        for (let message of error.Messages) {
+          this.alertService.error(message)
+        }
+      },
       () => this.populateYears()
     );
   }
@@ -62,7 +70,11 @@ export class AdminComponent implements OnInit {
       .getHolidaysByFilter(this.filter.year, this.filter.month)
       .subscribe(
         (response) => (this.holidays = response as Holiday[]),
-        (error) => this.alertService.error(error)
+        (error) => {
+          for (let message of error.Message) {
+            this.alertService.error(message)
+          }
+        }
       );
   }
 
@@ -74,7 +86,11 @@ export class AdminComponent implements OnInit {
             this.alertService.success('Sikeres törlés!');
             this.holidays = this.holidays?.filter((h) => h != holiday);
           },
-          (error) => this.alertService.error(error),
+          (error) => {
+            for (let message of error.Message) {
+              this.alertService.error(message)
+            }
+          },
           () => {
             this.populateYears();
           }
@@ -90,7 +106,11 @@ export class AdminComponent implements OnInit {
           this.alertService.success('Sikeres törlés!');
           this.users = this.users?.filter((u) => u != user);
         },
-        (error) => this.alertService.error(error)
+        (error) => {
+          for (let message of error.Messages) {
+            this.alertService.error(message);
+          }
+        }
       );
     }
   }
@@ -101,7 +121,11 @@ export class AdminComponent implements OnInit {
         this.alertService.success('Új felhasználó létrehozva!');
         this.users?.push(response as User);
       },
-      (error) => this.alertService.error(error),
+      (error) => {
+        for (let message of error.Messages) {
+          this.alertService.error(message)
+        }
+      },
       () => this.cancel()
     );
   }
@@ -112,7 +136,11 @@ export class AdminComponent implements OnInit {
         this.alertService.success('Új ünnep hozzáadva!');
         this.holidays?.push(response as Holiday);
       },
-      (error) => this.alertService.error(error),
+      (error) => {
+        for (let message of error.Messages) {
+          this.alertService.error(message);
+        }
+      },
       () => {
         this.cancel();
         this.populateYears();
@@ -137,9 +165,13 @@ export class AdminComponent implements OnInit {
   }
 
   saveEditChanges(user: User) {
-    this.usersService.updateUser(user).subscribe(
+    this.usersService.updateUser(this.authService.decodedToken.nameid, user).subscribe(
       (response) => this.alertService.success('Sikeres frissítés!'),
-      (error) => this.alertService.error(error),
+      (error) => {
+        for (let message of error.Messages) {
+          this.alertService.error(message)
+        }
+      },
       () => this.cancel()
     );
   }

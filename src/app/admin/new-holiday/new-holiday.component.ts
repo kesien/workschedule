@@ -35,10 +35,9 @@ export class NewHolidayComponent implements OnInit {
     const newHoliday: Partial<Holiday> = {
       day: date.getDate(),
       month: date.getMonth() + 1,
+      year: date.getFullYear(),
+      isFix: this.holiday.isFix
     };
-    if (!this.holiday.isFix) {
-      newHoliday.year = date.getFullYear();
-    }
     this.onCreateNewHoliday.emit(newHoliday);
   }
 }

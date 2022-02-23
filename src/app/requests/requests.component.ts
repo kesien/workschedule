@@ -3,8 +3,6 @@ import { RequestsService } from '../_services/requests.service';
 import { AlertService } from '../_services/alert.service';
 import { AuthService } from '../_services/auth.service';
 import { Request } from './request.model';
-import { ThrowStmt } from '@angular/compiler';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { months } from '../_shared/months.data';
 
 @Component({
@@ -14,6 +12,7 @@ import { months } from '../_shared/months.data';
 })
 export class RequestsComponent implements OnInit {
   date = new Date();
+  requestTypes: any[] = [];
   filter = {
     userId: '',
     year: this.date.getFullYear(),
@@ -22,6 +21,9 @@ export class RequestsComponent implements OnInit {
   model: Request = {
     date: '',
     type: 0,
+    year: 0,
+    month: 0,
+    day: 0
   };
   createMode = false;
 
@@ -38,15 +40,32 @@ export class RequestsComponent implements OnInit {
   ngOnInit(): void {
     this.filter.userId = this.authService.decodedToken.nameid;
     this.getAllRequestsForUser();
+
+    this.requestTypes = [
+      { label: "8:00", value: 0 },
+      { label: "9:30", value: 1 },
+      { label: "Szabadság", value: 2 }
+    ]
+  }
+
+  logOut(event: any) {
+    console.log(event);
+    
   }
 
   createRequest() {
-    this.requestsService.createNewRequest(this.model).subscribe(
+    this.requestsService.createNewRequest(this.authService.decodedToken.nameid, this.model).subscribe(
       (response) => {
         this.alertService.success('Sikeres küldés!');
         this.allRequests.push(response as Request);
       },
-      (error) => this.alertService.error(error),
+      (error) => {
+        console.log(error);
+        
+        for (const errorMessage of error.Messages) {
+          this.alertService.error(errorMessage)
+        }
+      },
       () => {
         this.getAllRequestsForUser();
         const year = new Date(this.model.date).getFullYear();
@@ -84,7 +103,8 @@ export class RequestsComponent implements OnInit {
     this.requestsService.getAllRequestsForUser(this.filter.userId).subscribe(
       (response) => {
         this.allRequests = response as Request[];
-
+        console.log(this.allRequests);
+        
         this.allRequests.forEach((request) => {
           const year = this.getYear(request.date);
 
@@ -111,7 +131,11 @@ export class RequestsComponent implements OnInit {
         this.alertService.success('Sikeres törlés!');
         this.allRequests = this.allRequests.filter((req) => req !== request);
       },
-      (error) => this.alertService.error(error),
+      (error) => {
+        for (let message of error.Messages) {
+          this.alertService.error(message);
+        }
+      },
       () => {
         if (
           this.allRequests.filter(

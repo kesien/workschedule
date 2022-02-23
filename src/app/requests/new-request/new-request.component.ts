@@ -20,6 +20,10 @@ export class NewRequestComponent implements OnInit {
   ngOnInit(): void {}
 
   createRequest() {
+    const date = new Date(this.model.date);
+    this.model.year = date.getFullYear();
+    this.model.month = date.getMonth() + 1;
+    this.model.day = date.getDate();
     this.onCreateNewRequest.emit(true);
   }
 

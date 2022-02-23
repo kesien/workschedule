@@ -4,4 +4,7 @@ export interface Request {
   id?: string;
   userId?: string;
   username?: string;
+  year: number;
+  month: number;
+  day: number;
 }

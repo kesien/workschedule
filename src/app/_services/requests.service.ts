@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Request } from '../requests/request.model';
@@ -10,21 +10,29 @@ export class RequestsService {
   baseUrl = environment.baseApiUrl + 'requests';
   constructor(private http: HttpClient) {}
 
-  getRequestsForUser(id: string, year: number, month: number) {
+  getRequestsForUser(userId: string, year: number, month: number) {
     return this.http.get(
-      this.baseUrl + `/user?userid=${id}&year=${year}&month=${month}`
+      this.baseUrl + `/${userId}/${year}/${month}`
     );
   }
 
-  getAllRequestsForUser(id: string) {
-    return this.http.get(this.baseUrl + `/user/${id}`);
+  getAllRequestsForUser(userId: string) {
+    return this.http.get(this.baseUrl + `/${userId}`);
   }
 
-  createNewRequest(data: Request) {
-    return this.http.post(this.baseUrl, data);
+  createNewRequest(userId: string, data: Request) {
+    return this.http.post(this.baseUrl, { userId, data });
   }
 
   deleteRequest(id: string | undefined) {
-    return this.http.delete(this.baseUrl + `/${id}`);
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        id: id
+      },
+    };
+    return this.http.delete(this.baseUrl, options);
   }
 }

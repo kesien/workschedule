@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Holiday } from '../_models/holiday.model';
@@ -19,10 +19,19 @@ export class HolidayService {
   }
 
   delete(id: string) {
-    return this.http.delete(this.baseUrl + `/${id}`);
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        id: id
+      },
+    };
+    return this.http.delete(this.baseUrl, options);
   }
 
   createNewHoliday(holiday: Holiday) {
-    return this.http.post(this.baseUrl, holiday);
+    const payload = { isFix: holiday.isFix, date: new Date(holiday.year, holiday.month - 1, holiday.day) }
+    return this.http.post(this.baseUrl, payload);
   }
 }

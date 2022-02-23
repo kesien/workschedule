@@ -55,7 +55,11 @@ export class ScheduleComponent implements OnInit {
       (response) => {
         this.schedule = response as Schedule;
       },
-      (error) => this.alertService.error(error),
+      (error) => {
+        for (let message of error.Messages) {
+          this.alertService.error(message);
+        }
+      },
       () => {
         this.generateRows();
       }
@@ -63,7 +67,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   createSchedule() {
-    this.scheduleService.createSchedule(this.year, this.month).subscribe(
+    this.scheduleService.createSchedule(this.authService.decodedToken.nameid, this.year, this.month).subscribe(
       (response) => {
         this.schedule = response as Schedule;
       },
@@ -81,7 +85,11 @@ export class ScheduleComponent implements OnInit {
       if (this.schedule.id) {
         this.scheduleService.deleteSchedule(this.schedule.id).subscribe(
           (response) => this.alertService.success('Sikeres törlés!'),
-          (error) => this.alertService.error(error),
+          (error) => {
+            for (let message of error.Messages) {
+              this.alertService.error(message);
+            }
+          },
           () => this.getSchedule()
         );
       }
@@ -142,14 +150,18 @@ export class ScheduleComponent implements OnInit {
   saveChanges() {
     if (this.changes.length && this.schedule.id) {
       this.scheduleService
-        .updateSchedule(this.schedule.id, this.changes)
+        .updateSchedule(this.authService.decodedToken.nameid, this.schedule.id, this.changes)
         .subscribe(
           (response) => {
             this.schedule = response as Schedule;
 
             this.alertService.success('Sikeres frissítés!');
           },
-          (error) => this.alertService.error(error),
+          (error) => {
+            for (let message of error.Messages) {
+              this.alertService.error(message);
+            }
+          },
           () => {
             this.editMode = false;
             this.changes = [];
