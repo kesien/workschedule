@@ -1,0 +1,12 @@
+<p-menubar [model]="regularMenu" class="p-d-flex p-jc-between" *ngIf="!isAdmin()">
+  <ng-template pTemplate="end">
+    <p-button label="Bejelentkezés" [disabled]="isOpened" icon="pi pi-sign-in" (click)="login()" styleClass="p-button-success" *ngIf="!loggedIn()"></p-button>
+    <p-button label="Kijelentkezés" icon="pi pi-power-off" (click)="logout()" styleClass="p-button-danger" *ngIf="loggedIn()"></p-button>
+</ng-template>
+</p-menubar>
+<p-menubar [model]="adminMenu" class="p-d-flex p-jc-between" *ngIf="isAdmin()">
+  <ng-template pTemplate="end">
+    <p-button label="Bejelentkezés" [disabled]="isOpened" icon="pi pi-sign-in" (click)="login()" styleClass="p-button-success" *ngIf="!loggedIn()"></p-button>
+    <p-button label="Kijelentkezés" icon="pi pi-power-off" (click)="logout()" styleClass="p-button-danger" *ngIf="loggedIn()"></p-button>
+  </ng-template>
+</p-menubar>

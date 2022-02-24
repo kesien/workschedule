@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Holiday } from 'src/app/_models/holiday.model';
+import { Holiday } from 'src/app/shared/models/holiday.model';
 
 @Component({
   selector: 'app-new-holiday',

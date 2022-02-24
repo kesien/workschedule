@@ -1,12 +1,11 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { Holiday } from '../_models/holiday.model';
-import { User } from '../_models/user.model';
-import { AlertService } from '../_services/alert.service';
-import { AuthService } from '../_services/auth.service';
-import { HolidayService } from '../_services/holiday.service';
-import { UserService } from '../_services/user.service';
-import { months } from '../_shared/months.data';
+import { Holiday } from '../shared/models/holiday.model';
+import { User } from '../shared/models/user.model';
+import { AlertService } from '../shared/services/alert.service';
+import { AuthService } from '../shared/services/auth.service';
+import { HolidayService } from '../shared/services/holiday.service';
+import { UserService } from '../shared/services/user.service';
+import { months } from '../shared/constants/months.data';
 
 @Component({
   selector: 'app-admin',

@@ -1,0 +1,31 @@
+<div class="container">
+  <div *ngIf="user" class="lg:w-3 md:w-6 xs:w-12 mx-auto mt-3">
+    <p-card header="Profil beállítások">
+      <form [formGroup]="userForm" (ngSubmit)="updateInfo()">
+          <div class="p-fluid">
+            <div class="field">
+              <label for="username">Felhasználónév</label>
+              <input type="text" pInputText formControlName="userName"/>
+            </div>
+            <div class="field">
+              <label for="name">Név</label>
+              <input type="text" pInputText formControlName="name"/>
+            </div>
+            <div class="field">
+              <label for="password">Új jelszó</label>
+              <p-password id="password"  formControlName="password" #password></p-password>
+            </div>
+            <div class="field">
+              <label for="passwordre" class="form-label"
+                >Új jelszó mégegyszer</label
+              >
+              <p-password id="passwordre" #passwordRepeat formControlName="confirmPassword" [feedback]="false"></p-password>
+            </div>
+            <div class="field">
+              <button pButton type="button" [disabled]="!userForm.valid" label="Mentés" icon="pi pi-save" class="p-button-lg p-button-success" (click)="updateInfo()" [loading]="isLoading.isLoading"></button>
+            </div>
+        </div>
+        </form>
+    </p-card>
+  </div>
+</div>

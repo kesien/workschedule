@@ -1,0 +1,11 @@
+<div class="p-fluid">
+  <div class="field">
+      <label for="username">Felhasználónév</label>
+      <input [(ngModel)]="user.username" id="username" type="text" pInputText class="w-full"> 
+  </div>
+  <div class="field">
+      <label for="password">Jelszó</label>
+      <p-password [(ngModel)]="user.password" id="password" [toggleMask]="true" [feedback]="false"></p-password>
+  </div>
+</div>
+<p-button label="Belépés" (click)="login()" styleClass="w-full" [loading]="isLoading.isLoading"></p-button>

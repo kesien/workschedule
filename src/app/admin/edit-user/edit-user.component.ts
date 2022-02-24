@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { User } from 'src/app/_models/user.model';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-edit-user',

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Holiday } from 'src/app/_models/holiday.model';
-import { months } from 'src/app/_shared/months.data';
+import { months } from 'src/app/shared/constants/months.data';
+import { Holiday } from 'src/app/shared/models/holiday.model';
 
 @Component({
   selector: 'app-holidays',

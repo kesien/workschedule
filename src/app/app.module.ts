@@ -4,33 +4,42 @@ import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { routes } from 'src/app/routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {TableModule} from 'primeng/table';
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { ProfileComponent } from './profile/profile.component';
-import { RequestsComponent } from './requests/requests.component';
-import { AdminComponent } from './admin/admin.component';
-import { HomeComponent } from './home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { LoginComponent } from './login/login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ScheduleComponent } from './schedule/schedule.component';
-import { ErrorInterceptorProvider } from './_services/error.interceptor';
-import { NewRequestComponent } from './requests/new-request/new-request.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { ScheduleDayComponent } from './schedule/schedule-day/schedule-day.component';
-import { ScheduleRowComponent } from './schedule/schedule-row/schedule-row.component';
-import { SpinnerInterceptor } from './_interceptors/spinner.interceptor';
-import { NewUserComponent } from './admin/new-user/new-user.component';
-import { NewHolidayComponent } from './admin/new-holiday/new-holiday.component';
-import { HolidaysComponent } from './admin/holidays/holidays.component';
-import { UsersComponent } from './admin/users/users.component';
-import { SummaryComponent } from './schedule/summary/summary.component';
-import { EditUserComponent } from './admin/edit-user/edit-user.component';
+import { SpinnerInterceptor } from './shared/interceptors/spinner.interceptor';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ProfileComponent } from './components/profile/profile.component';
+import { RequestsComponent } from './components/requests/requests.component';
+import { AdminComponent } from './admin/admin.component';
+import { EditUserComponent } from './admin/edit-user/edit-user.component';
+import { HolidaysComponent } from './admin/holidays/holidays.component';
+import { NewUserComponent } from './admin/new-user/new-user.component';
+import { UsersComponent } from './admin/users/users.component';
+import { HomeComponent } from './components/home/home.component';
+import { ScheduleDayComponent } from './components/schedule/schedule-day/schedule-day.component';
+import { ScheduleRowComponent } from './components/schedule/schedule-row/schedule-row.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import { SummaryComponent } from './components/schedule/summary/summary.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { ErrorInterceptorProvider } from './shared/interceptors/error.interceptor';
+import { DropdownModule } from 'primeng/dropdown';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { CalendarModule } from 'primeng/calendar';
+import { DialogModule } from 'primeng/dialog';
+import { MenubarModule } from 'primeng/menubar';
+import { TabViewModule } from 'primeng/tabview';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { PopupdialogModule } from './popupdialog/popupdialog.module';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import {CardModule} from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -44,19 +53,29 @@ export function tokenGetter() {
     RequestsComponent,
     AdminComponent,
     HomeComponent,
-    LoginComponent,
     ScheduleComponent,
-    NewRequestComponent,
     ScheduleDayComponent,
     ScheduleRowComponent,
     NewUserComponent,
-    NewHolidayComponent,
     HolidaysComponent,
     UsersComponent,
     SummaryComponent,
     EditUserComponent,
   ],
   imports: [
+    PasswordModule,
+    InputTextModule,
+    CardModule,
+    DynamicDialogModule,
+    PopupdialogModule,
+    DialogModule,
+    TabViewModule,
+    MenubarModule,
+    CalendarModule,
+    ButtonModule,
+    DropdownModule,
+    MultiSelectModule,
+    TableModule,
     BrowserModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
