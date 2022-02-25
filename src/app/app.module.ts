@@ -40,6 +40,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import {CardModule} from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -63,6 +64,7 @@ export function tokenGetter() {
     EditUserComponent,
   ],
   imports: [
+    ProgressSpinnerModule,
     PasswordModule,
     InputTextModule,
     CardModule,

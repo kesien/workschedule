@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
-  @Input() users?: User[];
+  @Input() users!: User[];
   @Output() onDeleteUser = new EventEmitter();
   @Output() onEditUser = new EventEmitter();
   constructor(public authService: AuthService) {}

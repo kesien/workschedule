@@ -9,6 +9,7 @@ import { months } from 'src/app/shared/constants/months.data';
 import { DayType } from 'src/app/shared/constants/daytype.constant';
 import { Row } from 'src/app/shared/models/row.model';
 import { ScheduleDay } from 'src/app/shared/models/scheduleday.model';
+import { IsLoadingService } from 'src/app/shared/services/isloading.service';
 
 @Component({
   selector: 'app-schedule',
@@ -18,29 +19,24 @@ import { ScheduleDay } from 'src/app/shared/models/scheduleday.model';
 export class ScheduleComponent implements OnInit {
   date = new Date();
   fileUrl = environment.baseApiUrl + 'files/';
-  year = this.date.getFullYear();
-  month = this.date.getMonth() + 1;
   schedule!: Schedule;
   rows: Row[] = [];
-  years = Array(10)
-    .fill(2021)
-    .map((x, y) => x + y);
   editMode = false;
   changes: Day[] = [];
+  yearRange: string;
+  filter: Date = new Date();
   mobile = false;
-  months = months;
-
   constructor(
     private alertService: AlertService,
     private scheduleService: ScheduleService,
-    public authService: AuthService
-  ) {}
+    public authService: AuthService,
+    public isLoading: IsLoadingService
+  ) {
+    this.yearRange = `${new Date().getFullYear() - 6}:${new Date().getFullYear() + 10}`;
+  }
 
   ngOnInit(): void {
-    this.getSchedule();
-    if (window.screen.width <= 650) {
-      this.mobile = true;
-    }
+    this.getSchedule(this.filter.getFullYear(), this.filter.getMonth() + 1);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -52,8 +48,8 @@ export class ScheduleComponent implements OnInit {
     }
   }
 
-  getSchedule() {
-    this.scheduleService.getSchedule(this.year, this.month).subscribe(
+  getSchedule(year: number = this.filter.getFullYear(), month: number = this.filter.getMonth() + 1) {
+    this.scheduleService.getSchedule(year, month).subscribe(
       (response) => {
         this.schedule = response as Schedule;
       },
@@ -69,7 +65,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   createSchedule() {
-    this.scheduleService.createSchedule(this.authService.decodedToken.nameid, this.year, this.month).subscribe(
+    this.scheduleService.createSchedule(this.authService.decodedToken.nameid, this.filter.getFullYear(), this.filter.getMonth() + 1).subscribe(
       (response) => {
         this.schedule = response as Schedule;
       },
@@ -92,7 +88,7 @@ export class ScheduleComponent implements OnInit {
               this.alertService.error(message);
             }
           },
-          () => this.getSchedule()
+          () => this.getSchedule(this.filter.getFullYear(), this.filter.getMonth() + 1)
         );
       }
     }
@@ -176,6 +172,6 @@ export class ScheduleComponent implements OnInit {
 
   cancel() {
     this.editMode = false;
-    this.getSchedule();
+    this.getSchedule(this.filter.getFullYear(), this.filter.getMonth() + 1);
   }
 }

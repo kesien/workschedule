@@ -1,35 +1,29 @@
-<div class="table-responsive">
-  <table class="table-striped table" *ngIf="users">
-    <thead>
+<p-table [value]="users" responsiveLayout="scroll">
+  <ng-template pTemplate="header">
       <tr>
-        <th>Felhasználónév</th>
-        <th>Név</th>
-        <th class="text-center">Admin</th>
-        <th>&nbsp;</th>
+          <th>Felhasználónév</th>
+          <th>Név</th>
+          <th>Admin</th>
+          <th>&nbsp;</th>
       </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{ user.userName }}</td>
-        <td>{{ user.name }}</td>
-        <td class="text-center">
-          <i class="fa fa-ban text-danger" *ngIf="user.role == 0"></i>
-          <i class="fa fa-check text-success" *ngIf="user.role == 1"></i>
-        </td>
-        <td class="text-center">
-          <div
-            class="btn-group"
-            *ngIf="user.id != this.authService.decodedToken?.nameid"
-          >
-            <a class="btn btn-success" (click)="editUser(user)"
-              ><i class="fa fa-edit"></i
-            ></a>
-            <a class="btn btn-danger" (click)="deleteUser(user)"
-              ><i class="fa fa-trash"></i
-            ></a>
+  </ng-template>
+  <ng-template pTemplate="body" let-user>
+      <tr>
+          <td>{{user.userName}}</td>
+          <td>{{user.name}}</td>
+          <td>
+            <i class="pi pi-check text-green-400" *ngIf="user.role == 1"></i>
+            <i class="pi pi-ban text-pink-400" *ngIf="user.role == 0"></i>
+          </td>
+          <td>
+            <div
+              class="p-buttonset"
+              *ngIf="user.id != this.authService.decodedToken?.nameid"
+            >
+              <button pButton icon="pi pi-pencil" class="p-button-success mr-2" (click)="editUser(user)"></button>
+              <button pButton icon="pi pi-trash" class="p-button-danger" (click)="deleteUser(user)"></button>
           </div>
-        </td>
+          </td>
       </tr>
-    </tbody>
-  </table>
-</div>
+  </ng-template>
+</p-table>

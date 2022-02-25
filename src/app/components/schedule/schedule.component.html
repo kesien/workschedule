@@ -1,44 +1,16 @@
-<div class="lg:mx-8 md:mx-4" *ngIf="schedule">
-  <div class="row mb-3 justify-content-end">
-    <div class="col-md-auto col-1">
-      <label for="year" class="col-form-label">Év:</label>
-    </div>
-    <div class="col-md-auto col-3">
-      <select
-        class="form-control"
-        id="year"
-        [(ngModel)]="year"
-        (change)="getSchedule()"
-      >
-        <option
-          *ngFor="let year of years"
-          [value]="year"
-          [selected]="date.getFullYear() === year"
-        >
-          {{ year }}
-        </option>
-      </select>
-    </div>
-    <div class="col-md-auto col-2">
-      <label for="month" class="col-form-label">Hónap:</label>
-    </div>
-    <div class="col-md-auto col-6">
-      <select
-        class="form-control"
-        id="month"
-        [(ngModel)]="month"
-        (change)="getSchedule()"
-      >
-        <option
-          *ngFor="let month of months"
-          [value]="months.indexOf(month) + 1"
-          [selected]="date.getMonth() === months.indexOf(month)"
-        >
-          {{ month }}
-        </option>
-      </select>
-    </div>
+<div *ngIf="isLoading.isLoading" class="spinner-container flex flex-column justify-content-center align-items-center">
+  <div>
+    <p-progressSpinner></p-progressSpinner>  
   </div>
+</div>
+<div class="lg:mx-8 md:mx-4 mt-3" *ngIf="schedule && !isLoading.isLoading" style="position: relative;">
+    <div class="lg:w-3 md:w-4 xs:w-12 mb-3 ml-auto">
+      <div class="p-fluid">
+        <p-calendar [(ngModel)]="filter" [showIcon]="true" view="month" dateFormat="yy/mm" 
+        [yearNavigator]="true" [yearRange]="yearRange" placeholder="Válasz ki a hónapot"
+        [readonlyInput]="true" inputId="monthpicker" (onSelect)="getSchedule()"></p-calendar>
+      </div>
+    </div>
   <div class="calendar">
     <div class="calendar__table">
       <div class="calendar__header">
@@ -61,69 +33,44 @@
       ></app-schedule-row>
     </div>
   </div>
-  <div
-    class="row justify-content-end mt-3"
-    *ngIf="this.authService.decodedToken?.role === 'Administrator'"
-  >
-    <div class="col-12 col-lg-4 col-md-6" *ngIf="schedule.isSaved">
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button
-          class="btn btn-primary btn-lg"
-          (click)="enableEditMode()"
-          *ngIf="!editMode"
-        >
-          <i class="fa fa-edit"></i>
-          Szerkesztés
-        </button>
-        <button
-          class="btn btn-danger btn-lg"
-          (click)="deleteSchedule()"
-          *ngIf="!editMode"
-        >
-          <i class="fa fa-trash"></i>
-          Törlés
-        </button>
-        <a
-          *ngIf="schedule.wordFile && !editMode"
-          class="btn btn-success btn-lg"
-          [href]="fileUrl + schedule.wordFile"
-          [download]="schedule.wordFile"
-        >
-          <i class="fa fa-download"></i>
-          Letöltés
-        </a>
-        <button
-          class="btn btn-primary btn-lg"
-          (click)="cancel()"
-          *ngIf="editMode"
-        >
-          <i class="fa fa-close"></i>
-          Mégse
-        </button>
-        <button
-          class="btn btn-success btn-lg"
-          (click)="saveChanges()"
-          *ngIf="editMode"
-        >
-          <i class="fa fa-save"></i>
-          Mentés
-        </button>
+  <div *ngIf="this.authService.decodedToken?.role === 'Administrator'" class="mt-3">
+    <div class="grid justify-content-end" *ngIf="!schedule.isSaved">
+      <div class="col-12 lg:col-2 md:col-4 p-fluid">
+        <p-button label="Kiállít" icon="pi pi-check" styleClass="p-button-lg" (click)="createSchedule()"></p-button>
       </div>
     </div>
-    <div class="col-12 col-lg-3 col-md-6" *ngIf="!schedule.isSaved">
-      <div class="d-grid">
-        <button class="btn btn-success btn-lg" (click)="createSchedule()">
-          Kiállít
-        </button>
+    <div class="grid justify-content-end" *ngIf="schedule.isSaved">
+      <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="!editMode">
+        <p-button label="Szerkesztés" icon="pi pi-pencil" styleClass="p-button-lg p-button-success" (click)="enableEditMode()"></p-button>
+      </div>
+      <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="!editMode">
+        <p-button label="Törlés" icon="pi pi-trash" styleClass="p-button-lg p-button-danger" (click)="deleteSchedule()"></p-button>
+      </div>
+      <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="schedule.wordFile && !editMode">
+        <p-button label="Letöltés" icon="pi pi-save" styleClass="p-button-lg p-button-primary"></p-button>
+      </div>
+          <!-- <a
+            *ngIf="schedule.wordFile && !editMode"
+            class="btn btn-success btn-lg"
+            [href]="fileUrl + schedule.wordFile"
+            [download]="schedule.wordFile"
+            >
+            <i class="fa fa-download"></i>
+            Letöltés
+          </a> -->
+      <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="editMode">
+        <p-button label="Mégse" icon="pi pi-close" styleClass="p-button-lg p-button-info" (click)="cancel()"></p-button>
+      </div>
+      <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="editMode">
+        <p-button label="Mentés" icon="pi pi-close" styleClass="p-button-lg p-button-success" (click)="saveChanges()"></p-button>
       </div>
     </div>
+    
   </div>
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-6 col-lg-4">
-      <app-summary
-        [summaries]="schedule.summaries"
-        *ngIf="schedule.isSaved"
-      ></app-summary>
-    </div>
+  <div class="mx-auto mt-6 lg:w-5 md:w-6 xs:w-12">
+    <app-summary
+      [summaries]="schedule.summaries"
+      *ngIf="schedule.isSaved"
+    ></app-summary>
   </div>
 </div>

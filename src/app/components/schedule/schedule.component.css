@@ -13,3 +13,7 @@
     max-width: 100%;
   }
 }
+
+.spinner-container {
+  height: 80vh;
+}
