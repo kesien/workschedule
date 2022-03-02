@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable, Query } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Request } from '../models/request.model';
 import { Years } from '../models/years.model';
@@ -12,28 +11,27 @@ export class RequestsService {
   baseUrl = environment.baseApiUrl + 'requests';
   constructor(private http: HttpClient) {}
 
-  getRequestsForUser(userId: string, year: number, month: number): Observable<Request[]> {
-    return this.http.get(
+  getRequestsForUser(userId: string, year: number, month: number) {
+    return this.http.get<Request[]>(
       this.baseUrl + `/${userId}/${year}/${month}`
-    ) as Observable<Request[]>;
+    );
   }
 
-  getAllRequestYearsForUser(userId: string): Observable<Years> {
-    return this.http.get(this.baseUrl + `/years/${userId}`) as Observable<Years>
+  getAllRequestYearsForUser(userId: string) {
+    return this.http.get<Years>(this.baseUrl + `/years/${userId}`)
   }
 
-  getAllRequestsForUser(userId: string): Observable<Request[]> {
-    return this.http.get(this.baseUrl + `/${userId}`) as Observable<Request[]>;
+  getAllRequestsForUser(userId: string) {
+    return this.http.get<Request[]>(this.baseUrl + `/${userId}`);
   }
 
-  createNewRequest(userId: string, data: Request): Observable<Request> {
+  createNewRequest(userId: string, data: Request) {
     const payload = {
       userId,
       type: data.type,
       date: data.date.toLocaleString("en-CA").substring(0, 10)
     };
-    console.log(payload);
-    return this.http.post(this.baseUrl, payload) as Observable<Request>;
+    return this.http.post<Request>(this.baseUrl, payload);
   }
 
   deleteRequest(id: string | undefined) {

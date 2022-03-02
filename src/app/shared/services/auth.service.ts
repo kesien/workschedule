@@ -44,4 +44,9 @@ export class AuthService {
       this.decodedToken.unique_name = name;
     }
   }
+
+  logOut() {
+    localStorage.removeItem('token');
+    this.decodedToken = undefined;
+  }
 }

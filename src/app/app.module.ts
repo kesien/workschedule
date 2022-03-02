@@ -15,11 +15,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RequestsComponent } from './components/requests/requests.component';
-import { AdminComponent } from './admin/admin.component';
-import { EditUserComponent } from './admin/edit-user/edit-user.component';
-import { HolidaysComponent } from './admin/holidays/holidays.component';
-import { NewUserComponent } from './admin/new-user/new-user.component';
-import { UsersComponent } from './admin/users/users.component';
+import { EditUserComponent } from './components/admin/edit-user/edit-user.component';
+import { HolidaysComponent } from './components/admin/holidays/holidays.component';
+import { NewUserComponent } from './components/admin/new-user/new-user.component';
+import { UsersComponent } from './components/admin/users/users.component';
 import { HomeComponent } from './components/home/home.component';
 import { ScheduleDayComponent } from './components/schedule/schedule-day/schedule-day.component';
 import { ScheduleRowComponent } from './components/schedule/schedule-row/schedule-row.component';
@@ -35,12 +34,18 @@ import { MenubarModule } from 'primeng/menubar';
 import { TabViewModule } from 'primeng/tabview';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { PopupdialogModule } from './popupdialog/popupdialog.module';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import {CardModule} from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {PanelModule} from 'primeng/panel';
+import {SliderModule} from 'primeng/slider';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import { AdminComponent } from './components/admin/admin.component';
+import { PopupdialogModule } from './modules/popupdialog.module';
+
+
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -64,6 +69,9 @@ export function tokenGetter() {
     EditUserComponent,
   ],
   imports: [
+    ConfirmPopupModule,
+    SliderModule,
+    PanelModule,
     ProgressSpinnerModule,
     PasswordModule,
     InputTextModule,

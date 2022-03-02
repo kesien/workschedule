@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { USER_TYPES } from 'src/app/shared/constants/usertype.constant';
 import { User } from 'src/app/shared/models/user.model';
 
 @Component({
@@ -7,18 +9,20 @@ import { User } from 'src/app/shared/models/user.model';
   styleUrls: ['./edit-user.component.css'],
 })
 export class EditUserComponent implements OnInit {
-  @Input() user?: User;
+  user!: User;
   @Output() onSave = new EventEmitter();
   @Output() onCancel = new EventEmitter();
-  constructor() {}
+  userTypes = USER_TYPES;
 
-  ngOnInit(): void {}
+  constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig) { }
+
+  ngOnInit(): void { 
+    this.user = this.config.data.user;
+  }
 
   save() {
-    this.onSave.emit(this.user);
+    this.ref.close(this.user);
   }
 
-  cancel() {
-    this.onCancel.emit(true);
-  }
+  close() {}
 }

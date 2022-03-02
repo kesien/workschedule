@@ -13,11 +13,14 @@ import { LoginComponent } from '../login/login.component';
   providers: [DialogService]
 })
 export class NavigationComponent implements OnInit {
+
   ref!: DynamicDialogRef;
-  public regularMenu: MenuItem[] = [];
-  public adminMenu: MenuItem[] = [];
+
+  public menuItems: MenuItem[] = [];
+
   isOpened = false;
   isCollapsed = true;
+
   constructor(
     public authService: AuthService,
     private alertService: AlertService,
@@ -27,29 +30,28 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit(): void {
     this.isOpened = false;
-    this.regularMenu = [
-      { label: "Home", icon:'pi pi-fw pi-home', routerLink: ['/'], routerLinkActiveOptions: { exact: true }},
-      { label: "Kéréseim", icon:'pi pi-fw pi-heart', routerLink: ['requests']},
-      { label: "Profil", icon:'pi pi-fw pi-user', routerLink: ['profile']},
-      { label: "Beosztás", icon:'pi pi-fw pi-calendar', routerLink: ['schedule']},
-    ];
-    this.adminMenu = [
-      { label: "Home", icon:'pi pi-fw pi-home', routerLink: ['/'], routerLinkActiveOptions: { exact: true }},
-      { label: "Kéréseim", icon:'pi pi-fw pi-heart', routerLink: ['requests']},
-      { label: "Profil", icon:'pi pi-fw pi-user', routerLink: ['profile']},
-      { label: "Beosztás", icon:'pi pi-fw pi-calendar', routerLink: ['schedule']},
-      { label: "Adminisztráció", icon:'pi pi-fw pi-lock', routerLink: ['admin']}
-    ];
+    this.initMenu();
   }
 
   loggedIn() {
     return this.authService.loggedIn();
   }
 
+  initMenu() {
+    this.menuItems = [
+      { label: "Home", icon:'pi pi-fw pi-home', routerLink: ['/'], routerLinkActiveOptions: { exact: true }},
+      { label: "Kéréseim", icon:'pi pi-fw pi-heart', routerLink: ['requests']},
+      { label: "Profil", icon:'pi pi-fw pi-user', routerLink: ['profile']},
+      { label: "Beosztás", icon:'pi pi-fw pi-calendar', routerLink: ['schedule']},
+      { label: "Adminisztráció", icon:'pi pi-fw pi-lock', routerLink: ['admin'], visible: this.isAdmin()}
+    ];
+  }
+
   logout() {
-    localStorage.removeItem('token');
+    this.authService.logOut();
     this.alertService.info('Sikeres kilépés!');
     this.router.navigate(['/']);
+    this.initMenu();
   }
 
   isAdmin() {
@@ -70,6 +72,7 @@ export class NavigationComponent implements OnInit {
     this.ref.onClose.subscribe(() =>{
       this.isOpened = false;
       if (this.loggedIn()) {
+        this.initMenu();
         this.alertService.success("Sikeres belépés!");
         this.router.navigate(['/schedule']);
       }

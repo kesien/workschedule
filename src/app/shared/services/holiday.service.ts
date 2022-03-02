@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { HolidayYears } from '../models/allholidayyears.model';
 import { Holiday } from '../models/holiday.model';
 
 @Injectable({
@@ -11,12 +12,31 @@ export class HolidayService {
   baseUrl = environment.baseApiUrl + 'holidays';
   constructor(private http: HttpClient) {}
 
-  getAllHolidays(): Observable<Holiday[]> {
-    return this.http.get(this.baseUrl) as Observable<Holiday[]>;
+  getAllHolidays() {
+    return this.http.get<Holiday[]>(this.baseUrl);
   }
 
-  getHolidaysByFilter(year: number, month: number): Observable<Holiday[]> {
-    return this.http.get(this.baseUrl + `/filter?year=${year}&month=${month}`) as Observable<Holiday[]>;
+  getAllYears() {
+    return this.http.get<HolidayYears>(this.baseUrl + "/years");
+  }
+
+  getHolidaysByFilter(year: number, month: number, day: number, isFix: boolean) {
+    let query = "?";
+    if (year) {
+      query += "year=" + year;
+    }
+    if (month) {
+      query += "&month=" + month;
+    }
+    if (day) {
+      query += "&day=" + day;
+    }
+    if (isFix || isFix === false) {
+      query += "&type=" + isFix
+    } else {
+      query += "&type=all"
+    }
+    return this.http.get<Holiday[]>(this.baseUrl + `/filter${query}`);
   }
 
   delete(id: string) {
@@ -31,8 +51,7 @@ export class HolidayService {
     return this.http.delete(this.baseUrl, options);
   }
 
-  createNewHoliday(holiday: Holiday): Observable<Holiday> {
-    const payload = { isFix: holiday.isFix, date: new Date(holiday.year, holiday.month - 1, holiday.day) }
-    return this.http.post(this.baseUrl, payload) as Observable<Holiday>;
+  createNewHoliday(holiday: Holiday) {
+    return this.http.post<Holiday>(this.baseUrl, holiday);
   }
 }

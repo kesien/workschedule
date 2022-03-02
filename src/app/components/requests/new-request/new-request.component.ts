@@ -19,14 +19,16 @@ export class NewRequestComponent implements OnInit {
     private config: DynamicDialogConfig,
     public isLoading: IsLoadingService
     ) {
-    this.request = {
-      date: new Date(),
-      type: 0
+      this.request = {
+        date: new Date(),
+        type: 0
     }
   }
 
   ngOnInit(): void {}
+
   close() {}
+
   save() {
     this.requestService.createNewRequest(this.config.data.userId, this.request).subscribe(
       null,

@@ -159,6 +159,9 @@ export class ScheduleComponent implements OnInit {
             for (let message of error.Messages) {
               this.alertService.error(message);
             }
+            this.editMode = false;
+            this.changes = [];
+            this.getSchedule(this.filter.getFullYear(), this.filter.getMonth() + 1);
           },
           () => {
             this.editMode = false;

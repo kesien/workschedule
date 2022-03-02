@@ -1,5 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { USER_TYPES } from 'src/app/shared/constants/usertype.constant';
 import { User } from 'src/app/shared/models/user.model';
+import { IsLoadingService } from 'src/app/shared/services/isloading.service';
 
 @Component({
   selector: 'app-new-user',
@@ -12,10 +15,13 @@ export class NewUserComponent implements OnInit {
   user: Partial<User> = {
     userName: '',
     password: '',
-    role: 0,
+    role: undefined,
     name: '',
   };
-  constructor() {}
+  userTypes = USER_TYPES;
+
+
+  constructor(private ref: DynamicDialogRef) {}
 
   ngOnInit(): void {
     this.user = {
@@ -30,7 +36,9 @@ export class NewUserComponent implements OnInit {
     this.cancelNewUserMode.emit(true);
   }
 
-  createNewUser() {
-    this.onCreateNewUser.emit(this.user);
+  close() {}
+
+  save() {
+    this.ref.close(this.user);
   }
 }

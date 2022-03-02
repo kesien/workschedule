@@ -32,7 +32,9 @@ export class ProfileComponent implements OnInit {
     },
     passwordMatchValidator
   );
+  
   user!: User;
+
   constructor(
     private userService: UserService,
     private alertService: AlertService,

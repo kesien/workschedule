@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AdminComponent } from './admin/admin.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RequestsComponent } from './components/requests/requests.component';

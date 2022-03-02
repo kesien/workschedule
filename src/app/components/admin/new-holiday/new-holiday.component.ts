@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Holiday } from 'src/app/shared/models/holiday.model';
 
 @Component({
@@ -7,7 +8,6 @@ import { Holiday } from 'src/app/shared/models/holiday.model';
   styleUrls: ['./new-holiday.component.css'],
 })
 export class NewHolidayComponent implements OnInit {
-  @Output() onCancelNewHolidayMode = new EventEmitter();
   @Output() onCreateNewHoliday = new EventEmitter();
   holiday: {
     date: Date;
@@ -16,7 +16,7 @@ export class NewHolidayComponent implements OnInit {
     date: new Date(),
     isFix: false,
   };
-  constructor() {}
+  constructor(private ref: DynamicDialogRef) {}
 
   ngOnInit(): void {
     this.holiday = {
@@ -25,19 +25,25 @@ export class NewHolidayComponent implements OnInit {
     };
   }
 
-  cancel() {
-    this.onCancelNewHolidayMode.emit(true);
-  }
-
   createNewHoliday() {
-    const date = new Date(this.holiday.date);
-
     const newHoliday: Partial<Holiday> = {
-      day: date.getDate(),
-      month: date.getMonth() + 1,
-      year: date.getFullYear(),
+      day: this.holiday.date.getDate(),
+      month: this.holiday.date.getMonth() + 1,
+      year: this.holiday.date.getFullYear(),
       isFix: this.holiday.isFix
     };
     this.onCreateNewHoliday.emit(newHoliday);
   }
+
+  save() {
+    const newHoliday: Partial<Holiday> = {
+      day: this.holiday.date.getDate(),
+      month: this.holiday.date.getMonth() + 1,
+      year: this.holiday.date.getFullYear(),
+      isFix: this.holiday.isFix
+    };
+    this.ref.close(newHoliday);
+  }
+
+  close() {}
 }

@@ -12,18 +12,18 @@ export class UserService {
   baseUrl = environment.baseApiUrl + 'users';
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  getUser(userId: string): Observable<User> {
-    return this.http.get(
+  getUser(userId: string) {
+    return this.http.get<User>(
       this.baseUrl + `/${userId}`
-    ) as Observable<User>;
+    );
   }
 
-  updateUser(requesterId: string, user: User): Observable<User> {
-    return this.http.put(this.baseUrl, { requesterId, ...user }) as Observable<User>;
+  updateUser(requesterId: string, user: User) {
+    return this.http.put<User>(this.baseUrl, { requesterId, ...user });
   }
 
-  getAllUser(): Observable<User[]> {
-    return this.http.get(this.baseUrl) as Observable<User[]>;
+  getAllUser() {
+    return this.http.get<User[]>(this.baseUrl);
   }
 
   deleteUser(id: string) {
@@ -38,7 +38,7 @@ export class UserService {
     return this.http.delete(this.baseUrl, options);
   }
 
-  createUser(user: User): Observable<User> {
-    return this.http.post(this.baseUrl, user) as Observable<User>;
+  createUser(user: User) {
+    return this.http.post<User>(this.baseUrl, user);
   }
 }

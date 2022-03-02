@@ -4,10 +4,10 @@ import { AlertService } from '../../shared/services/alert.service';
 import { Request } from '../../shared/models/request.model';
 import { AuthService } from '../../shared/services/auth.service';
 import { months } from 'src/app/shared/constants/months.data';
-import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { NewRequestComponent } from './new-request/new-request.component';
 import { REQUEST_TYPES } from 'src/app/shared/constants/requesttypes.constant';
+import { IsLoadingService } from 'src/app/shared/services/isloading.service';
 
 @Component({
   selector: 'app-requests',
@@ -17,30 +17,24 @@ import { REQUEST_TYPES } from 'src/app/shared/constants/requesttypes.constant';
 })
 export class RequestsComponent implements OnInit, OnDestroy {
   ref!: DynamicDialogRef;
-  @ViewChild('dt1') dt: Table | undefined;
   isOpened = false;
   displayModal: boolean = false;
   requestTypes = REQUEST_TYPES;
   date = new Date();
-  filter = {
-    userId: '',
-    year: this.date.getFullYear(),
-    month: this.date.getMonth(),
-  };
-  createMode = false;
   years: number[] = [];
   months = months;
   allRequests: Request[] = [];
+  totalRecords = 0;
 
   constructor(
     private authService: AuthService,
     private requestsService: RequestsService,
     private alertService: AlertService,
-    private dialogService: DialogService
-  ) {}
+    private dialogService: DialogService,
+    public isLoading: IsLoadingService
+  ) { }
 
   ngOnInit(): void {
-    this.filter.userId = this.authService.decodedToken.nameid;
     this.getAllRequestYearsForUser();
     this.getAllRequestsForUser();
   }
@@ -58,14 +52,14 @@ export class RequestsComponent implements OnInit, OnDestroy {
     this.isOpened = true;
     this.ref = this.dialogService.open(NewRequestComponent, {
       header: 'Új kérés',
-      style: {'max-width': '500px'},
+      style: { 'max-width': '500px' },
       baseZIndex: 10000,
       data: {
         userId: this.authService.decodedToken.nameid
       }
     });
 
-    this.ref.onClose.subscribe((request: Request) =>{
+    this.ref.onClose.subscribe((request: Request) => {
       this.isOpened = false;
       if (request) {
         this.getAllRequestYearsForUser();
@@ -73,27 +67,6 @@ export class RequestsComponent implements OnInit, OnDestroy {
         this.alertService.success("Sikeresen hozzáadva!")
       }
     });
-  }
-
-  cancel(cancelCreateMode: boolean) {
-    this.createMode = cancelCreateMode;
-  }
-
-  filterRequests() {
-    this.requestsService
-      .getRequestsForUser(
-        this.filter.userId,
-        this.filter.year,
-        this.filter.month
-      )
-      .subscribe(
-        (response) => {
-          this.allRequests = response;
-        },
-        (error) => {
-          this.alertService.error(error);
-        }
-      );
   }
 
   getAllRequestYearsForUser() {
@@ -106,30 +79,15 @@ export class RequestsComponent implements OnInit, OnDestroy {
           }
         }
       },
-      error => {
-        for (let message of error.Messages) {
-          this.alertService.error(message);
-        }
-      }
     );
   }
 
   getAllRequestsForUser() {
-    this.requestsService.getAllRequestsForUser(this.filter.userId).subscribe(
+    this.requestsService.getAllRequestsForUser(this.authService.decodedToken.nameid).subscribe(
       (response) => {
         this.allRequests = response;
-        console.log(this.allRequests);
-        
+        this.totalRecords = response.length;
       },
-      (error) => {
-        this.alertService.error(error);
-      }
-    );
-  }
-
-  filteredRequests() {
-    return this.allRequests.filter(
-      (request) => this.getYear(request.date.toString()) == this.filter.year
     );
   }
 
@@ -139,20 +97,10 @@ export class RequestsComponent implements OnInit, OnDestroy {
         this.alertService.success('Sikeres törlés!');
         this.allRequests = this.allRequests.filter((req) => req !== request);
       },
-      (error) => {
-        for (let message of error.Messages) {
-          this.alertService.error(message);
-        }
-      },
       () => {
         this.getAllRequestYearsForUser();
       }
     );
-  }
-
-  private getYear(date: string) {
-    const dateFromString = new Date(date);
-    return dateFromString.getFullYear();
   }
 
   getType(type: number) {
@@ -162,9 +110,5 @@ export class RequestsComponent implements OnInit, OnDestroy {
       return '9:30';
     }
     return 'Szabadság';
-  }
-
-  isCurrentMonth(monthIndex: number) {
-    return this.date.getMonth() === monthIndex;
   }
 }
