@@ -12,6 +12,9 @@ import { NewHolidayComponent } from './new-holiday/new-holiday.component';
 import { IsLoadingService } from '../../shared/services/isloading.service';
 import { HolidayYears } from '../../shared/models/allholidayyears.model';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import * as signalR from '@microsoft/signalr';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-admin',
@@ -36,6 +39,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     year: 0,
     month: 0,
   };
+  private connection?: signalR.HubConnection;
 
   constructor(
     private usersService: UserService,
@@ -50,9 +54,45 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.getUsers();
     this.getHolidayYears();
     this.getHolidays();
+
+    this.connection = new signalR.HubConnectionBuilder()  
+      .configureLogging(signalR.LogLevel.Information)  
+      .withUrl(environment.signalRUrl)  
+      .build();  
+  
+    this.connection.start().then(function () {  
+      console.log('SignalR Connected!');  
+    }).catch(function (err) {  
+      return console.error(err.toString());  
+    });  
+  
+    this.connection.on("UserCreatedEvent", () => {  
+      this.getUsers();  
+    });
+
+    this.connection.on("UserDeletedEvent", () => {  
+      this.getUsers();  
+    });
+
+    this.connection.on("UserUpdatedEvent", () => {  
+      this.getUsers();  
+    });
+
+    this.connection.on("HolidayCreatedEvent", () => {  
+      this.getHolidays(); 
+      this.getHolidayYears(); 
+    });
+
+    this.connection.on("HolidayDeletedEvent", () => {  
+      this.getHolidays(); 
+      this.getHolidayYears(); 
+    });
   }
 
   ngOnDestroy(): void {
+    if (this.connection) {
+      this.connection.stop();
+    }
     if (this.ref) {
       this.ref.close();
     }
@@ -100,8 +140,6 @@ export class AdminComponent implements OnInit, OnDestroy {
       this.holidayService.delete(holiday.id).subscribe(
         (response) => {
           this.alertService.success('Sikeres törlés!');
-          this.getHolidays()
-          this.getHolidayYears();
         },
       );
     }
@@ -111,7 +149,6 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.usersService.deleteUser(user.id).subscribe(
       (response) => {
         this.alertService.success('Sikeres törlés!');
-        this.getUsers();
       })
   }
 
@@ -179,7 +216,6 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.usersService.createUser(user).subscribe(
       (response) => {
         this.alertService.success('Új felhasználó létrehozva!');
-        this.users.push(response);
       },
     );
   }
@@ -188,8 +224,6 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.holidayService.createNewHoliday(holiday).subscribe(
       (response) => {
         this.alertService.success('Új ünnep hozzáadva!');
-        this.holidays.push(response);
-        this.getHolidayYears();
       },
     );
   }

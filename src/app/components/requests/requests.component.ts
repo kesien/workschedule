@@ -8,6 +8,8 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { NewRequestComponent } from './new-request/new-request.component';
 import { REQUEST_TYPES } from 'src/app/shared/constants/requesttypes.constant';
 import { IsLoadingService } from 'src/app/shared/services/isloading.service';
+import * as signalR from '@microsoft/signalr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-requests',
@@ -26,6 +28,8 @@ export class RequestsComponent implements OnInit, OnDestroy {
   allRequests: Request[] = [];
   totalRecords = 0;
 
+  private connection?: signalR.HubConnection;
+
   constructor(
     private authService: AuthService,
     private requestsService: RequestsService,
@@ -37,6 +41,27 @@ export class RequestsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getAllRequestYearsForUser();
     this.getAllRequestsForUser();
+
+    this.connection = new signalR.HubConnectionBuilder()  
+      .configureLogging(signalR.LogLevel.Information)  
+      .withUrl(environment.signalRUrl)  
+      .build();  
+  
+    this.connection.start().then(function () {  
+      console.log('SignalR Connected!');  
+    }).catch(function (err) {  
+      return console.error(err.toString());  
+    });  
+  
+    this.connection.on("RequestCreatedEvent", () => {  
+      this.getAllRequestsForUser();  
+      this.getAllRequestYearsForUser();  
+    });
+
+    this.connection.on("RequestDeletedEvent", () => {  
+      this.getAllRequestsForUser();  
+      this.getAllRequestYearsForUser();  
+    });
   }
 
   ngOnDestroy(): void {
@@ -62,8 +87,6 @@ export class RequestsComponent implements OnInit, OnDestroy {
     this.ref.onClose.subscribe((request: Request) => {
       this.isOpened = false;
       if (request) {
-        this.getAllRequestYearsForUser();
-        this.getAllRequestsForUser();
         this.alertService.success("Sikeresen hozzáadva!")
       }
     });
@@ -95,11 +118,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
     this.requestsService.deleteRequest(request.id).subscribe(
       () => {
         this.alertService.success('Sikeres törlés!');
-        this.allRequests = this.allRequests.filter((req) => req !== request);
       },
-      () => {
-        this.getAllRequestYearsForUser();
-      }
     );
   }
 

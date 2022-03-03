@@ -1,22 +1,22 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Day } from '../../shared/models/day.model';
 import { Schedule } from '../../shared/models/schedule.model';
 import { AlertService } from '../../shared/services/alert.service';
 import { AuthService } from '../../shared/services/auth.service';
 import { ScheduleService } from '../../shared/services/schedule.service';
-import { months } from 'src/app/shared/constants/months.data';
 import { DayType } from 'src/app/shared/constants/daytype.constant';
 import { Row } from 'src/app/shared/models/row.model';
 import { ScheduleDay } from 'src/app/shared/models/scheduleday.model';
 import { IsLoadingService } from 'src/app/shared/services/isloading.service';
+import * as signalR from '@microsoft/signalr';
 
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.css'],
 })
-export class ScheduleComponent implements OnInit {
+export class ScheduleComponent implements OnInit, OnDestroy {
   date = new Date();
   fileUrl = environment.baseApiUrl + 'files/';
   schedule!: Schedule;
@@ -26,6 +26,8 @@ export class ScheduleComponent implements OnInit {
   yearRange: string;
   filter: Date = new Date();
   mobile = false;
+  private connection?: signalR.HubConnection;
+
   constructor(
     private alertService: AlertService,
     private scheduleService: ScheduleService,
@@ -35,8 +37,43 @@ export class ScheduleComponent implements OnInit {
     this.yearRange = `${new Date().getFullYear() - 6}:${new Date().getFullYear() + 10}`;
   }
 
+  ngOnDestroy(): void {
+    this.connection?.stop();
+  }
+
   ngOnInit(): void {
     this.getSchedule(this.filter.getFullYear(), this.filter.getMonth() + 1);
+
+    this.connection = new signalR.HubConnectionBuilder()  
+      .configureLogging(signalR.LogLevel.Information)  
+      .withUrl(environment.signalRUrl)  
+      .build();  
+  
+    this.connection.start().then(function () {  
+      console.log('SignalR Connected!');  
+    }).catch(function (err) {  
+      return console.error(err.toString());  
+    });  
+  
+    this.connection.on("ScheduleCreatedEvent", () => {  
+      this.getSchedule();  
+    });
+
+    this.connection.on("ScheduleUpdatedEvent", () => {  
+      this.getSchedule();  
+    });
+
+    this.connection.on("ScheduleDeletedEvent", () => {  
+      this.getSchedule();  
+    });
+
+    this.connection.on("RequestCreatedEvent", () => {  
+      this.getSchedule();  
+    });
+
+    this.connection.on("RequestDeletedEvent", () => {  
+      this.getSchedule();  
+    });
   }
 
   @HostListener('window:resize', ['$event'])

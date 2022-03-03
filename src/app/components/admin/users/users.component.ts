@@ -16,9 +16,15 @@ export class UsersComponent implements OnInit {
   @Output() onEditUser = new EventEmitter();
   @Output() onAddNewUser = new EventEmitter();
   
-  constructor(public authService: AuthService, private confirmationService: ConfirmationService) {}
+  constructor(
+    public authService: AuthService, 
+    private confirmationService: ConfirmationService,
+    
+    ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 
   deleteUser(user: User) {
     this.onDeleteUser.emit(user);

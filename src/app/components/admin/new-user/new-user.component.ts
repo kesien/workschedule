@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { USER_TYPES } from 'src/app/shared/constants/usertype.constant';
 import { User } from 'src/app/shared/models/user.model';
-import { IsLoadingService } from 'src/app/shared/services/isloading.service';
 
 @Component({
   selector: 'app-new-user',
