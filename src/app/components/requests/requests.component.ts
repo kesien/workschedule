@@ -84,12 +84,15 @@ export class RequestsComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.ref.onClose.subscribe((request: Request) => {
-      this.isOpened = false;
-      if (request) {
-        this.alertService.success("Sikeresen hozzáadva!")
-      }
-    });
+    this.ref.onClose.subscribe(
+      (request: Request) => {
+        this.isOpened = false;
+        if (request) {
+          this.alertService.success("Sikeresen hozzáadva!")
+        }
+      },
+      error => this.alertService.error(error)
+    );
   }
 
   getAllRequestYearsForUser() {
@@ -102,6 +105,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
           }
         }
       },
+      error => this.alertService.error(error)
     );
   }
 
@@ -111,14 +115,14 @@ export class RequestsComponent implements OnInit, OnDestroy {
         this.allRequests = response;
         this.totalRecords = response.length;
       },
+      error => this.alertService.error(error)
     );
   }
 
   deleteRequest(request: Request) {
     this.requestsService.deleteRequest(request.id).subscribe(
-      () => {
-        this.alertService.success('Sikeres törlés!');
-      },
+      () => this.alertService.success('Sikeres törlés!'),
+      error => this.alertService.error(error)
     );
   }
 

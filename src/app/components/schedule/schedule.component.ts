@@ -10,6 +10,7 @@ import { Row } from 'src/app/shared/models/row.model';
 import { ScheduleDay } from 'src/app/shared/models/scheduleday.model';
 import { IsLoadingService } from 'src/app/shared/services/isloading.service';
 import * as signalR from '@microsoft/signalr';
+import { FileService } from 'src/app/shared/services/file.service';
 
 @Component({
   selector: 'app-schedule',
@@ -32,7 +33,8 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private scheduleService: ScheduleService,
     public authService: AuthService,
-    public isLoading: IsLoadingService
+    public isLoading: IsLoadingService,
+    private fileService: FileService
   ) {
     this.yearRange = `${new Date().getFullYear() - 6}:${new Date().getFullYear() + 10}`;
   }
@@ -87,31 +89,17 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   getSchedule(year: number = this.filter.getFullYear(), month: number = this.filter.getMonth() + 1) {
     this.scheduleService.getSchedule(year, month).subscribe(
-      (response) => {
-        this.schedule = response as Schedule;
-      },
-      (error) => {
-        for (let message of error.Messages) {
-          this.alertService.error(message);
-        }
-      },
-      () => {
-        this.generateRows();
-      }
+      (response) => this.schedule = response,
+      error => this.alertService.error(error),
+      () => this.generateRows()
     );
   }
 
   createSchedule() {
     this.scheduleService.createSchedule(this.authService.decodedToken.nameid, this.filter.getFullYear(), this.filter.getMonth() + 1).subscribe(
-      (response) => {
-        this.schedule = response as Schedule;
-      },
-      (error) => {
-        this.alertService.error(error);
-      },
-      () => {
-        this.generateRows();
-      }
+      null,
+      (error) => this.alertService.error(error),
+      () => this.generateRows()
     );
   }
 
@@ -119,13 +107,8 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     if (confirm(`Biztos, hogy törlöd ezt a beosztást?`)) {
       if (this.schedule.id) {
         this.scheduleService.deleteSchedule(this.schedule.id).subscribe(
-          (response) => this.alertService.success('Sikeres törlés!'),
-          (error) => {
-            for (let message of error.Messages) {
-              this.alertService.error(message);
-            }
-          },
-          () => this.getSchedule(this.filter.getFullYear(), this.filter.getMonth() + 1)
+          () => this.alertService.success('Sikeres törlés!'),
+          error => this.alertService.error(error),
         );
       }
     }
@@ -187,15 +170,9 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       this.scheduleService
         .updateSchedule(this.authService.decodedToken.nameid, this.schedule.id, this.changes)
         .subscribe(
-          (response) => {
-            this.schedule = response as Schedule;
-
-            this.alertService.success('Sikeres frissítés!');
-          },
+          () => this.alertService.success('Sikeres frissítés!'),
           (error) => {
-            for (let message of error.Messages) {
-              this.alertService.error(message);
-            }
+            this.alertService.error(error);
             this.editMode = false;
             this.changes = [];
             this.getSchedule(this.filter.getFullYear(), this.filter.getMonth() + 1);
@@ -208,6 +185,10 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     } else {
       this.editMode = false;
     }
+  }
+
+  download(fileName: string) {
+    this.fileService.download(fileName);
   }
 
   cancel() {

@@ -47,7 +47,7 @@
         <p-button label="Törlés" icon="pi pi-trash" styleClass="p-button-lg p-button-danger" (click)="deleteSchedule()"></p-button>
       </div>
       <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="schedule.wordFile && !editMode">
-        <p-button label="Letöltés" icon="pi pi-save" styleClass="p-button-lg p-button-primary"></p-button>
+        <p-button label="Letöltés" icon="pi pi-save" styleClass="p-button-lg p-button-primary" (click)="download(schedule.wordFile)"></p-button>
       </div>
           <!-- <a
             *ngIf="schedule.wordFile && !editMode"

@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { throwError } from 'rxjs';
 import { REQUEST_TYPES } from 'src/app/shared/constants/requesttypes.constant';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { IsLoadingService } from 'src/app/shared/services/isloading.service';
 import { RequestsService } from 'src/app/shared/services/requests.service';
 import { Request } from '../../../shared/models/request.model';
@@ -17,6 +19,7 @@ export class NewRequestComponent implements OnInit {
     private ref: DynamicDialogRef,
     private requestService: RequestsService,
     private config: DynamicDialogConfig,
+    private alertService: AlertService,
     public isLoading: IsLoadingService
     ) {
       this.request = {
@@ -32,7 +35,14 @@ export class NewRequestComponent implements OnInit {
   save() {
     this.requestService.createNewRequest(this.config.data.userId, this.request).subscribe(
       null,
-      error => {console.log(error);
+      error => {
+        if (error.Messages) {
+          for (const message of error.Messages) {
+            this.alertService.error(message);
+          }
+        } else {
+          this.alertService.error(error);
+        }
       },
       () => {
         this.ref.close(this.request) 

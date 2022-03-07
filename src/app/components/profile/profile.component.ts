@@ -48,12 +48,8 @@ export class ProfileComponent implements OnInit {
 
   getUserData() {
     this.userService.getUser(this.authService.decodedToken.nameid).subscribe(
-      (response) => {
-        this.user = response as User;
-      },
-      (error) => {
-        this.alertService.error(error);
-      },
+      (response) => this.user = response as User,
+      (error) => this.alertService.error(error),
       () => {
         this.userForm.controls['userName'].setValue(this.user.userName);
         this.userForm.controls['name'].setValue(this.user.name);
@@ -66,14 +62,8 @@ export class ProfileComponent implements OnInit {
       .updateUser(this.authService.decodedToken.nameid, { id: this.user.id, ...this.userForm.value })
       .subscribe(
         () => this.alertService.success('Sikeresen frissítetted a profilod!'),
-        (error) => {
-          for (let message of error.Messages) {
-            this.alertService.error(message);
-          }
-        },
-        () => {
-          this.authService.setName(this.userForm.get('name')?.value);
-        }
+        (error) => this.alertService.error(error),
+        () => this.authService.setName(this.userForm.get('name')?.value)
       );
   }
 }

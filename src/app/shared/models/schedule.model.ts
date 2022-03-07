@@ -1,6 +1,5 @@
 import { Day } from './day.model';
 import { Summary } from './summary.model';
-import { WordFile } from './wordfile.model';
 
 export interface Schedule {
   id?: string;
@@ -10,5 +9,5 @@ export interface Schedule {
   summaries: Summary[];
   numOfWorkDay: number;
   isSaved: boolean;
-  wordFile?: WordFile;
+  wordFile?: string;
 }

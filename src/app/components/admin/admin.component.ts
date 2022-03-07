@@ -101,19 +101,14 @@ export class AdminComponent implements OnInit, OnDestroy {
   getUsers() {
     this.usersService.getAllUser().subscribe(
       (response) => (this.users = response as User[]),
-      (error) => {
-        for (let message of error.Messages) {
-          this.alertService.error(message)
-        }
-      }
+      (error) => this.alertService.error(error)
     );
   }
 
   getHolidays() {
     this.holidayService.getAllHolidays().subscribe(
-      (response) => {
-        this.holidays = response;
-      },
+      (response) => this.holidays = response,
+      error => this.alertService.error(error)
     );
   }
 
@@ -122,7 +117,8 @@ export class AdminComponent implements OnInit, OnDestroy {
       (response) => {
         this.years = response;
         this.getOptions();
-      }
+      },
+      error => this.alertService.error(error)
     )
   }
 
@@ -138,9 +134,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   deleteHoliday(holiday: Holiday) {
     if (holiday.id) {
       this.holidayService.delete(holiday.id).subscribe(
-        (response) => {
-          this.alertService.success('Sikeres törlés!');
-        },
+        () =>  this.alertService.success('Sikeres törlés!'),
+        error => this.alertService.error(error)
       );
     }
   }
@@ -214,17 +209,15 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   createNewUser(user: User) {
     this.usersService.createUser(user).subscribe(
-      (response) => {
-        this.alertService.success('Új felhasználó létrehozva!');
-      },
+      () => this.alertService.success('Új felhasználó létrehozva!'),
+      error => this.alertService.error(error)
     );
   }
 
   createNewHoliday(holiday: Holiday) {
     this.holidayService.createNewHoliday(holiday).subscribe(
-      (response) => {
-        this.alertService.success('Új ünnep hozzáadva!');
-      },
+      () => this.alertService.success('Új ünnep hozzáadva!'),
+      error => this.alertService.error(error)
     );
   }
 
@@ -234,10 +227,11 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   saveEditChanges(user: User) {
     this.usersService.updateUser(this.authService.decodedToken.nameid, user).subscribe(
-      (response) => {
+      () => {
         this.alertService.success('Sikeres frissítés!')
         this.getUsers();
       },
+      error => this.alertService.error(error)
     );
   }
 }

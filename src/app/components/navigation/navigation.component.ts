@@ -5,6 +5,7 @@ import { AuthService } from '../../shared/services/auth.service';
 import { MenuItem } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LoginComponent } from '../login/login.component';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 
 @Component({
   selector: 'app-navigation',
@@ -21,11 +22,17 @@ export class NavigationComponent implements OnInit {
   isOpened = false;
   isCollapsed = true;
 
+  themeOptions = [
+    { label: 'Világos téma', value: 'light-theme' },
+    { label: 'Sötét téma', value: 'dark-theme' }
+  ]
+
   constructor(
     public authService: AuthService,
     private alertService: AlertService,
     private router: Router,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    public themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
@@ -66,16 +73,22 @@ export class NavigationComponent implements OnInit {
     this.ref = this.dialogService.open(LoginComponent, {
       header: 'Bejelentkezés',
       width: '300px',
-      baseZIndex: 10000
     });
 
-    this.ref.onClose.subscribe(() =>{
-      this.isOpened = false;
-      if (this.loggedIn()) {
-        this.initMenu();
-        this.alertService.success("Sikeres belépés!");
-        this.router.navigate(['/schedule']);
-      }
-    });
+    this.ref.onClose.subscribe(
+      () =>{
+        this.isOpened = false;
+        if (this.loggedIn()) {
+          this.initMenu();
+          this.alertService.success("Sikeres belépés!");
+          this.router.navigate(['/schedule']);
+        }
+      },
+      error => this.alertService.error(error)
+    );
+  }
+
+  changeTheme() {
+    this.themeService.switchTheme();
   }
 }

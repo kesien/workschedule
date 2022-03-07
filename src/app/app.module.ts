@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
@@ -25,7 +25,7 @@ import { ScheduleRowComponent } from './components/schedule/schedule-row/schedul
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { SummaryComponent } from './components/schedule/summary/summary.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { ErrorInterceptorProvider } from './shared/interceptors/error.interceptor';
+import { ServerErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CalendarModule } from 'primeng/calendar';
@@ -43,8 +43,13 @@ import {PanelModule} from 'primeng/panel';
 import {SliderModule} from 'primeng/slider';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import { AdminComponent } from './components/admin/admin.component';
-import { PopupdialogModule } from './modules/popupdialog.module';
-
+import { GlobalErrorHandler } from './shared/errorhandler/error.handler';
+import { NewHolidayComponent } from './components/admin/new-holiday/new-holiday.component';
+import { NewRequestComponent } from './components/requests/new-request/new-request.component';
+import { LoginComponent } from './components/login/login.component';
+import { ToastModule } from 'primeng/toast';
+import { CommonModule } from '@angular/common';
+import { CheckboxModule } from 'primeng/checkbox';
 
 
 export function tokenGetter() {
@@ -53,6 +58,9 @@ export function tokenGetter() {
 
 @NgModule({
   declarations: [
+    LoginComponent,
+    NewRequestComponent,
+    NewHolidayComponent,
     AppComponent,
     NavigationComponent,
     ProfileComponent,
@@ -69,6 +77,9 @@ export function tokenGetter() {
     EditUserComponent,
   ],
   imports: [
+    CheckboxModule,
+    CommonModule,
+    ToastModule,
     ConfirmPopupModule,
     SliderModule,
     PanelModule,
@@ -77,7 +88,6 @@ export function tokenGetter() {
     InputTextModule,
     CardModule,
     DynamicDialogModule,
-    PopupdialogModule,
     DialogModule,
     TabViewModule,
     MenubarModule,
@@ -116,10 +126,10 @@ export function tokenGetter() {
     }),
   ],
   providers: [
-    ErrorInterceptorProvider,
-    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [LoginComponent]
 })
 export class AppModule {}

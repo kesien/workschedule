@@ -20,7 +20,7 @@ export class ScheduleRowComponent implements OnInit {
     this.arrowClick.emit(day);
   }
 
-  shouldDisplay(day: Day | null) {
+  shouldDisplay(day: Day | null) {    
     if (this.mobile) {
       if (day == null || day.isWeekend) {
         return false;
