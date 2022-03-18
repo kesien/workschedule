@@ -1,0 +1,12 @@
+<div class="p-fluid">
+  <div class="field">
+    <p-checkbox label="Fix ünnepnap" [(ngModel)]="holiday.isFix" [binary]="true" inputId="binary"></p-checkbox>
+  </div>
+  <div class="field">
+    <label for="date">Dátum</label>
+    <p-calendar [(ngModel)]="holiday.date" [inline]="true" id="date"></p-calendar>
+  </div>
+  <div class="field">
+    <button pButton type="button" label="Hozzáadás" class="p-button-success w-full" (click)="save()"></button>
+  </div>
+</div>

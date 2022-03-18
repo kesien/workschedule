@@ -1,0 +1,14 @@
+<div class="p-fluid">
+  <div class="field">
+    <label for="type">Típus</label>
+    <p-dropdown [options]="requestTypes" [(ngModel)]="request.type" optionLabel="label" optionValue="value" id="type"></p-dropdown>
+  </div>
+  <div class="field">
+    <label for="date">Dátum</label>
+    <p-calendar [(ngModel)]="request.date" [inline]="true" [showWeek]="true" id="date"></p-calendar>
+  </div>
+  
+  <div class="field">
+    <button pButton type="button" label="Hozzáadás" class="p-button-success w-full" (click)="save()" [loading]="isLoading.isLoading"></button>
+  </div>
+</div>

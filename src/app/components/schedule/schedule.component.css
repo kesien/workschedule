@@ -1,0 +1,19 @@
+.container {
+  max-width: 85%;
+}
+
+@media (max-width: 68.75em) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 40.625em) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+.spinner-container {
+  height: 80vh;
+}

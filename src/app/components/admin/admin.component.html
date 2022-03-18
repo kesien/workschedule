@@ -1,0 +1,20 @@
+<div class="container">
+  <div *ngIf="users && holidays && years" class="mx-auto lg:w-6 mt-3">
+    <app-users 
+      [users]="users" 
+      [isLoading]="isLoading.isLoading"
+      (onDeleteUser)="deleteUser($event)" 
+      (onEditUser)="editUser($event)" 
+      (onAddNewUser)="showNewUserDialog()">
+    </app-users>
+    <app-holidays 
+      [years]="years" 
+      [holidays]="holidays" 
+      [options]="options"
+      [isLoading]="isLoading.isLoading"
+      (onDeleteHoliday)="deleteHoliday($event)" 
+      (onEditUser)="editUser($event)" 
+      (onAddNewHoliday)="showNewHolidayDialog()" >
+    </app-holidays>
+  </div>
+</div>

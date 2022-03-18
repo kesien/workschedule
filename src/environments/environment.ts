@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   baseApiUrl: 'https://localhost:7040/api/',
+  signalRUrl: 'https://localhost:7040/schedule/',
 };
 
 /*
