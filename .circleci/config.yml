@@ -1,0 +1,62 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: ~/workschedule-client
+    docker:
+      - image: circleci/node:12-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run: npm ci
+      - save_cache:
+          key: myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - run: |
+          if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            npm run build-ghpages
+          else
+            npm run build
+          fi
+      - persist_to_workspace:
+          root: ~/workschedule-client
+          paths:
+            - dist/*
+  deploy:
+    working_directory: ~/workschedule-client
+    docker:
+      - image: node:8.10.0
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - 'e6:9c:fb:3e:5f:aa:4d:43:e0:5c:9f:ec:ef:3e:1e:39'
+      - checkout
+      - attach_workspace:
+          at: ~/workschedule-client
+      - run:
+          name: Install gh-pages
+          command: |
+            npm install -g --silent gh-pages
+      - run:
+          name: Configure git
+          command: |
+            git config user.email "balazsnobik@gmail.com"
+            git config user.name "kesien"
+      - run:
+          name: Deploy to gh-pages branch
+          command: gh-pages --message "[ci skip]" -d dist
+
+workflows:
+  version: 2
+  build_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
