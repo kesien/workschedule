@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/workschedule-client
     docker:
-      - image: circleci/node:12-browsers
+      - image: cimg/node:12.16
     steps:
       - checkout
       - restore_cache:
