@@ -1,0 +1,103 @@
+<div class="lg:w-6 md:w-8 xs:w-12 mx-auto mt-3">
+    <p-table #dt1 [value]="allRequests" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+        responsiveLayout="scroll" [totalRecords]="totalRecords" [loading]="isLoading.isLoading"
+        [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-gridlines" [paginator]="true"
+        currentPageReportTemplate="{first} - {last} a(z) {totalRecords} kérésből"
+        [globalFilterFields]="['year','month','type']">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>
+                    <div pSortableColumn="year" class="p-d-flex p-jc-between p-ai-center">
+                        Év
+                        <p-columnFilter field="year" matchMode="equals" display="menu" [showMatchModes]="false"
+                            [showOperator]="false" [showAddButton]="false">
+                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                <p-dropdown [ngModel]="value" [options]="years" (onChange)="filter($event.value)"
+                                    placeholder="Any">
+                                    <ng-template let-option pTemplate="item">
+                                        <span>{{option}}</span>
+                                    </ng-template>
+                                </p-dropdown>
+                            </ng-template>
+                        </p-columnFilter>
+                        <p-sortIcon field="year"></p-sortIcon>
+                    </div>
+                </th>
+                <th>
+                    <div pSortableColumn="month" class="p-d-flex p-jc-between p-ai-center">
+                        Hónap
+                        <p-columnFilter field="month" matchMode="equals" display="menu" [showMatchModes]="false"
+                            [showOperator]="false" [showAddButton]="false">
+                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                <p-dropdown [ngModel]="value" [options]="months" (onChange)="filter($event.value)"
+                                    placeholder="Any">
+                                    <ng-template let-option pTemplate="item">
+                                        <span>{{option.label}}</span>
+                                    </ng-template>
+                                </p-dropdown>
+                            </ng-template>
+                        </p-columnFilter>
+                        <p-sortIcon field="month"></p-sortIcon>
+                    </div>
+                </th>
+                <th>
+                    <div pSortableColumn="day" class="p-d-flex p-jc-between p-ai-center">
+                        Nap
+                        <p-sortIcon field="day"></p-sortIcon>
+                    </div>
+                </th>
+                <th>
+                    <div pSortableColumn="type" class="p-d-flex p-jc-between p-ai-center">
+                        Típus
+                        <p-columnFilter field="type" matchMode="equals" display="menu" [showMatchModes]="false"
+                            [showOperator]="false" [showAddButton]="false">
+                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                <p-dropdown [ngModel]="value" [options]="requestTypes" (onChange)="filter($event.value)"
+                                    placeholder="Any">
+                                    <ng-template let-option pTemplate="item">
+                                        <span>{{option.label}}</span>
+                                    </ng-template>
+                                </p-dropdown>
+                            </ng-template>
+                        </p-columnFilter>
+                        <p-sortIcon field="type"></p-sortIcon>
+                    </div>
+                </th>
+                <th>
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        &nbsp;
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-request>
+            <tr>
+                <td>
+                    {{request.year}}
+                </td>
+                <td>
+                    {{months[request.month - 1].label}}
+                </td>
+                <td>
+                    {{request.day}}
+                </td>
+                <td>
+                    {{getType(request.type)}}
+                </td>
+                <td class="text-center">
+                    <p-button styleClass="p-button-danger" icon="pi pi-trash" iconPos="center"
+                        (click)="deleteRequest(request)"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="5">Nincsenek kéréseid erre a hónapra.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<div class="lg:w-2 xs:w-12 mx-auto mt-3">
+    <button (click)="showModalDialog()" pButton type="button" label="Új hozzáadása"
+        class="p-button-success w-full"></button>
+</div>

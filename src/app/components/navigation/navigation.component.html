@@ -1,0 +1,20 @@
+<p-menubar [model]="menuItems" class="p-d-flex p-jc-between">
+  <ng-template pTemplate="end">
+    <p-dropdown id="theme-picker" [options]="themeOptions" [(ngModel)]="themeService.selectedTheme" optionLabel="label" optionValue="value" styleClass="mr-3" (onChange)="changeTheme()">
+      <ng-template let-option pTemplate="item">
+        <div>
+            <i class="pi" [ngClass]="option.value === 'dark-theme' ? 'pi-moon' : 'pi-sun'"></i>
+            <span class="ml-2">{{option.label}}</span>
+        </div>
+      </ng-template>
+      <ng-template let-option pTemplate="selectedItem">
+        <div>
+            <i class="pi" [ngClass]="option.value === 'dark-theme' ? 'pi-moon' : 'pi-sun'"></i>
+            <span class="ml-2">{{option.label}}</span>
+        </div>
+      </ng-template>
+    </p-dropdown>
+    <p-button label="Bejelentkezés" [disabled]="isOpened" icon="pi pi-sign-in" (click)="login()" styleClass="p-button-success" *ngIf="!loggedIn()"></p-button>
+    <p-button label="Kijelentkezés" icon="pi pi-power-off" (click)="logout()" styleClass="p-button-danger" *ngIf="loggedIn()"></p-button>
+</ng-template>
+</p-menubar>

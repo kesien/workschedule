@@ -1,36 +1,56 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { routes } from 'src/app/routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {TableModule} from 'primeng/table';
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { ProfileComponent } from './profile/profile.component';
-import { RequestsComponent } from './requests/requests.component';
-import { AdminComponent } from './admin/admin.component';
-import { HomeComponent } from './home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { LoginComponent } from './login/login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ScheduleComponent } from './schedule/schedule.component';
-import { ErrorInterceptorProvider } from './_services/error.interceptor';
-import { NewRequestComponent } from './requests/new-request/new-request.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { ScheduleDayComponent } from './schedule/schedule-day/schedule-day.component';
-import { ScheduleRowComponent } from './schedule/schedule-row/schedule-row.component';
-import { SpinnerInterceptor } from './_interceptors/spinner.interceptor';
-import { NewUserComponent } from './admin/new-user/new-user.component';
-import { NewHolidayComponent } from './admin/new-holiday/new-holiday.component';
-import { HolidaysComponent } from './admin/holidays/holidays.component';
-import { UsersComponent } from './admin/users/users.component';
-import { SummaryComponent } from './schedule/summary/summary.component';
-import { EditUserComponent } from './admin/edit-user/edit-user.component';
+import { SpinnerInterceptor } from './shared/interceptors/spinner.interceptor';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ProfileComponent } from './components/profile/profile.component';
+import { RequestsComponent } from './components/requests/requests.component';
+import { EditUserComponent } from './components/admin/edit-user/edit-user.component';
+import { HolidaysComponent } from './components/admin/holidays/holidays.component';
+import { NewUserComponent } from './components/admin/new-user/new-user.component';
+import { UsersComponent } from './components/admin/users/users.component';
+import { HomeComponent } from './components/home/home.component';
+import { ScheduleDayComponent } from './components/schedule/schedule-day/schedule-day.component';
+import { ScheduleRowComponent } from './components/schedule/schedule-row/schedule-row.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import { SummaryComponent } from './components/schedule/summary/summary.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { ServerErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { DropdownModule } from 'primeng/dropdown';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { CalendarModule } from 'primeng/calendar';
+import { DialogModule } from 'primeng/dialog';
+import { MenubarModule } from 'primeng/menubar';
+import { TabViewModule } from 'primeng/tabview';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import {CardModule} from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {PanelModule} from 'primeng/panel';
+import {SliderModule} from 'primeng/slider';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import { AdminComponent } from './components/admin/admin.component';
+import { GlobalErrorHandler } from './shared/errorhandler/error.handler';
+import { NewHolidayComponent } from './components/admin/new-holiday/new-holiday.component';
+import { NewRequestComponent } from './components/requests/new-request/new-request.component';
+import { LoginComponent } from './components/login/login.component';
+import { ToastModule } from 'primeng/toast';
+import { CommonModule } from '@angular/common';
+import { CheckboxModule } from 'primeng/checkbox';
+
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -38,25 +58,44 @@ export function tokenGetter() {
 
 @NgModule({
   declarations: [
+    LoginComponent,
+    NewRequestComponent,
+    NewHolidayComponent,
     AppComponent,
     NavigationComponent,
     ProfileComponent,
     RequestsComponent,
     AdminComponent,
     HomeComponent,
-    LoginComponent,
     ScheduleComponent,
-    NewRequestComponent,
     ScheduleDayComponent,
     ScheduleRowComponent,
     NewUserComponent,
-    NewHolidayComponent,
     HolidaysComponent,
     UsersComponent,
     SummaryComponent,
     EditUserComponent,
   ],
   imports: [
+    CheckboxModule,
+    CommonModule,
+    ToastModule,
+    ConfirmPopupModule,
+    SliderModule,
+    PanelModule,
+    ProgressSpinnerModule,
+    PasswordModule,
+    InputTextModule,
+    CardModule,
+    DynamicDialogModule,
+    DialogModule,
+    TabViewModule,
+    MenubarModule,
+    CalendarModule,
+    ButtonModule,
+    DropdownModule,
+    MultiSelectModule,
+    TableModule,
     BrowserModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
@@ -87,10 +126,10 @@ export function tokenGetter() {
     }),
   ],
   providers: [
-    ErrorInterceptorProvider,
-    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [LoginComponent]
 })
 export class AppModule {}
