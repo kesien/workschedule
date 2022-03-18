@@ -10,7 +10,6 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerInterceptor } from './shared/interceptors/spinner.interceptor';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -117,7 +116,6 @@ export function tokenGetter() {
     FormsModule,
     NgxSpinnerModule,
     ReactiveFormsModule,
-    CollapseModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
