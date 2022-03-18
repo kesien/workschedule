@@ -21,7 +21,7 @@ export class FileService {
             this.alertService.error(message);
           }
         } else {
-          this.alertService.error(error)
+          this.alertService.error(error.message)
         }
       }
     )

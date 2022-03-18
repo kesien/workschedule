@@ -90,7 +90,15 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   getSchedule(year: number = this.filter.getFullYear(), month: number = this.filter.getMonth() + 1) {
     this.scheduleService.getSchedule(year, month).subscribe(
       (response) => this.schedule = response,
-      error => this.alertService.error(error),
+      error => {
+        if (error.Messages) {
+          for (const message of error.Messages) {
+            this.alertService.error(message);
+          }
+        } else {
+          this.alertService.error(error.message)
+        }
+      },
       () => this.generateRows()
     );
   }
@@ -98,7 +106,15 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   createSchedule() {
     this.scheduleService.createSchedule(this.authService.decodedToken.nameid, this.filter.getFullYear(), this.filter.getMonth() + 1).subscribe(
       null,
-      (error) => this.alertService.error(error),
+      (error) => {
+        if (error.Messages) {
+          for (const message of error.Messages) {
+            this.alertService.error(message);
+          }
+        } else {
+          this.alertService.error(error.message)
+        }
+      },
       () => this.generateRows()
     );
   }
@@ -108,7 +124,15 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       if (this.schedule.id) {
         this.scheduleService.deleteSchedule(this.schedule.id).subscribe(
           () => this.alertService.success('Sikeres törlés!'),
-          error => this.alertService.error(error),
+          error => {
+            if (error.Messages) {
+              for (const message of error.Messages) {
+                this.alertService.error(message);
+              }
+            } else {
+              this.alertService.error(error.message)
+            }
+          },
         );
       }
     }
@@ -172,10 +196,15 @@ export class ScheduleComponent implements OnInit, OnDestroy {
         .subscribe(
           () => this.alertService.success('Sikeres frissítés!'),
           (error) => {
-            this.alertService.error(error);
+            if (error.Messages) {
+              for (const message of error.Messages) {
+                this.alertService.error(message);
+              }
+            } else {
+              this.alertService.error(error.message)
+            }
             this.editMode = false;
             this.changes = [];
-            this.getSchedule(this.filter.getFullYear(), this.filter.getMonth() + 1);
           },
           () => {
             this.editMode = false;

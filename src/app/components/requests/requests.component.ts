@@ -105,7 +105,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
           }
         }
       },
-      error => this.alertService.error(error)
+      error => this.alertService.error(error.message)
     );
   }
 
@@ -115,14 +115,14 @@ export class RequestsComponent implements OnInit, OnDestroy {
         this.allRequests = response;
         this.totalRecords = response.length;
       },
-      error => this.alertService.error(error)
+      error => this.alertService.error(error.message)
     );
   }
 
   deleteRequest(request: Request) {
     this.requestsService.deleteRequest(request.id).subscribe(
       () => this.alertService.success('Sikeres törlés!'),
-      error => this.alertService.error(error)
+      error => this.alertService.error(error.message)
     );
   }
 

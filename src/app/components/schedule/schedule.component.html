@@ -49,15 +49,6 @@
       <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="schedule.wordFile && !editMode">
         <p-button label="Letöltés" icon="pi pi-save" styleClass="p-button-lg p-button-primary" (click)="download(schedule.wordFile)"></p-button>
       </div>
-          <!-- <a
-            *ngIf="schedule.wordFile && !editMode"
-            class="btn btn-success btn-lg"
-            [href]="fileUrl + schedule.wordFile"
-            [download]="schedule.wordFile"
-            >
-            <i class="fa fa-download"></i>
-            Letöltés
-          </a> -->
       <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="editMode">
         <p-button label="Mégse" icon="pi pi-close" styleClass="p-button-lg p-button-info" (click)="cancel()"></p-button>
       </div>
