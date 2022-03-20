@@ -1,10 +1,10 @@
 <p-table [value]="summaries" responsiveLayout="scroll" *ngIf="summaries">
   <ng-template pTemplate="header">
       <tr>
-          <th>Név</th>
-          <th>8:00</th>
-          <th>9:30</th>
-          <th>Szabadság</th>
+          <th>{{ 'schedule.summary.headers.name' | translate }}</th>
+          <th>{{ 'schedule.summary.headers.eight' | translate }}</th>
+          <th>{{ 'schedule.summary.headers.halften' | translate }}</th>
+          <th>{{ 'schedule.summary.headers.holiday' | translate }}</th>
       </tr>
   </ng-template>
   <ng-template pTemplate="body" let-summary>

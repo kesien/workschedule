@@ -1,8 +1,7 @@
 <div class="container">
-  <div *ngIf="users && holidays && years" class="mx-auto lg:w-6 mt-3">
+  <div *ngIf="users && holidays && years" class="mx-auto lg:w-7 md:w-8 mt-3">
     <app-users 
       [users]="users" 
-      [isLoading]="isLoading.isLoading"
       (onDeleteUser)="deleteUser($event)" 
       (onEditUser)="editUser($event)" 
       (onAddNewUser)="showNewUserDialog()">
@@ -11,7 +10,6 @@
       [years]="years" 
       [holidays]="holidays" 
       [options]="options"
-      [isLoading]="isLoading.isLoading"
       (onDeleteHoliday)="deleteHoliday($event)" 
       (onEditUser)="editUser($event)" 
       (onAddNewHoliday)="showNewHolidayDialog()" >

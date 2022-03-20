@@ -1,11 +1,11 @@
-<p-panel header="Ünnepnapok" [toggleable]="true" styleClass="mt-3">
+<p-panel header="{{ 'admin.holidays.title' | translate }}" [toggleable]="true" styleClass="mt-3">
   <p-table *ngIf="holidays" [value]="holidays" responsiveLayout="scroll" [paginator]="true" [rows]="10"
     [totalRecords]="totalRecords" [loading]=isLoading [showCurrentPageReport]="true"
-    currentPageReportTemplate="{first} - {last} a(z) {totalRecords} kérésből" [rowsPerPageOptions]="[10,15,25]"
+    currentPageReportTemplate="{first} - {last} / {totalRecords} {{ 'admin.holidays.table.paginator' | translate }}" [rowsPerPageOptions]="[10,15,25]"
     [globalFilterFields]="['year','month', 'day', 'isFix']">
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="year">Év
+        <th pSortableColumn="year">{{ 'admin.holidays.table.year' | translate }}
           <p-columnFilter field="year" matchMode="equals" display="menu" [showMatchModes]="false" [showOperator]="false"
             [showAddButton]="false">
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
@@ -18,7 +18,7 @@
           </p-columnFilter>
           <p-sortIcon field="year"></p-sortIcon>
         </th>
-        <th pSortableColumn="month">Hónap
+        <th pSortableColumn="month">{{ 'admin.holidays.table.month' | translate }}
           <p-columnFilter field="month" matchMode="equals" display="menu" [showMatchModes]="false"
             [showOperator]="false" [showAddButton]="false">
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
@@ -31,12 +31,12 @@
           </p-columnFilter>
           <p-sortIcon field="month"></p-sortIcon>
         </th>
-        <th pSortableColumn="day">Nap
+        <th pSortableColumn="day">{{ 'admin.holidays.table.day' | translate }}
           <p-columnFilter type="numeric" field="day" display="menu" [showMatchModes]="false" [showOperator]="false"
             [showAddButton]="false"></p-columnFilter>
           <p-sortIcon field="day"></p-sortIcon>
         </th>
-        <th pSortableColumn="isFix">Fix?
+        <th pSortableColumn="isFix">{{ 'admin.holidays.table.isfix' | translate }}
           <p-columnFilter type="boolean" field="isFix" display="menu"></p-columnFilter>
           <p-sortIcon field="isFix"></p-sortIcon>
         </th>
@@ -52,7 +52,7 @@
           <i class="pi pi-check text-green-400" *ngIf="holiday.isFix"></i>
           <i class="pi pi-times text-pink-400" *ngIf="!holiday.isFix"></i>
         </td>
-        <td class="text-center">
+        <td class="text-right">
           <p-button styleClass="p-button-danger" icon="pi pi-trash" iconPos="center" (click)="confirm($event, holiday)">
           </p-button>
         </td>
@@ -60,9 +60,9 @@
     </ng-template>
   </p-table>
   <ng-template pTemplate="footer">
-    <div class="lg:w-3 xs:w-12 ml-auto mt-3">
-      <button (click)="addNewHoliday()" pButton icon="pi pi-plus" type="button" label="Új hozzáadása"
-          class="p-button-success w-full" [disabled]="isLoading"></button>
+    <div class="text-right">
+      <button (click)="addNewHoliday()" pButton icon="pi pi-plus" type="button" label="{{ 'admin.holidays.button' | translate }}"
+          class="p-button-success"></button>
     </div>
   </ng-template>
 </p-panel>

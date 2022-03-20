@@ -1,9 +1,4 @@
-<div *ngIf="isLoading.isLoading" class="spinner-container flex flex-column justify-content-center align-items-center">
-  <div>
-    <p-progressSpinner></p-progressSpinner>  
-  </div>
-</div>
-<div class="lg:mx-8 md:mx-4 mt-3" *ngIf="schedule && !isLoading.isLoading" style="position: relative;">
+<div class="lg:mx-8 md:mx-4 mt-3" *ngIf="schedule" style="position: relative;">
     <div class="lg:w-3 md:w-4 xs:w-12 mb-3 ml-auto">
       <div class="p-fluid">
         <p-calendar [(ngModel)]="filter" [showIcon]="true" view="month" dateFormat="yy/mm" 
@@ -15,13 +10,13 @@
     <div class="calendar__table">
       <div class="calendar__header">
         <div class="cell--header"><i class="fa fa-clock-o"></i></div>
-        <div class="cell--header">Hétfő</div>
-        <div class="cell--header">Kedd</div>
-        <div class="cell--header">Szerda</div>
-        <div class="cell--header">Csütörtök</div>
-        <div class="cell--header">Péntek</div>
-        <div class="cell--header">Szombat</div>
-        <div class="cell--header">Vasárnap</div>
+        <div class="cell--header">{{ 'schedule.monday' | translate }}</div>
+        <div class="cell--header">{{ 'schedule.tuesday' | translate }}</div>
+        <div class="cell--header">{{ 'schedule.wednesday' | translate }}</div>
+        <div class="cell--header">{{ 'schedule.thursday' | translate }}</div>
+        <div class="cell--header">{{ 'schedule.friday' | translate }}</div>
+        <div class="cell--header">{{ 'schedule.saturday' | translate }}</div>
+        <div class="cell--header">{{ 'schedule.sunday' | translate }}</div>
       </div>
 
       <app-schedule-row
@@ -36,24 +31,24 @@
   <div *ngIf="this.authService.decodedToken?.role === 'Administrator'" class="mt-3">
     <div class="grid justify-content-end" *ngIf="!schedule.isSaved">
       <div class="col-12 lg:col-2 md:col-4 p-fluid">
-        <p-button label="Kiállít" icon="pi pi-check" styleClass="p-button-lg" (click)="createSchedule()"></p-button>
+        <p-button label="{{ 'schedule.buttons.create' | translate }}" icon="pi pi-check" styleClass="p-button-lg" (click)="createSchedule()"></p-button>
       </div>
     </div>
     <div class="grid justify-content-end" *ngIf="schedule.isSaved">
       <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="!editMode">
-        <p-button label="Szerkesztés" icon="pi pi-pencil" styleClass="p-button-lg p-button-success" (click)="enableEditMode()"></p-button>
+        <p-button label="{{ 'schedule.buttons.edit' | translate }}" icon="pi pi-pencil" styleClass="p-button-lg p-button-success" (click)="enableEditMode()"></p-button>
       </div>
       <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="!editMode">
-        <p-button label="Törlés" icon="pi pi-trash" styleClass="p-button-lg p-button-danger" (click)="deleteSchedule()"></p-button>
+        <p-button label="{{ 'schedule.buttons.delete' | translate }}" icon="pi pi-trash" styleClass="p-button-lg p-button-danger" (click)="deleteSchedule()"></p-button>
       </div>
       <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="schedule.wordFile && !editMode">
-        <p-button label="Letöltés" icon="pi pi-save" styleClass="p-button-lg p-button-primary" (click)="download(schedule.wordFile)"></p-button>
+        <p-button label="{{ 'schedule.buttons.download' | translate }}" icon="pi pi-save" styleClass="p-button-lg p-button-primary" (click)="download(schedule.wordFile)"></p-button>
       </div>
       <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="editMode">
-        <p-button label="Mégse" icon="pi pi-close" styleClass="p-button-lg p-button-info" (click)="cancel()"></p-button>
+        <p-button label="{{ 'schedule.buttons.cancel' | translate }}" icon="pi pi-close" styleClass="p-button-lg p-button-info" (click)="cancel()"></p-button>
       </div>
       <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="editMode">
-        <p-button label="Mentés" icon="pi pi-close" styleClass="p-button-lg p-button-success" (click)="saveChanges()"></p-button>
+        <p-button label="{{ 'schedule.buttons.save' | translate }}" icon="pi pi-close" styleClass="p-button-lg p-button-success" (click)="saveChanges()"></p-button>
       </div>
     </div>
     

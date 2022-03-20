@@ -9,11 +9,11 @@ import { months } from '../../shared/constants/months.data';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { NewUserComponent } from './new-user/new-user.component';
 import { NewHolidayComponent } from './new-holiday/new-holiday.component';
-import { IsLoadingService } from '../../shared/services/isloading.service';
 import { HolidayYears } from '../../shared/models/allholidayyears.model';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import * as signalR from '@microsoft/signalr';
 import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -47,7 +47,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     private holidayService: HolidayService,
     private dialogService: DialogService,
     public authService: AuthService,
-    public isLoading: IsLoadingService
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -134,7 +134,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   deleteHoliday(holiday: Holiday) {
     if (holiday.id) {
       this.holidayService.delete(holiday.id).subscribe(
-        () =>  this.alertService.success('Sikeres törlés!'),
+        () =>  this.alertService.success(this.translate.instant('admin.holidays.delete-success')),
         error => this.alertService.error(error)
       );
     }
@@ -143,7 +143,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   deleteUser(user: User) {
     this.usersService.deleteUser(user.id).subscribe(
       (response) => {
-        this.alertService.success('Sikeres törlés!');
+        this.alertService.success(this.translate.instant('admin.users.delete-success'));
       })
   }
 
@@ -153,8 +153,8 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
     this.isOpened = true;
     this.ref = this.dialogService.open(NewUserComponent, {
-      header: 'Új felhasználó hozzáadása',
-      style: { 'max-width': '500px' },
+      header: this.translate.instant('admin.users.new-user-title'),
+      style: { 'width': '350px' },
       baseZIndex: 10000,
     });
 
@@ -172,8 +172,8 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
     this.isOpened = true;
     this.ref = this.dialogService.open(NewHolidayComponent, {
-      header: 'Új ünnepnap hozzáadása',
-      style: { 'max-width': '500px' },
+      header: this.translate.instant('admin.holidays.new-holiday-title'),
+      style: { 'width': '450px' },
       baseZIndex: 10000,
     });
 
@@ -191,11 +191,11 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
     this.isOpened = true;
     this.ref = this.dialogService.open(EditUserComponent, {
-      header: 'Felhasználó szerkesztése',
-      style: { 'max-width': '500px' },
+      header: this.translate.instant('admin.users.edit-user-title'),
+      style: { 'width': '350px' },
       baseZIndex: 10000,
       data: {
-        user: {...user}
+        user: user
       }
     });
 
@@ -209,14 +209,14 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   createNewUser(user: User) {
     this.usersService.createUser(user).subscribe(
-      () => this.alertService.success('Új felhasználó létrehozva!'),
+      () => this.alertService.success(this.translate.instant('admin.users.create-success')),
       error => this.alertService.error(error)
     );
   }
 
   createNewHoliday(holiday: Holiday) {
     this.holidayService.createNewHoliday(holiday).subscribe(
-      () => this.alertService.success('Új ünnep hozzáadva!'),
+      () => this.alertService.success(this.translate.instant('admin.holidays.create-success')),
       error => this.alertService.error(error)
     );
   }
@@ -228,7 +228,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   saveEditChanges(user: User) {
     this.usersService.updateUser(this.authService.decodedToken.nameid, user).subscribe(
       () => {
-        this.alertService.success('Sikeres frissítés!')
+        this.alertService.success(this.translate.instant('admin.users.update-success'))
         this.getUsers();
       },
       error => this.alertService.error(error)

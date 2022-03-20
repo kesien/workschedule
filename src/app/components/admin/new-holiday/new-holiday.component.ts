@@ -8,7 +8,6 @@ import { Holiday } from 'src/app/shared/models/holiday.model';
   styleUrls: ['./new-holiday.component.css'],
 })
 export class NewHolidayComponent implements OnInit {
-  @Output() onCreateNewHoliday = new EventEmitter();
   holiday: {
     date: Date;
     isFix: boolean;
@@ -23,16 +22,6 @@ export class NewHolidayComponent implements OnInit {
       date: new Date(),
       isFix: false,
     };
-  }
-
-  createNewHoliday() {
-    const newHoliday: Partial<Holiday> = {
-      day: this.holiday.date.getDate(),
-      month: this.holiday.date.getMonth() + 1,
-      year: this.holiday.date.getFullYear(),
-      isFix: this.holiday.isFix
-    };
-    this.onCreateNewHoliday.emit(newHoliday);
   }
 
   save() {

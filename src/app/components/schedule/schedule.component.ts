@@ -8,7 +8,6 @@ import { ScheduleService } from '../../shared/services/schedule.service';
 import { DayType } from 'src/app/shared/constants/daytype.constant';
 import { Row } from 'src/app/shared/models/row.model';
 import { ScheduleDay } from 'src/app/shared/models/scheduleday.model';
-import { IsLoadingService } from 'src/app/shared/services/isloading.service';
 import * as signalR from '@microsoft/signalr';
 import { FileService } from 'src/app/shared/services/file.service';
 
@@ -33,7 +32,6 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private scheduleService: ScheduleService,
     public authService: AuthService,
-    public isLoading: IsLoadingService,
     private fileService: FileService
   ) {
     this.yearRange = `${new Date().getFullYear() - 6}:${new Date().getFullYear() + 10}`;

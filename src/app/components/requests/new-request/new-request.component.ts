@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { throwError } from 'rxjs';
 import { REQUEST_TYPES } from 'src/app/shared/constants/requesttypes.constant';
 import { AlertService } from 'src/app/shared/services/alert.service';
-import { IsLoadingService } from 'src/app/shared/services/isloading.service';
 import { RequestsService } from 'src/app/shared/services/requests.service';
 import { Request } from '../../../shared/models/request.model';
 
@@ -20,7 +20,7 @@ export class NewRequestComponent implements OnInit {
     private requestService: RequestsService,
     private config: DynamicDialogConfig,
     private alertService: AlertService,
-    public isLoading: IsLoadingService
+    private translate: TranslateService
     ) {
       this.request = {
         date: new Date(),
@@ -28,7 +28,11 @@ export class NewRequestComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.requestTypes = this.requestTypes.map(rt => {
+        return { label: this.translate.instant(rt.label), value: rt.value };
+    })
+  }
 
   close() {}
 

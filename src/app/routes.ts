@@ -4,6 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RequestsComponent } from './components/requests/requests.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 import { AdminGuard } from './shared/guard/admin.guard';
 import { AuthGuard } from './shared/guard/auth.guard';
 
@@ -25,6 +26,10 @@ export const routes: Routes = [
       {
         path: 'schedule',
         component: ScheduleComponent,
+      },
+      {
+        path: 'statistics',
+        component: StatisticsComponent,
       },
       { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
     ],

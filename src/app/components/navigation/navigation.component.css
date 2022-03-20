@@ -1,0 +1,10 @@
+.themetoggler {
+    display: block;
+    margin-right: 10px;;
+}
+
+@media (min-width: 40.625em) {
+    .themetoggler {
+      display: none;
+    }
+}

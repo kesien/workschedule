@@ -1,10 +1,10 @@
-<p-panel header="Felhasználók" [toggleable]="true" styleClass="mt-3">
+<p-panel header="{{ 'admin.users.title' | translate }}" [toggleable]="true" styleClass="mt-3">
   <p-table [value]="users" responsiveLayout="scroll">
     <ng-template pTemplate="header">
       <tr>
-        <th>Felhasználónév</th>
-        <th>Név</th>
-        <th>Admin</th>
+        <th>{{ 'admin.users.table.username' | translate }}</th>
+        <th>{{ 'admin.users.table.name' | translate }}</th>
+        <th>{{ 'admin.users.table.admin' | translate }}</th>
         <th>&nbsp;</th>
       </tr>
     </ng-template>
@@ -17,8 +17,8 @@
           <i class="pi pi-ban text-pink-400" *ngIf="user.role == 0"></i>
         </td>
         <td>
-          <div class="p-buttonset" *ngIf="user.id != this.authService.decodedToken?.nameid">
-            <button pButton icon="pi pi-pencil" class="p-button-success mr-2" (click)="editUser(user)"></button>
+          <div class="p-buttonset text-right" *ngIf="user.id != this.authService.decodedToken?.nameid">
+            <button pButton icon="pi pi-pencil" class="p-button-success" (click)="editUser(user)"></button>
             <button pButton icon="pi pi-trash" class="p-button-danger" (click)="confirm($event, user)"></button>
           </div>
         </td>
@@ -26,9 +26,9 @@
     </ng-template>
   </p-table>
   <ng-template pTemplate="footer">
-    <div class="lg:w-3 xs:w-12 ml-auto mt-3">
-      <button (click)="addNewUser()" pButton icon="pi pi-plus" type="button" label="Új hozzáadása"
-          class="p-button-success w-full" [loading]="isLoading"></button>
+    <div class="text-right">
+      <button (click)="addNewUser()" pButton icon="pi pi-plus" type="button" label="{{ 'admin.users.button' | translate }}"
+          class="p-button-success"></button>
     </div>
   </ng-template>
 </p-panel>

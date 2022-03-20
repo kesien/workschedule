@@ -1,14 +1,14 @@
 <div class="lg:w-6 md:w-8 xs:w-12 mx-auto mt-3">
-    <p-table #dt1 [value]="allRequests" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
-        responsiveLayout="scroll" [totalRecords]="totalRecords" [loading]="isLoading.isLoading"
+    <p-table #datatable [value]="allRequests" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+        responsiveLayout="scroll" [totalRecords]="totalRecords"
         [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-gridlines" [paginator]="true"
-        currentPageReportTemplate="{first} - {last} a(z) {totalRecords} kérésből"
+        currentPageReportTemplate="{first} - {last} / {totalRecords} {{ 'requests.table.paginator' | translate }}"
         [globalFilterFields]="['year','month','type']">
         <ng-template pTemplate="header">
             <tr>
                 <th>
                     <div pSortableColumn="year" class="p-d-flex p-jc-between p-ai-center">
-                        Év
+                        {{ 'requests.table.year' | translate }}
                         <p-columnFilter field="year" matchMode="equals" display="menu" [showMatchModes]="false"
                             [showOperator]="false" [showAddButton]="false">
                             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
@@ -25,7 +25,7 @@
                 </th>
                 <th>
                     <div pSortableColumn="month" class="p-d-flex p-jc-between p-ai-center">
-                        Hónap
+                        {{ 'requests.table.month' | translate }}
                         <p-columnFilter field="month" matchMode="equals" display="menu" [showMatchModes]="false"
                             [showOperator]="false" [showAddButton]="false">
                             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
@@ -42,13 +42,13 @@
                 </th>
                 <th>
                     <div pSortableColumn="day" class="p-d-flex p-jc-between p-ai-center">
-                        Nap
+                        {{ 'requests.table.day' | translate }}
                         <p-sortIcon field="day"></p-sortIcon>
                     </div>
                 </th>
                 <th>
                     <div pSortableColumn="type" class="p-d-flex p-jc-between p-ai-center">
-                        Típus
+                        {{ 'requests.table.type' | translate }}
                         <p-columnFilter field="type" matchMode="equals" display="menu" [showMatchModes]="false"
                             [showOperator]="false" [showAddButton]="false">
                             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
@@ -92,12 +92,12 @@
         </ng-template>
         <ng-template pTemplate="emptymessage">
             <tr>
-                <td colspan="5">Nincsenek kéréseid erre a hónapra.</td>
+                <td colspan="5">{{ 'requests.table.empty-message' | translate }}</td>
             </tr>
         </ng-template>
     </p-table>
 </div>
-<div class="lg:w-2 xs:w-12 mx-auto mt-3">
-    <button (click)="showModalDialog()" pButton type="button" label="Új hozzáadása"
+<div class="lg:w-2 md:w-4 xs:w-12 mx-auto mt-3">
+    <button (click)="showModalDialog()" pButton type="button" label="{{ 'requests.button' | translate }}"
         class="p-button-success w-full"></button>
 </div>

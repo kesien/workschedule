@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {TableModule} from 'primeng/table';
 import { AppComponent } from './app.component';
 import { JwtModule } from '@auth0/angular-jwt';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerInterceptor } from './shared/interceptors/spinner.interceptor';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -49,6 +49,11 @@ import { LoginComponent } from './components/login/login.component';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { StatisticsComponent } from './components/statistics/statistics.component';
+import { ChartModule } from 'primeng/chart';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 
 export function tokenGetter() {
@@ -74,8 +79,12 @@ export function tokenGetter() {
     UsersComponent,
     SummaryComponent,
     EditUserComponent,
+    StatisticsComponent,
   ],
   imports: [
+    ChartModule,
+    ToggleButtonModule,
+    ReactiveFormsModule,
     CheckboxModule,
     CommonModule,
     ToastModule,
@@ -112,10 +121,16 @@ export function tokenGetter() {
         ],
       },
     }),
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    }),
     HttpClientModule,
     FormsModule,
     NgxSpinnerModule,
-    ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
@@ -131,3 +146,7 @@ export function tokenGetter() {
   entryComponents: [LoginComponent]
 })
 export class AppModule {}
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}

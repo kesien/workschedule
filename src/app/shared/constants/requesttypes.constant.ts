@@ -1,5 +1,5 @@
 export const REQUEST_TYPES = [
-    { label: '8:00', value: 0 },
-    { label: '9:30', value: 1 },
-    { label: 'Szabadság', value: 2 }
+    { label: 'requests.types.eight', value: 0 },
+    { label: 'requests.types.halften', value: 1 },
+    { label: 'requests.types.holiday', value: 2 }
 ];

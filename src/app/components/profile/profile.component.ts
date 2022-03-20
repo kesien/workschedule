@@ -6,7 +6,6 @@ import { AlertService } from '../../shared/services/alert.service';
 import { AuthService } from '../../shared/services/auth.service';
 import { UserService } from '../../shared/services/user.service';
 import { Password } from 'primeng/password';
-import { IsLoadingService } from 'src/app/shared/services/isloading.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +13,6 @@ import { IsLoadingService } from 'src/app/shared/services/isloading.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  @ViewChild('password') password!: Password;
   userForm = new FormGroup(
     {
       userName: new FormControl('', [
@@ -25,7 +23,6 @@ export class ProfileComponent implements OnInit {
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       password: new FormControl('', [
         Validators.minLength(6),
-        Validators.pattern('[A-Za-zd$@$!%*?&].{6,}'),
         Validators.maxLength(20),
       ]),
       confirmPassword: new FormControl(''),
@@ -39,7 +36,6 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private alertService: AlertService,
     private authService: AuthService,
-    public isLoading: IsLoadingService
   ) {}
 
   ngOnInit(): void {
@@ -65,5 +61,21 @@ export class ProfileComponent implements OnInit {
         (error) => this.alertService.error(error),
         () => this.authService.setName(this.userForm.get('name')?.value)
       );
+  }
+
+  get userName() {
+    return this.userForm.controls['userName'];
+  }
+
+  get name() {
+    return this.userForm.controls['name'];
+  }
+
+  get password() {
+    return this.userForm.controls['password'];
+  }
+
+  get confirmPassword() {
+    return this.userForm.controls['confirmPassword'];
   }
 }

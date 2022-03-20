@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
 
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
 :root {
   --color-primary: #34495e;
   --color-primary-light: hsl(210, 29%, 60%);
@@ -422,6 +426,10 @@
 
 @media (max-width: 40.625em) {
   .cell--hours {
+    display: none;
+  }
+
+  .theme-dropdown {
     display: none;
   }
 }

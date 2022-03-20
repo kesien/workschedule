@@ -1,11 +1,11 @@
 <div class="p-fluid">
   <div class="field">
-      <label for="username">Felhasználónév</label>
-      <input [(ngModel)]="user.username" id="username" type="text" pInputText class="w-full"> 
+      <label for="username">{{ 'login.username-label' | translate }}</label>
+      <input [(ngModel)]="user.username" id="username" type="text" pInputText class="w-full" placeholder="{{'login.username-placeholder' | translate}}"> 
   </div>
   <div class="field">
-      <label for="password">Jelszó</label>
-      <p-password [(ngModel)]="user.password" id="password" [toggleMask]="true" [feedback]="false"></p-password>
+      <label for="password">{{ 'login.password-label' | translate }}</label>
+      <p-password [(ngModel)]="user.password" id="password" [toggleMask]="true" [feedback]="false" placeholder="{{ 'login.password-placeholder' | translate }}"></p-password>
   </div>
 </div>
-<p-button label="Belépés" (click)="login()" styleClass="w-full" [loading]="isLoading.isLoading"></p-button>
+<p-button label="{{ 'login.button' | translate }}" (click)="login()" styleClass="w-full"></p-button>

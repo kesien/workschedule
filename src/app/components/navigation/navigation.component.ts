@@ -6,6 +6,8 @@ import { MenuItem } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LoginComponent } from '../login/login.component';
 import { ThemeService } from 'src/app/shared/services/theme.service';
+import { UserLogin } from 'src/app/shared/models/login.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navigation',
@@ -21,23 +23,28 @@ export class NavigationComponent implements OnInit {
 
   isOpened = false;
   isCollapsed = true;
-
-  themeOptions = [
-    { label: 'Világos téma', value: 'light-theme' },
-    { label: 'Sötét téma', value: 'dark-theme' }
-  ]
+  isLightTheme = false;
+  themeOptions: any;
 
   constructor(
     public authService: AuthService,
     private alertService: AlertService,
     private router: Router,
     private dialogService: DialogService,
-    public themeService: ThemeService
-  ) {}
+    public themeService: ThemeService,
+    private translate: TranslateService
+  ) {
+  }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.translate.get('navigation').toPromise().then();
     this.isOpened = false;
     this.initMenu();
+    this.isLightTheme = this.themeService.selectedTheme === "dark-theme" ? false : true;
+    this.themeOptions = [
+      { label: this.translate.instant('navigation.theme.light'), value: 'light-theme' },
+      { label: this.translate.instant('navigation.theme.dark'), value: 'dark-theme' }
+    ]
   }
 
   loggedIn() {
@@ -46,17 +53,18 @@ export class NavigationComponent implements OnInit {
 
   initMenu() {
     this.menuItems = [
-      { label: "Home", icon:'pi pi-fw pi-home', routerLink: ['/'], routerLinkActiveOptions: { exact: true }},
-      { label: "Kéréseim", icon:'pi pi-fw pi-heart', routerLink: ['requests']},
-      { label: "Profil", icon:'pi pi-fw pi-user', routerLink: ['profile']},
-      { label: "Beosztás", icon:'pi pi-fw pi-calendar', routerLink: ['schedule']},
-      { label: "Adminisztráció", icon:'pi pi-fw pi-lock', routerLink: ['admin'], visible: this.isAdmin()}
+      { label: this.translate.instant('navigation.menu.home'), icon:'pi pi-fw pi-home', routerLink: ['/'], routerLinkActiveOptions: { exact: true }},
+      { label: this.translate.instant('navigation.menu.requests'), icon:'pi pi-fw pi-heart', routerLink: ['requests']},
+      { label: this.translate.instant('navigation.menu.profile'), icon:'pi pi-fw pi-user', routerLink: ['profile']},
+      { label: this.translate.instant('navigation.menu.schedule'), icon:'pi pi-fw pi-calendar', routerLink: ['schedule']},
+      { label: this.translate.instant('navigation.menu.statistics'), icon:'pi pi-fw pi-calendar', routerLink: ['statistics']},
+      { label: this.translate.instant('navigation.menu.admin'), icon:'pi pi-fw pi-lock', routerLink: ['admin'], visible: this.isAdmin()}
     ];
   }
 
   logout() {
     this.authService.logOut();
-    this.alertService.info('Sikeres kilépés!');
+    this.alertService.info(this.translate.instant('navigation.login.logout-message'));
     this.router.navigate(['/']);
     this.initMenu();
   }
@@ -71,24 +79,37 @@ export class NavigationComponent implements OnInit {
     }
     this.isOpened = true;
     this.ref = this.dialogService.open(LoginComponent, {
-      header: 'Bejelentkezés',
+      header: this.translate.instant('navigation.login.title'),
       width: '300px',
     });
 
     this.ref.onClose.subscribe(
-      () =>{
+      (userLogin: UserLogin) =>{
         this.isOpened = false;
-        if (this.loggedIn()) {
-          this.initMenu();
-          this.alertService.success("Sikeres belépés!");
-          this.router.navigate(['/schedule']);
+        if (userLogin) {
+          this.authService.login(userLogin).subscribe(
+            () => {
+              this.initMenu();
+              this.alertService.success(this.translate.instant('navigation.login.success-message'));
+            },
+            error => this.alertService.error(error.error),
+            () => {
+              this.router.navigate(['/schedule']);
+            }
+          );
         }
       },
-      error => this.alertService.error(error)
     );
   }
 
   changeTheme() {
     this.themeService.switchTheme();
+    this.isLightTheme = !this.isLightTheme;
+  }
+
+  toggleTheme() {
+    this.themeService.selectedTheme = this.themeService.selectedTheme === "light-theme" ? "dark-theme" : "light-theme";
+    this.themeService.switchTheme();
+    this.isLightTheme = !this.isLightTheme;
   }
 }

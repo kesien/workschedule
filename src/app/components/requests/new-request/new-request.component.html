@@ -1,14 +1,14 @@
 <div class="p-fluid">
   <div class="field">
-    <label for="type">Típus</label>
+    <label for="type">{{ 'requests.new-request.type-label' | translate }}</label>
     <p-dropdown [options]="requestTypes" [(ngModel)]="request.type" optionLabel="label" optionValue="value" id="type"></p-dropdown>
   </div>
   <div class="field">
-    <label for="date">Dátum</label>
+    <label for="date">{{ 'requests.new-request.date-label' | translate }}</label>
     <p-calendar [(ngModel)]="request.date" [inline]="true" [showWeek]="true" id="date"></p-calendar>
   </div>
   
   <div class="field">
-    <button pButton type="button" label="Hozzáadás" class="p-button-success w-full" (click)="save()" [loading]="isLoading.isLoading"></button>
+    <button pButton type="button" label="{{ 'requests.new-request.button' | translate }}" class="p-button-success w-full" (click)="save()"></button>
   </div>
 </div>
