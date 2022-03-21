@@ -8,6 +8,7 @@ import { LoginComponent } from '../login/login.component';
 import { ThemeService } from 'src/app/shared/services/theme.service';
 import { UserLogin } from 'src/app/shared/models/login.model';
 import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
   selector: 'app-navigation',
@@ -21,6 +22,29 @@ export class NavigationComponent implements OnInit {
 
   public menuItems: MenuItem[] = [];
 
+  selectedLanguage: string = '';
+
+  items = [
+    {
+      label: 'English',
+      command: () => {
+        this.changeLanguage('en');
+      }
+    },
+    {
+      label: 'German',
+      command: () => {
+        this.changeLanguage('de');
+      }
+    },
+    {
+      label: 'Hungarian',
+      command: () => {
+        this.changeLanguage('hu'); 
+      }
+    }
+  ]
+
   isOpened = false;
   isCollapsed = true;
   isLightTheme = false;
@@ -32,14 +56,15 @@ export class NavigationComponent implements OnInit {
     private router: Router,
     private dialogService: DialogService,
     public themeService: ThemeService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private languageService: LanguageService
   ) {
   }
-
+  
   async ngOnInit() {
-    await this.translate.get('navigation').toPromise().then();
-    this.isOpened = false;
     this.initMenu();
+    this.translate.get('misc.language-button-label').subscribe(res => this.selectedLanguage = res);
+    this.isOpened = false;
     this.isLightTheme = this.themeService.selectedTheme === "dark-theme" ? false : true;
     this.themeOptions = [
       { label: this.translate.instant('navigation.theme.light'), value: 'light-theme' },
@@ -52,14 +77,16 @@ export class NavigationComponent implements OnInit {
   }
 
   initMenu() {
-    this.menuItems = [
-      { label: this.translate.instant('navigation.menu.home'), icon:'pi pi-fw pi-home', routerLink: ['/'], routerLinkActiveOptions: { exact: true }},
-      { label: this.translate.instant('navigation.menu.requests'), icon:'pi pi-fw pi-heart', routerLink: ['requests']},
-      { label: this.translate.instant('navigation.menu.profile'), icon:'pi pi-fw pi-user', routerLink: ['profile']},
-      { label: this.translate.instant('navigation.menu.schedule'), icon:'pi pi-fw pi-calendar', routerLink: ['schedule']},
-      { label: this.translate.instant('navigation.menu.statistics'), icon:'pi pi-fw pi-calendar', routerLink: ['statistics']},
-      { label: this.translate.instant('navigation.menu.admin'), icon:'pi pi-fw pi-lock', routerLink: ['admin'], visible: this.isAdmin()}
-    ];
+    this.translate.get('navigation.menu').subscribe(n => {
+      this.menuItems = [
+        { label: n.home, icon:'pi pi-fw pi-home', routerLink: ['/'], routerLinkActiveOptions: { exact: true }},
+        { label: n.requests, icon:'pi pi-fw pi-heart', routerLink: ['requests']},
+        { label: n.profile, icon:'pi pi-fw pi-user', routerLink: ['profile']},
+        { label: n.schedule, icon:'pi pi-fw pi-calendar', routerLink: ['schedule']},
+        { label: n.statistics, icon:'pi pi-fw pi-calendar', routerLink: ['statistics']},
+        { label: n.admin, icon:'pi pi-fw pi-lock', routerLink: ['admin'], visible: this.isAdmin()}
+      ];
+    })
   }
 
   logout() {
@@ -105,6 +132,22 @@ export class NavigationComponent implements OnInit {
   changeTheme() {
     this.themeService.switchTheme();
     this.isLightTheme = !this.isLightTheme;
+  }
+
+  changeLanguage(lang: string) {
+    switch(lang) {
+      case 'de':
+        this.selectedLanguage = this.translate.instant('misc.languages.german');
+        break;
+      case 'hu':
+        this.selectedLanguage = this.translate.instant('misc.languages.hungarian');
+        break;
+      default:
+        this.selectedLanguage = this.translate.instant('misc.languages.english');
+        break;
+    }
+    this.languageService.switchLanguage(lang);
+    this.initMenu();
   }
 
   toggleTheme() {

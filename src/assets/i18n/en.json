@@ -1,7 +1,94 @@
 {
+	"admin": {
+		"holidays": {
+			"add-new-button": "Save",
+			"button": "Add new",
+			"create-success": "Holiday successfully added",
+			"date-label": "Date",
+			"delete-success": "Public holiday deleted",
+			"isfix-label": "Fixed public holiday?",
+			"new-holiday-title": "Create a holiday",
+			"table": {
+				"day": "day",
+				"isfix": "Fix?",
+				"month": "Month",
+				"paginator": "from holiday",
+				"year": "Year"
+			},
+			"title": "Holidays"
+		},
+		"users": {
+			"add-new-button": "Save",
+			"button": "Add new",
+			"create-success": "User Successfully Added",
+			"delete-success": "User deleted",
+			"dropdown-placeholder": "Choose the type",
+			"edit-user-title": "Edit user",
+			"name-error-required": "Name is required!",
+			"name-label": "Name",
+			"new-user-title": "Create a new user",
+			"password-error-maxlength": "The password you entered is too long!",
+			"password-error-minlength": "The password you entered is too short!",
+			"password-error-required": "Entering a password is mandatory!",
+			"password-label": "New password",
+			"table": {
+				"admin": "Admin",
+				"name": "Name",
+				"username": "Username"
+			},
+			"title": "Users",
+			"type-label": "Type",
+			"update-success": "Successful update",
+			"username-error-email": "Invalid email address!",
+			"username-error-required": "Please enter your username!",
+			"username-label": "Username"
+		}
+	},
 	"demo": {
 		"text": "This is a simple demonstration app for ngx-translate",
 		"title": "Translation demo"
+	},
+	"guards": {
+		"admin-message": "You do not have permission to view this page!",
+		"auth-message": "You must be logged in first!"
+	},
+	"login": {
+		"button": "Login",
+		"password-label": "Password",
+		"password-placeholder": "Password",
+		"title": "Login",
+		"username-label": "Username",
+		"username-placeholder": "Username"
+	},
+	"misc": {
+		"language-button-label": "Language",
+		"languages": {
+			"english": "English",
+			"german": "German",
+			"hungarian": "Hungarian"
+		},
+		"spinner-message": "Content is loading ..."
+	},
+	"navigation": {
+		"login": {
+			"logout-message": "Successful logout",
+			"success-message": "Successful login",
+			"title": "Login"
+		},
+		"menu": {
+			"admin": "Administration",
+			"home": "Home",
+			"login-button-label": "Login",
+			"logout-button-label": "Logout",
+			"profile": "Profile",
+			"requests": "Requests",
+			"schedule": "Schedule",
+			"statistics": "Statistics"
+		},
+		"theme": {
+			"dark": "Dark theme",
+			"light": "Bright theme"
+		}
 	},
 	"primeng": {
 		"accept": "Yes",
@@ -99,12 +186,71 @@
 		"weak": "Weak",
 		"weekHeader": "Wk"
 	},
-    "login": {
-        "title": "Login",
-        "username-label": "Username",
-        "password-label": "Password",
-		"username-placeholder": "Username",
-		"password-placeholder": "Password",
-		"button": "Login"
+	"profile": {
+		"button": "Save",
+		"name-error-required": "Name required!",
+		"name-label": "Name",
+		"password-confirm-error-nomatch": "The two passwords do not match!",
+		"password-confirm-label": "New password once again",
+		"password-error-maxlength": "The password you entered is too long!",
+		"password-error-minlength": "The password you entered is too short!",
+		"password-label": "New password",
+		"title": "Profile settings",
+		"username-error-email": "Invalid email address!",
+		"username-error-required": "Please enter your username!",
+		"username-label": "Username"
+	},
+	"requests": {
+		"button": "Add new",
+		"delete-success": "Successful deletion",
+		"new-request": {
+			"button": "Add",
+			"date-label": "Date",
+			"success-message": "Request successfully created",
+			"title": "Add a new request",
+			"type-label": "Type"
+		},
+		"table": {
+			"day": "Day",
+			"empty-message": "No requests for this month",
+			"month": "Month",
+			"paginator": "from request",
+			"type": "Type",
+			"year": "Year"
+		},
+		"types": {
+			"eight": "8:00",
+			"halften": "9:30",
+			"holiday": "Holiday"
+		}
+	},
+	"schedule": {
+		"buttons": {
+			"cancel": "Cancel",
+			"create": "Create",
+			"delete": "Delete",
+			"download": "Download",
+			"edit": "Edit",
+			"save": "Save"
+		},
+		"friday": "Friday",
+		"monday": "Monday",
+		"saturday": "Saturday",
+		"summary": {
+			"headers": {
+				"eight": "8:00",
+				"halften": "9:30",
+				"holiday": "Holiday",
+				"name": "Name"
+			}
+		},
+		"sunday": "Sunday",
+		"thursday": "Thursday",
+		"tuesday": "Tuesday",
+		"wednesday": "Wednesday"
+	},
+	"usertypes": {
+		"admin": "Administrator",
+		"user": "User"
 	}
 }

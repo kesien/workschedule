@@ -50,11 +50,11 @@ import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { MenuModule } from 'primeng/menu';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { ChartModule } from 'primeng/chart';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -99,6 +99,7 @@ export function tokenGetter() {
     DialogModule,
     TabViewModule,
     MenubarModule,
+    MenuModule,
     CalendarModule,
     ButtonModule,
     DropdownModule,
@@ -139,7 +140,11 @@ export function tokenGetter() {
     }),
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: SpinnerInterceptor, 
+      multi: true 
+    }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

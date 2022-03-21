@@ -1,7 +1,94 @@
 {
+	"admin": {
+		"holidays": {
+			"add-new-button": "Hozzáadás",
+			"button": "Új hozzáadása",
+			"create-success": "Ünnepnap sikeresen hozzáadva",
+			"date-label": "Dátum",
+			"delete-success": "Ünnepnap törölve",
+			"isfix-label": "Fix ünnepnap?",
+			"new-holiday-title": "Ünnepnap létrehozása",
+			"table": {
+				"day": "Nap",
+				"isfix": "Fix?",
+				"month": "Hónap",
+				"paginator": "ünnepnapból",
+				"year": "Év"
+			},
+			"title": "Ünnepnapok"
+		},
+		"users": {
+			"add-new-button": "Mentés",
+			"button": "Új hozzáadása",
+			"create-success": "Felhasználó sikeresen hozzáadva",
+			"delete-success": "Felhasználó törölve",
+			"dropdown-placeholder": "Válaszd ki a típust",
+			"edit-user-title": "Felhasználó szerkesztése",
+			"name-error-required": "Név megadása kötelező!",
+			"name-label": "Név",
+			"new-user-title": "Felhasználó létrehozása",
+			"password-error-maxlength": "A megadott jelszó túl hosszú!",
+			"password-error-minlength": "A megadott jelszó túl rövid!",
+			"password-error-required": "A jelszó megadása kötelező!",
+			"password-label": "Új jelszó",
+			"table": {
+				"admin": "Admin",
+				"name": "Név",
+				"username": "Felhasználónév"
+			},
+			"title": "Felhasználók",
+			"type-label": "Típus",
+			"update-success": "Sikeres frissítés",
+			"username-error-email": "Érvénytelen e-mail cím!",
+			"username-error-required": "Felhasználónév megadása kötelező!",
+			"username-label": "Felhasználónév"
+		}
+	},
 	"demo": {
 		"text": "test",
 		"title": "test"
+	},
+	"guards": {
+		"admin-message": "Nincs jogosultságod megtekinteni ezt az oldalt!",
+		"auth-message": "Először be kell jelentkezned!"
+	},
+	"login": {
+		"button": "Bejelentkezés",
+		"password-label": "Jelszó",
+		"password-placeholder": "Jelszó",
+		"title": "Bejelentkezés",
+		"username-label": "Felhasználónév",
+		"username-placeholder": "Felhasználónév"
+	},
+	"misc": {
+		"language-button-label": "Nyelv",
+		"languages": {
+			"english": "Angol",
+			"german": "Német",
+			"hungarian": "Magyar"
+		},
+		"spinner-message": "Tartalom betöltése folyamatban..."
+	},
+	"navigation": {
+		"login": {
+			"logout-message": "Sikeres kijelentkezés",
+			"success-message": "Sikeres bejelentkezés",
+			"title": "Bejelentkezés"
+		},
+		"menu": {
+			"admin": "Adminisztráció",
+			"home": "Főoldal",
+			"login-button-label": "Bejelentkezés",
+			"logout-button-label": "Kijelentkezés",
+			"profile": "Profil",
+			"requests": "Kérések",
+			"schedule": "Beosztás",
+			"statistics": "Statisztika"
+		},
+		"theme": {
+			"dark": "Sötét téma",
+			"light": "Világos téma"
+		}
 	},
 	"primeng": {
 		"accept": "Igen",
@@ -19,31 +106,31 @@
 		"dateIs": "Dátum",
 		"dateIsNot": "Dátum nem",
 		"dayNames": [
-			"vasárnap",
-			"hétfő",
-			"kedd",
-			"szerda",
-			"csütörtök",
-			"péntek",
-			"szombat"
+			"Vasárnap",
+			"Hétfő",
+			"Kedd",
+			"Szerda",
+			"Csütörtök",
+			"Péntek",
+			"Szombat"
 		],
 		"dayNamesMin": [
-			"Vas",
-			"Hét",
-			"Kedd",
-			"Szer",
-			"Csüt",
-			"Pén",
-			"Szom"
+			"Va",
+			"Hé",
+			"Ke",
+			"Sze",
+			"Csü",
+			"Pé",
+			"Szo"
 		],
 		"dayNamesShort": [
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			""
+			"Va",
+			"Hé",
+			"Ke",
+			"Sze",
+			"Csü",
+			"Pé",
+			"Szo"
 		],
 		"emptyFilterMessage": "Nincs eredmény",
 		"emptyMessage": "Nincs eredmény",
@@ -73,75 +160,63 @@
 			"December"
 		],
 		"monthNamesShort": [
-			"jan.",
-			"feb.",
-			"márc.",
-			"ápr.",
-			"máj.",
-			"jún.",
-			"júl.",
-			"aug.",
-			"szep.",
-			"okt.",
-			"nov.",
-			"dec."
+			"Jan.",
+			"Feb.",
+			"Márc.",
+			"Ápr.",
+			"Máj.",
+			"Jún.",
+			"Júl.",
+			"Aug.",
+			"Szep.",
+			"Okt.",
+			"Nov.",
+			"Dec."
 		],
 		"noFilter": "Nincs szűrő",
 		"notContains": "nem tartalmaz",
 		"notEquals": "Nem egyenlő",
 		"passwordPrompt": "Jelszó megadása",
-		"reject": "nem",
+		"reject": "Nem",
 		"removeRule": "Szabály eltávolítása",
 		"startsWith": "Kezdődik",
 		"strong": "Erős",
-		"today": "ma",
+		"today": "Ma",
 		"upload": "Feltöltés",
 		"weak": "Gyenge",
 		"weekHeader": "Hét"
 	},
-	"login": {
-		"username-label": "Felhasználónév",
-		"password-label": "Jelszó",
-		"username-placeholder": "Felhasználónév",
-		"password-placeholder": "Jelszó",
-		"button": "Bejelentkezés"
-	},
-	"navigation": {
-		"login": {
-			"title": "Bejelentkezés",
-			"success-message": "Sikeres bejelentkezés",
-			"logout-message": "Sikeres kijelentkezés"
-		},
-		"theme": {
-			"light": "Világos téma",
-			"dark": "Sötét téma"
-		},
-		"menu": {
-			"home": "Főoldal",
-			"requests": "Kérések",
-			"profile": "Profil",
-			"schedule": "Beosztás",
-			"statistics": "Statisztika",
-			"admin": "Adminisztráció"
-		}
+	"profile": {
+		"button": "Mentés",
+		"name-error-required": "Név megadása kötelező!",
+		"name-label": "Név",
+		"password-confirm-error-nomatch": "A két jelszó nem egyezik!",
+		"password-confirm-label": "Új jelszó mégegyszer",
+		"password-error-maxlength": "A megadott jelszó túl hosszú!",
+		"password-error-minlength": "A megadott jelszó túl rövid!",
+		"password-label": "Új jelszó",
+		"title": "Profil beállítások",
+		"username-error-email": "Érvénytelen e-mail cím!",
+		"username-error-required": "Felhasználónév megadása kötelező!",
+		"username-label": "Felhasználónév"
 	},
 	"requests": {
-		"table": {
-			"year": "Év",
-			"month": "Hónap",
-			"day": "Nap",
-			"type": "Típus",
-			"empty-message": "Nincsenek kéréseid erre a hónapra",
-			"paginator": "kérésből"
-		},
 		"button": "Új hozzáadása",
 		"delete-success": "Sikeres törlés",
 		"new-request": {
-			"title": "Új kérés hozzáadása",
-			"success-message": "Kérés sikeresen létrehozva",
-			"type-label": "Típus",
+			"button": "Hozzáadás",
 			"date-label": "Dátum",
-			"button": "Hozzáadás"
+			"success-message": "Kérés sikeresen létrehozva",
+			"title": "Új kérés hozzáadása",
+			"type-label": "Típus"
+		},
+		"table": {
+			"day": "Nap",
+			"empty-message": "Nincsenek kéréseid erre a hónapra",
+			"month": "Hónap",
+			"paginator": "kérésből",
+			"type": "Típus",
+			"year": "Év"
 		},
 		"types": {
 			"eight": "8:00",
@@ -149,92 +224,33 @@
 			"holiday": "Szabadság"
 		}
 	},
-	"profile": {
-		"title": "Profil beállítások",
-		"name-label": "Név",
-		"username-label": "Felhasználónév",
-		"password-label": "Új jelszó",
-		"password-confirm-label": "Új jelszó mégegyszer",
-		"button": "Mentés",
-		"username-error-required": "Felhasználónév megadása kötelező!",
-		"username-error-email": "Érvénytelen e-mail cím!",
-		"name-error-required": "Név megadása kötelező!",
-		"password-error-minlength": "A megadott jelszó túl rövid!",
-		"password-error-maxlength": "A megadott jelszó túl hosszú!",
-		"password-confirm-error-nomatch": "A két jelszó nem egyezik!"
-	},
 	"schedule": {
-		"monday": "Hétfő",
-		"tuesday": "Kedd",
-		"wednesday": "Szerda",
-		"thursday": "Csütörtök",
-		"friday": "Péntek",
-		"saturday": "Szombat",
-		"sunday": "Vasárnap",
 		"buttons": {
+			"cancel": "Mégse",
 			"create": "Kiállít",
 			"delete": "Törlés",
 			"download": "Letöltés",
 			"edit": "Szerkesztés",
-			"save": "Mentés",
-			"cancel": "Mégse"
+			"save": "Mentés"
 		},
+		"friday": "Péntek",
+		"monday": "Hétfő",
+		"saturday": "Szombat",
 		"summary": {
 			"headers": {
-				"name": "Név",
 				"eight": "8:00",
 				"halften": "9:30",
-				"holiday": "Szabadság"
-			}
-		}
-	},
-	"admin": {
-		"users": {
-			"create-success": "Felhasználó sikeresen hozzáadva",
-			"delete-success": "Felhasználó törölve",
-			"new-user-title": "Felhasználó létrehozása",
-			"edit-user-title": "Felhasználó szerkesztése",
-			"update-success": "Sikeres frissítés",
-			"button": "Új hozzáadása",
-			"title": "Felhasználók",
-			"name-label": "Név",
-			"type-label": "Típus",
-			"username-label": "Felhasználónév",
-			"password-label": "Új jelszó",
-			"add-new-button": "Mentés",
-			"username-error-required": "Felhasználónév megadása kötelező!",
-			"username-error-email": "Érvénytelen e-mail cím!",
-			"name-error-required": "Név megadása kötelező!",
-			"password-error-minlength": "A megadott jelszó túl rövid!",
-			"password-error-required": "A jelszó megadása kötelező!",
-			"password-error-maxlength": "A megadott jelszó túl hosszú!",
-			"dropdown-placeholder": "Válaszd ki a típust",
-			"table": {
-				"username": "Felhasználónév",
-				"name": "Név",
-				"admin": "Admin"
+				"holiday": "Szabadság",
+				"name": "Név"
 			}
 		},
-		"holidays": {
-			"create-success": "Ünnepnap sikeresen hozzáadva",
-			"delete-success": "Ünnepnap törölve",
-			"new-holiday-title": "Ünnepnap létrehozása",
-			"button": "Új hozzáadása",
-			"title": "Ünnepnapok",
-			"isfix-label": "Fix ünnepnap?",
-			"date-label": "Dátum",
-			"add-new-button": "Hozzáadás",
-			"table": {
-				"year": "Év",
-				"month": "Hónap",
-				"day": "Nap",
-				"isfix": "Fix?",
-				"paginator": "ünnepnapból"
-			}
-		}
+		"sunday": "Vasárnap",
+		"thursday": "Csütörtök",
+		"tuesday": "Kedd",
+		"wednesday": "Szerda"
 	},
 	"usertypes": {
-		"user": "Felhasználó",
-		"admin": "Adminisztrátor"
+		"admin": "Adminisztrátor",
+		"user": "Felhasználó"
 	}
 }
