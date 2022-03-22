@@ -44,10 +44,6 @@
 			"username-label": "Username"
 		}
 	},
-	"demo": {
-		"text": "This is a simple demonstration app for ngx-translate",
-		"title": "Translation demo"
-	},
 	"guards": {
 		"admin-message": "You do not have permission to view this page!",
 		"auth-message": "You must be logged in first!"

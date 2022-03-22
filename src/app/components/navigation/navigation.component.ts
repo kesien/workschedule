@@ -135,6 +135,7 @@ export class NavigationComponent implements OnInit {
   }
 
   changeLanguage(lang: string) {
+    this.languageService.switchLanguage(lang);
     switch(lang) {
       case 'de':
         this.selectedLanguage = this.translate.instant('misc.languages.german');
@@ -146,7 +147,6 @@ export class NavigationComponent implements OnInit {
         this.selectedLanguage = this.translate.instant('misc.languages.english');
         break;
     }
-    this.languageService.switchLanguage(lang);
     this.initMenu();
   }
 
