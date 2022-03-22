@@ -101,14 +101,12 @@ export class AdminComponent implements OnInit, OnDestroy {
   getUsers() {
     this.usersService.getAllUser().subscribe(
       (response) => (this.users = response as User[]),
-      (error) => this.alertService.error(error)
     );
   }
 
   getHolidays() {
     this.holidayService.getAllHolidays().subscribe(
       (response) => this.holidays = response,
-      error => this.alertService.error(error)
     );
   }
 
@@ -118,7 +116,6 @@ export class AdminComponent implements OnInit, OnDestroy {
         this.years = response;
         this.getOptions();
       },
-      error => this.alertService.error(error)
     )
   }
 
@@ -135,7 +132,6 @@ export class AdminComponent implements OnInit, OnDestroy {
     if (holiday.id) {
       this.holidayService.delete(holiday.id).subscribe(
         () =>  this.alertService.success(this.translate.instant('admin.holidays.delete-success')),
-        error => this.alertService.error(error)
       );
     }
   }
@@ -210,14 +206,12 @@ export class AdminComponent implements OnInit, OnDestroy {
   createNewUser(user: User) {
     this.usersService.createUser(user).subscribe(
       () => this.alertService.success(this.translate.instant('admin.users.create-success')),
-      error => this.alertService.error(error)
     );
   }
 
   createNewHoliday(holiday: Holiday) {
     this.holidayService.createNewHoliday(holiday).subscribe(
       () => this.alertService.success(this.translate.instant('admin.holidays.create-success')),
-      error => this.alertService.error(error)
     );
   }
 
@@ -231,7 +225,6 @@ export class AdminComponent implements OnInit, OnDestroy {
         this.alertService.success(this.translate.instant('admin.users.update-success'))
         this.getUsers();
       },
-      error => this.alertService.error(error)
     );
   }
 }

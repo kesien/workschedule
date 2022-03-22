@@ -87,34 +87,19 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   getSchedule(year: number = this.filter.getFullYear(), month: number = this.filter.getMonth() + 1) {
     this.scheduleService.getSchedule(year, month).subscribe(
-      (response) => this.schedule = response,
-      error => {
-        if (error.Messages) {
-          for (const message of error.Messages) {
-            this.alertService.error(message);
-          }
-        } else {
-          this.alertService.error(error.message)
-        }
+      (response) => {
+        this.schedule = response
+        this.generateRows();
       },
-      () => this.generateRows()
     );
   }
 
   createSchedule() {
     this.scheduleService.createSchedule(this.authService.decodedToken.nameid, this.filter.getFullYear(), this.filter.getMonth() + 1).subscribe(
-      null,
-      (error) => {
-        if (error.Messages) {
-          for (const message of error.Messages) {
-            this.alertService.error(message);
-          }
-        } else {
-          this.alertService.error(error.message)
-        }
-      },
-      () => this.generateRows()
-    );
+      (res) => {
+        this.generateRows()
+      }
+    )
   }
 
   deleteSchedule() {
@@ -122,15 +107,6 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       if (this.schedule.id) {
         this.scheduleService.deleteSchedule(this.schedule.id).subscribe(
           () => this.alertService.success('Sikeres törlés!'),
-          error => {
-            if (error.Messages) {
-              for (const message of error.Messages) {
-                this.alertService.error(message);
-              }
-            } else {
-              this.alertService.error(error.message)
-            }
-          },
         );
       }
     }
@@ -192,22 +168,11 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       this.scheduleService
         .updateSchedule(this.authService.decodedToken.nameid, this.schedule.id, this.changes)
         .subscribe(
-          () => this.alertService.success('Sikeres frissítés!'),
-          (error) => {
-            if (error.Messages) {
-              for (const message of error.Messages) {
-                this.alertService.error(message);
-              }
-            } else {
-              this.alertService.error(error.message)
-            }
+          () => {
+            this.alertService.success('Sikeres frissítés!')
             this.editMode = false;
             this.changes = [];
           },
-          () => {
-            this.editMode = false;
-            this.changes = [];
-          }
         );
     } else {
       this.editMode = false;

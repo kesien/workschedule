@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core'
+import { CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule } from '@angular/router'
 import { ToastrModule } from 'ngx-toastr'
@@ -57,6 +57,8 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { ChartModule } from 'primeng/chart'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+import { GlobalErrorHandler } from './shared/errorhandler/error.handler'
+import { ServerErrorInterceptor } from './shared/interceptors/error.interceptor'
 
 export function tokenGetter() {
   return localStorage.getItem('token')
@@ -142,6 +144,10 @@ export function tokenGetter() {
     }),
   ],
   providers: [
+    { 
+      provide: ErrorHandler, 
+      useClass: GlobalErrorHandler 
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: SpinnerInterceptor,

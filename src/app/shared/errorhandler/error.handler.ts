@@ -1,32 +1,31 @@
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorService } from '../services/error.service';
 import { AlertService } from '../services/alert.service';
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class GlobalErrorHandler implements ErrorHandler {
 
   constructor(private injector: Injector) { }
   
   handleError(error: Error | HttpErrorResponse) {
-    const errorService = this.injector.get(ErrorService);
     const alertService = this.injector.get(AlertService);
-    
-    let messages;
-    let message;
     if (error instanceof HttpErrorResponse) {
-      messages = errorService.getServerMessages(error);
-      errorService.getClientMessage(error);
-      errorService.getServerMessage(error);
-      for (const message of messages) {
-          alertService.error(message);
+      if (error.status >= 400 && error.status < 500) {
+        alertService.error(error.error);
+      }
+      if (error.status == 500) {
+        if (error.error.Messages) {
+          for (const err of error.error.Messages) {
+            alertService.error(err);
+          }
+        } else {
+          alertService.error(error.error);
+        }
       }
     } else {
-      errorService.getClientMessage(error);
-      message = errorService.getClientMessage(error);
-      alertService.error(message);
+      alertService.error(error.message);
     }
-    console.log(error);
-    
   }
 }

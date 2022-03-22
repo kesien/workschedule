@@ -1,10 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { throwError } from 'rxjs';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { REQUEST_TYPES } from 'src/app/shared/constants/requesttypes.constant';
-import { AlertService } from 'src/app/shared/services/alert.service';
-import { RequestsService } from 'src/app/shared/services/requests.service';
 import { Request } from '../../../shared/models/request.model';
 
 @Component({
@@ -17,9 +14,6 @@ export class NewRequestComponent implements OnInit {
   requestTypes = REQUEST_TYPES;
   constructor(
     private ref: DynamicDialogRef,
-    private requestService: RequestsService,
-    private config: DynamicDialogConfig,
-    private alertService: AlertService,
     private translate: TranslateService
     ) {
       this.request = {
@@ -34,23 +28,11 @@ export class NewRequestComponent implements OnInit {
     })
   }
 
-  close() {}
+  close() {
+    this.ref.close();
+  }
 
   save() {
-    this.requestService.createNewRequest(this.config.data.userId, this.request).subscribe(
-      null,
-      error => {
-        if (error.Messages) {
-          for (const message of error.Messages) {
-            this.alertService.error(message);
-          }
-        } else {
-          this.alertService.error(error);
-        }
-      },
-      () => {
-        this.ref.close(this.request) 
-      }
-    );
+    this.ref.close(this.request) 
   }
 }

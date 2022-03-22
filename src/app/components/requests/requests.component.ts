@@ -43,23 +43,27 @@ export class RequestsComponent implements OnInit, OnDestroy, AfterViewInit {
     private alertService: AlertService,
     private dialogService: DialogService,
     private translate: TranslateService
-  ) { }
-
+  ) {
+  }
+  
   ngAfterViewInit(): void {
     if (this.datatable) {
-      this.datatable.filters = this.filters;
-      this.datatable._filter();
+      setTimeout(() => {
+        this.filters = {
+          "year": [{ "value": this.years[0].toString(), "matchMode": "equals" }] as FilterMetadata,
+          "month": [{ "value": this.months[this.date.getMonth()].value, "matchMode": "equals" }] as FilterMetadata,
+          "type": [{ "value": '', "matchMode": "equals" }] as FilterMetadata,
+        }
+       if (this.datatable)  {
+         this.datatable.filters = this.filters;
+         this.datatable._filter();
+       }
+      });
     }
   }
   ngOnInit(): void {
     this.getAllRequestYearsForUser();
     this.getAllRequestsForUser();
-
-    this.filters = {
-      "year": [{ "value": this.years[0].toString(), "matchMode": "equals" }] as FilterMetadata,
-      "month": [{ "value": this.months[this.date.getMonth()].value, "matchMode": "equals" }] as FilterMetadata,
-      "type": [{ "value": '', "matchMode": "equals" }] as FilterMetadata,
-    }
 
     this.connection = new signalR.HubConnectionBuilder()  
       .configureLogging(signalR.LogLevel.Information)  
@@ -107,10 +111,13 @@ export class RequestsComponent implements OnInit, OnDestroy, AfterViewInit {
       (request: Request) => {
         this.isOpened = false;
         if (request) {
-          this.alertService.success(this.translate.instant('requests.new-request.success-message'))
+          this.requestsService.createNewRequest(this.authService.decodedToken.nameid, request).subscribe(
+            (res) => {
+              this.alertService.success(this.translate.instant('requests.new-request.success-message'))
+            }
+          )
         }
       },
-      error => this.alertService.error(error)
     );
   }
 
@@ -124,7 +131,6 @@ export class RequestsComponent implements OnInit, OnDestroy, AfterViewInit {
           }
         }
       },
-      error => this.alertService.error(error.message)
     );
   }
 
@@ -134,14 +140,12 @@ export class RequestsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.allRequests = response;
         this.totalRecords = response.length;
       },
-      error => this.alertService.error(error.message)
     );
   }
 
   deleteRequest(request: Request) {
     this.requestsService.deleteRequest(request.id).subscribe(
       () => this.alertService.success(this.translate.instant('requests.delete-success')),
-      error => this.alertService.error(error.message)
     );
   }
 

@@ -119,10 +119,6 @@ export class NavigationComponent implements OnInit {
               this.initMenu();
               this.alertService.success(this.translate.instant('navigation.login.success-message'));
             },
-            error => this.alertService.error(error.error),
-            () => {
-              this.router.navigate(['/schedule']);
-            }
           );
         }
       },
