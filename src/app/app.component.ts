@@ -19,7 +19,7 @@ export class AppComponent {
     private authService: AuthService, 
     private themeService: ThemeService,
     private translate: TranslateService,
-    private config: PrimeNGConfig
+    private config: PrimeNGConfig,
     ) {
   }
 
