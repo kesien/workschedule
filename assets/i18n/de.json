@@ -1,0 +1,256 @@
+{
+	"admin": {
+		"holidays": {
+			"add-new-button": "Hinzufügen",
+			"button": "Neu hinzufügen",
+			"create-success": "Urlaub erfolgreich hinzugefügt",
+			"date-label": "Datum",
+			"delete-success": "Feiertag gestrichen",
+			"isfix-label": "Fester Feiertag?",
+			"new-holiday-title": "Einen Urlaub erstellen",
+			"table": {
+				"day": "Tag",
+				"isfix": "Fest?",
+				"month": "Monat",
+				"paginator": "aus dem Urlaub",
+				"year": "Jahr"
+			},
+			"title": "Feiertage"
+		},
+		"users": {
+			"add-new-button": "Speichern",
+			"button": "Neu hinzufügen",
+			"create-success": "Benutzer erfolgreich hinzugefügt",
+			"delete-success": "Benutzer gelöscht",
+			"dropdown-placeholder": "Wählen Sie den Typ",
+			"edit-user-title": "Benutzer bearbeiten",
+			"name-error-required": "Name erforderlich!",
+			"name-label": "Name",
+			"new-user-title": "Einen Benutzer erstellen",
+			"password-error-maxlength": "Das von Ihnen eingegebene Passwort ist zu lang!",
+			"password-error-minlength": "Das von Ihnen eingegebene Passwort ist zu kurz!",
+			"password-error-required": "Die Eingabe eines Passworts ist obligatorisch!",
+			"password-label": "Neues Passwort",
+			"table": {
+				"admin": "Verwaltung",
+				"name": "Name",
+				"username": "Benutzername"
+			},
+			"title": "Benutzer",
+			"type-label": "Typ",
+			"update-success": "Erfolgreiche Aktualisierung",
+			"username-error-email": "Ungültige E-Mail Adresse!",
+			"username-error-required": "Bitte geben Sie Ihren Benutzernamen ein!",
+			"username-label": "Benutzername"
+		}
+	},
+	"demo": {
+		"text": "",
+		"title": ""
+	},
+	"guards": {
+		"admin-message": "Sie sind nicht berechtigt, diese Seite anzuzeigen!",
+		"auth-message": "Sie müssen sich zuerst anmelden!"
+	},
+	"login": {
+		"button": "Einloggen",
+		"password-label": "Passwort",
+		"password-placeholder": "Passwort",
+		"title": "Einloggen",
+		"username-label": "Benutzername",
+		"username-placeholder": "Benutzername"
+	},
+	"misc": {
+		"language-button-label": "Sprache",
+		"languages": {
+			"english": "Englisch",
+			"german": "Deutsch",
+			"hungarian": "Ungarisch"
+		},
+		"spinner-message": "Inhalt wird gerade geladen..."
+	},
+	"navigation": {
+		"login": {
+			"logout-message": "Erfolgreiche Abmeldung",
+			"success-message": "Erfolgreiche Anmeldung",
+			"title": "Einloggen"
+		},
+		"menu": {
+			"admin": "Verwaltung",
+			"home": "Startseite",
+			"login-button-label": "Einloggen",
+			"logout-button-label": "Abmeldung",
+			"profile": "Profil",
+			"requests": "Anfragen",
+			"schedule": "Zeitplan",
+			"statistics": "Statistik"
+		},
+		"theme": {
+			"dark": "Dunkles Thema",
+			"light": "Helles Thema"
+		}
+	},
+	"primeng": {
+		"accept": "Ja",
+		"addRule": "Regel hinzufügen",
+		"after": "",
+		"apply": "Sich bewerben",
+		"before": "Vor",
+		"cancel": "Stornieren",
+		"choose": "Wählen Sie",
+		"clear": "Klare",
+		"contains": "Enthält",
+		"dateAfter": "Datum ist nach",
+		"dateBefore": "Datum ist vor",
+		"dateFormat": "dd/mm/yy",
+		"dateIs": "Datum ist",
+		"dateIsNot": "Datum ist nicht",
+		"dayNames": [
+			"Sonntag",
+			"Montag",
+			"Dienstag",
+			"Mittwoch",
+			"Donnerstag",
+			"Freitag",
+			"Samstag"
+		],
+		"dayNamesMin": [
+			"So",
+			"Mo",
+			"Di",
+			"Mi",
+			"Do",
+			"Fr",
+			"Sa"
+		],
+		"dayNamesShort": [
+			"So",
+			"Mo",
+			"Di",
+			"Mi",
+			"Do",
+			"Fr",
+			"Sa"
+		],
+		"emptyFilterMessage": "keine Ergebnisse gefunden",
+		"emptyMessage": "keine Ergebnisse gefunden",
+		"endsWith": "endet mit",
+		"equals": "entspricht",
+		"gt": "Größer als",
+		"gte": "Größer als oder gleich",
+		"is": "Ist ",
+		"isNot": "ist nicht",
+		"lt": "Weniger als",
+		"lte": "Weniger als oder gleich",
+		"matchAll": "Alle zuordnen",
+		"matchAny": "Beliebige Übereinstimmung",
+		"medium": "Mittel",
+		"monthNames": [
+			"Januar",
+			"Februar",
+			"März",
+			"April",
+			"Mai",
+			"Juni",
+			"Juli",
+			"August",
+			"September",
+			"Oktober",
+			"November",
+			"Dezember"
+		],
+		"monthNamesShort": [
+			"Jan.",
+			"Feb.",
+			"Mar.",
+			"Apr.",
+			"Mai.",
+			"Jun.",
+			"Jul",
+			"Aug.",
+			"Sep.",
+			"Okt.",
+			"Nov.",
+			"Dez."
+		],
+		"noFilter": "Kein Filter",
+		"notContains": "Nicht enthalten",
+		"notEquals": "Nicht gleichgestellt",
+		"passwordPrompt": "Geben Sie ein Passwort ein",
+		"reject": "Nein",
+		"removeRule": "Regel entfernen",
+		"startsWith": "Beginnt mit",
+		"strong": "Stark",
+		"today": "Heute",
+		"upload": "Hochladen",
+		"weak": "Schwach",
+		"weekHeader": "Woche"
+	},
+	"profile": {
+		"button": "Speichern",
+		"name-error-required": "Name erforderlich!",
+		"name-label": "Name",
+		"password-confirm-error-nomatch": "Die beiden Passwörter stimmen nicht überein!",
+		"password-confirm-label": "Wieder ein neues Passwort",
+		"password-error-maxlength": "Das von Ihnen eingegebene Passwort ist zu lang!",
+		"password-error-minlength": "Das von Ihnen eingegebene Passwort ist zu kurz!",
+		"password-label": "Neues Passwort",
+		"title": "Profil-Einstellungen",
+		"username-error-email": "Ungültige E-Mail Adresse!",
+		"username-error-required": "Bitte geben Sie Ihren Benutzernamen ein!",
+		"username-label": "Benutzername"
+	},
+	"requests": {
+		"button": "Neu hinzufügen",
+		"delete-success": "Erfolgreiche Löschung",
+		"new-request": {
+			"button": "Hinzufügen",
+			"date-label": "Datum",
+			"success-message": "Anfrage erfolgreich erstellt",
+			"title": "Eine neue Anfrage hinzufügen",
+			"type-label": "Typ"
+		},
+		"table": {
+			"day": "Tag",
+			"empty-message": "Keine Anfragen für diesen Monat",
+			"month": "Monat",
+			"paginator": "aus Anfrage",
+			"type": "Typ",
+			"year": "Jahr"
+		},
+		"types": {
+			"eight": "8:00",
+			"halften": "9:30",
+			"holiday": "Ferien"
+		}
+	},
+	"schedule": {
+		"buttons": {
+			"cancel": "Abbrechen",
+			"create": "Erstellen",
+			"delete": "Löschen",
+			"download": "Herunterladen",
+			"edit": "Bearbeiten",
+			"save": "Speichern"
+		},
+		"friday": "Freitag",
+		"monday": "Montag",
+		"saturday": "Samstag",
+		"summary": {
+			"headers": {
+				"eight": "8:00",
+				"halften": "9:30",
+				"holiday": "Ferien",
+				"name": "Name"
+			}
+		},
+		"sunday": "Sonntag",
+		"thursday": "Donnerstag",
+		"tuesday": "Dienstag",
+		"wednesday": "Mittwoch"
+	},
+	"usertypes": {
+		"admin": "Verwalter",
+		"user": "Benutzer"
+	}
+}
