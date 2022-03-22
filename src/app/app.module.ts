@@ -47,7 +47,7 @@ import { NewHolidayComponent } from './components/admin/new-holiday/new-holiday.
 import { NewRequestComponent } from './components/requests/new-request/new-request.component';
 import { LoginComponent } from './components/login/login.component';
 import { ToastModule } from 'primeng/toast';
-import { CommonModule } from '@angular/common';
+import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { MenuModule } from 'primeng/menu';
@@ -140,6 +140,10 @@ export function tokenGetter() {
     }),
   ],
   providers: [
+    {
+      provide: APP_BASE_HREF,
+      useValue: '/workschedule/'
+    },
     { 
       provide: HTTP_INTERCEPTORS, 
       useClass: SpinnerInterceptor, 
