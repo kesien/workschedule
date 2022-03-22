@@ -83,7 +83,7 @@ export class NavigationComponent implements OnInit {
         { label: n.requests, icon:'pi pi-fw pi-heart', routerLink: ['requests']},
         { label: n.profile, icon:'pi pi-fw pi-user', routerLink: ['profile']},
         { label: n.schedule, icon:'pi pi-fw pi-calendar', routerLink: ['schedule']},
-        { label: n.statistics, icon:'pi pi-fw pi-calendar', routerLink: ['statistics']},
+        //{ label: n.statistics, icon:'pi pi-fw pi-calendar', routerLink: ['statistics']},
         { label: n.admin, icon:'pi pi-fw pi-lock', routerLink: ['admin'], visible: this.isAdmin()}
       ];
     })
