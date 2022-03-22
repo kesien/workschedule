@@ -44,10 +44,6 @@
 			"username-label": "Felhasználónév"
 		}
 	},
-	"demo": {
-		"text": "test",
-		"title": "test"
-	},
 	"guards": {
 		"admin-message": "Nincs jogosultságod megtekinteni ezt az oldalt!",
 		"auth-message": "Először be kell jelentkezned!"

@@ -44,10 +44,6 @@
 			"username-label": "Benutzername"
 		}
 	},
-	"demo": {
-		"text": "",
-		"title": ""
-	},
 	"guards": {
 		"admin-message": "Sie sind nicht berechtigt, diese Seite anzuzeigen!",
 		"auth-message": "Sie müssen sich zuerst anmelden!"

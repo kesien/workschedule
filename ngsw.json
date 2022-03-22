@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1647980136240,
+  "timestamp": 1647980614196,
   "index": "https://kesien.github.io/workschedule/index.html",
   "assetGroups": [
     {
@@ -15,7 +15,7 @@
         "https://kesien.github.io/workschedule/favicon.ico",
         "https://kesien.github.io/workschedule/index.html",
         "https://kesien.github.io/workschedule/light-theme.css",
-        "https://kesien.github.io/workschedule/main.8f7cb99277fe2ab78064.js",
+        "https://kesien.github.io/workschedule/main.a8c22ad225f9e1f925fc.js",
         "https://kesien.github.io/workschedule/manifest.webmanifest",
         "https://kesien.github.io/workschedule/polyfills.2590d322191391c76883.js",
         "https://kesien.github.io/workschedule/runtime.6b9cf0c7e11a8c23e7ae.js",
@@ -63,9 +63,9 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://kesien.github.io/workschedule/assets/i18n/de.json": "1e8b29cac380cf6670b54fb3ca7a7036e39813f8",
-    "https://kesien.github.io/workschedule/assets/i18n/en.json": "dbb98d3efde8fc1f79f34ef663895f7f96642137",
-    "https://kesien.github.io/workschedule/assets/i18n/hu.json": "65e746c74702631d910797cf439d1a74b3ddb972",
+    "https://kesien.github.io/workschedule/assets/i18n/de.json": "a7587d3784400b7e1e6f196e2f63ca2f0d697a0b",
+    "https://kesien.github.io/workschedule/assets/i18n/en.json": "10a1de15d9a88f4399f75fa7b99bfd084e2166e6",
+    "https://kesien.github.io/workschedule/assets/i18n/hu.json": "aa7708a6a4a9e791d2c5f984c068e16ad8439acd",
     "https://kesien.github.io/workschedule/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "https://kesien.github.io/workschedule/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
     "https://kesien.github.io/workschedule/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
@@ -87,9 +87,9 @@
     "https://kesien.github.io/workschedule/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg": "98a8aa5cf7d62c2eff5f07ede8d844b874ef06ed",
     "https://kesien.github.io/workschedule/fontawesome-webfont.f691f37e57f04c152e23.woff": "28b782240b3e76db824e12c02754a9731a167527",
     "https://kesien.github.io/workschedule/hue.f8505bd4d6f3e3aa435b.png": "f81ae627637a684614aa726e206c73ce099a01fd",
-    "https://kesien.github.io/workschedule/index.html": "02f39714677fd05cc27cb112d9ebcc0c88f79f1d",
+    "https://kesien.github.io/workschedule/index.html": "d4823f2fe7d15a3b42760813df54a3ee5a38270b",
     "https://kesien.github.io/workschedule/light-theme.css": "e5512fee7a08ccbe0e5f128cc44a1975fbf0a8ac",
-    "https://kesien.github.io/workschedule/main.8f7cb99277fe2ab78064.js": "b03b7cbce52fe804b3334659837b566a76eb2f8f",
+    "https://kesien.github.io/workschedule/main.a8c22ad225f9e1f925fc.js": "760797256a0a9a8270900ba4ded281d20a240bfd",
     "https://kesien.github.io/workschedule/manifest.webmanifest": "213ee77b9e01aa717aed2a72bb60031a257ca7fa",
     "https://kesien.github.io/workschedule/polyfills.2590d322191391c76883.js": "31e88b0a9d1db7e03be9191a6dab81050c293df6",
     "https://kesien.github.io/workschedule/primeicons.449aa8c65cdc5c2a8686.woff": "21e477ea19e15b66344bcc23b3fbb2161092a707",
