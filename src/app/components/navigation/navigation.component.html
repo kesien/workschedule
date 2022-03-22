@@ -1,8 +1,8 @@
 <p-menubar [model]="menuItems" class="p-d-flex p-jc-between">
   <ng-template pTemplate="end">
     <div style="display: flex">
-      <button *ngIf="!isLightTheme" pButton pRipple type="button" icon="pi pi-sun" class="themetoggler p-button-rounded p-button-warning" (click)="toggleTheme()"></button>
-      <button *ngIf="isLightTheme" pButton pRipple type="button" icon="pi pi-moon" class="themetoggler p-button-rounded p-button-secondary" (click)="toggleTheme()"></button>
+      <button *ngIf="!isLightTheme" pButton pRipple type="button" icon="pi pi-sun" class="themetoggler p-button-rounded p-button-warning mr-2" (click)="toggleTheme()"></button>
+      <button *ngIf="isLightTheme" pButton pRipple type="button" icon="pi pi-moon" class="themetoggler p-button-rounded p-button-secondary mr-2" (click)="toggleTheme()"></button>
       <button type="button" class="p-button-outlined p-button-secondary mr-2" pButton icon="pi pi-globe" label="{{selectedLanguage}}" (click)="menu.toggle($event)"></button>
       <p-menu #menu [popup]="true" [model]="items"></p-menu>
       <p-button label="{{ 'navigation.menu.login-button-label' | translate }}" [disabled]="isOpened" icon="pi pi-sign-in" (click)="login()" styleClass="p-button-success" *ngIf="!loggedIn()"></p-button>
