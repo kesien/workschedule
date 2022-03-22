@@ -7,7 +7,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build": "ng build --output-path=dist",
-    "build-ghpages": "ng build --configuration=production --output-path=dist --base-href=./workschedule/"
+    "build-ghpages": "ng build --configuration=production --output-path=dist --base-href=https://kesien.github.io/workschedule/ --deploy-url=/workschedule/"
   },
   "private": true,
   "dependencies": {
