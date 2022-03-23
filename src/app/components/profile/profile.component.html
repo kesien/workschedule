@@ -28,7 +28,7 @@
               <small *ngIf="confirmPassword.dirty && userForm.errors?.noMatchError" class="p-error">{{ 'profile.password-confirm-error-nomatch' | translate }}</small>
             </div>
             <div class="field">
-              <button pButton type="button" [disabled]="!userForm.valid" label="Mentés" icon="pi pi-save" class="p-button-lg p-button-success" (click)="updateInfo()"></button>
+              <button pButton type="button" [disabled]="!userForm.valid" label="{{ 'profile.button' | translate }}" icon="pi pi-save" class="p-button-lg p-button-success" (click)="updateInfo()"></button>
             </div>
         </div>
         </form>

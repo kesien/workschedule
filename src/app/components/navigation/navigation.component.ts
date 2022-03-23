@@ -24,26 +24,7 @@ export class NavigationComponent implements OnInit {
 
   selectedLanguage: string = '';
 
-  items = [
-    {
-      label: 'English',
-      command: () => {
-        this.changeLanguage('en');
-      }
-    },
-    {
-      label: 'German',
-      command: () => {
-        this.changeLanguage('de');
-      }
-    },
-    {
-      label: 'Hungarian',
-      command: () => {
-        this.changeLanguage('hu'); 
-      }
-    }
-  ]
+  items: MenuItem[] = [];
 
   isOpened = false;
   isCollapsed = true;
@@ -87,6 +68,13 @@ export class NavigationComponent implements OnInit {
         { label: n.admin, icon:'pi pi-fw pi-lock', routerLink: ['admin'], visible: this.isAdmin()}
       ];
     })
+    this.translate.get('misc.languages').subscribe(n => {
+      this.items = [
+        { label: n.english, command: () => {this.changeLanguage('en')}},
+        { label: n.german, command: () => {this.changeLanguage('de')}},
+        { label: n.hungarian, command: () => {this.changeLanguage('hu')}},
+      ]
+    })
   }
 
   logout() {
@@ -118,6 +106,7 @@ export class NavigationComponent implements OnInit {
             () => {
               this.initMenu();
               this.alertService.success(this.translate.instant('navigation.login.success-message'));
+              this.router.navigate(['/schedule']);
             },
           );
         }
