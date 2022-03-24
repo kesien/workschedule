@@ -191,6 +191,7 @@
 		"password-error-maxlength": "The password you entered is too long!",
 		"password-error-minlength": "The password you entered is too short!",
 		"password-label": "New password",
+		"receive-emails-label": "Send e-mail notification",
 		"title": "Profile settings",
 		"username-error-email": "Invalid email address!",
 		"username-error-required": "Please enter your username!",

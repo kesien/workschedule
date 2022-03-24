@@ -191,6 +191,7 @@
 		"password-error-maxlength": "A megadott jelszó túl hosszú!",
 		"password-error-minlength": "A megadott jelszó túl rövid!",
 		"password-label": "Új jelszó",
+		"receive-emails-label": "E-mail értesítés küldése",
 		"title": "Profil beállítások",
 		"username-error-email": "Érvénytelen e-mail cím!",
 		"username-error-required": "Felhasználónév megadása kötelező!",
