@@ -5,4 +5,5 @@ export interface User {
   password?: string;
   isRequest?: boolean;
   role?: number;
+  receiveEmails: boolean;
 }

@@ -21,6 +21,10 @@
       <label class="form-label" for="type">{{ 'admin.users.type-label' | translate }}</label>
       <p-dropdown [options]="userTypes" name="role" formControlName="role" optionLabel="label" optionValue="value" placeholder="{{ 'admin.users.dropdown-placeholder' | translate }}"></p-dropdown>
     </div>
+    <div class="field-checkbox">
+      <p-checkbox formControlName="receiveEmails" [binary]="true" inputId="emailnotification"></p-checkbox>
+      <label for="emailnotification" class="form-label">{{ 'profile.receive-emails-label' | translate }}</label>
+    </div>
     <div class="field">
       <button pButton type="submit" [disabled]="!newUserForm.valid" label="{{ 'admin.users.add-new-button' | translate }}" icon="pi pi-save"
         class="p-button-lg p-button-success"></button>

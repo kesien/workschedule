@@ -20,7 +20,8 @@ export class EditUserComponent implements OnInit {
       name: new FormControl(this.config.data.user.name, Validators.required),
       userName: new FormControl(this.config.data.user.userName, [Validators.required, Validators.email]),
       password: new FormControl('', Validators.minLength(6)),
-      role: new FormControl(this.config.data.user.role)
+      role: new FormControl(this.config.data.user.role),
+      receiveEmails: new FormControl(this.config.data.user.receiveEmails)
     });
    }
 

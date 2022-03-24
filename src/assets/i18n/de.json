@@ -63,7 +63,11 @@
 			"german": "Deutsch",
 			"hungarian": "Ungarisch"
 		},
-		"spinner-message": "Inhalt wird gerade geladen..."
+		"spinner-message": "Inhalt wird gerade geladen...",
+		"success": "Erfolg",
+		"error": "Fehler",
+		"warning": "Warnung",
+		"info": "Info"
 	},
 	"navigation": {
 		"login": {
@@ -191,6 +195,7 @@
 		"password-error-maxlength": "Das von Ihnen eingegebene Passwort ist zu lang!",
 		"password-error-minlength": "Das von Ihnen eingegebene Passwort ist zu kurz!",
 		"password-label": "Neues Passwort",
+		"receive-emails-label": "E-Mail-Benachrichtigung senden",
 		"title": "Profil-Einstellungen",
 		"username-error-email": "Ungültige E-Mail Adresse!",
 		"username-error-required": "Bitte geben Sie Ihren Benutzernamen ein!",

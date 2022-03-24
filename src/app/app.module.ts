@@ -59,6 +59,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { GlobalErrorHandler } from './shared/errorhandler/error.handler'
 import { ServerErrorInterceptor } from './shared/interceptors/error.interceptor'
+import { ToolbarModule } from 'primeng/toolbar';
+import { MessageService } from 'primeng/api'
 
 export function tokenGetter() {
   return localStorage.getItem('token')
@@ -86,6 +88,8 @@ export function tokenGetter() {
     StatisticsComponent,
   ],
   imports: [
+    ToastModule,
+    ToolbarModule,
     ChartModule,
     ToggleButtonModule,
     ReactiveFormsModule,
@@ -144,6 +148,7 @@ export function tokenGetter() {
     }),
   ],
   providers: [
+    MessageService,
     { 
       provide: ErrorHandler, 
       useClass: GlobalErrorHandler 

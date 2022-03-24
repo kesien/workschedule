@@ -12,6 +12,7 @@ import { UserService } from '../../shared/services/user.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
+
   userForm = new FormGroup(
     {
       userName: new FormControl('', [
@@ -25,6 +26,7 @@ export class ProfileComponent implements OnInit {
         Validators.maxLength(20),
       ]),
       confirmPassword: new FormControl(''),
+      receiveEmails: new FormControl()
     },
     passwordMatchValidator
   );
@@ -47,6 +49,7 @@ export class ProfileComponent implements OnInit {
         this.user = response as User
         this.userForm.controls['userName'].setValue(this.user.userName);
         this.userForm.controls['name'].setValue(this.user.name);
+        this.userForm.controls['receiveEmails'].setValue(this.user.receiveEmails);
       }
     );
   }

@@ -23,6 +23,7 @@ export class NewUserComponent implements OnInit {
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       role: new FormControl(0),
       name: new FormControl('', Validators.required),
+      receiveEmails: new FormControl(true)
     })
   }
 
