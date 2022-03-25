@@ -57,13 +57,31 @@
 		"username-placeholder": "Felhasználónév"
 	},
 	"misc": {
+		"error": "Hiba",
+		"info": "Infó",
 		"language-button-label": "Nyelv",
 		"languages": {
 			"english": "Angol",
 			"german": "Német",
 			"hungarian": "Magyar"
 		},
-		"spinner-message": "Tartalom betöltése folyamatban..."
+		"spinner-message": "Tartalom betöltése folyamatban...",
+		"success": "Siker",
+		"warning": "Figyelmeztetés"
+	},
+	"months": {
+		"april": "Április",
+		"august": "Augusztus",
+		"december": "December",
+		"february": "Február",
+		"january": "Január",
+		"july": "Július",
+		"june": "Június",
+		"march": "Március",
+		"may": "Május",
+		"november": "November",
+		"oktober": "Október",
+		"september": "Szeptember"
 	},
 	"navigation": {
 		"login": {
@@ -231,6 +249,7 @@
 			"save": "Mentés"
 		},
 		"friday": "Péntek",
+		"holiday": "Szabadság",
 		"monday": "Hétfő",
 		"saturday": "Szombat",
 		"summary": {

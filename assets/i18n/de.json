@@ -57,6 +57,8 @@
 		"username-placeholder": "Benutzername"
 	},
 	"misc": {
+		"error": "Fehler",
+		"info": "Info",
 		"language-button-label": "Sprache",
 		"languages": {
 			"english": "Englisch",
@@ -65,9 +67,21 @@
 		},
 		"spinner-message": "Inhalt wird gerade geladen...",
 		"success": "Erfolg",
-		"error": "Fehler",
-		"warning": "Warnung",
-		"info": "Info"
+		"warning": "Warnung"
+	},
+	"months": {
+		"april": "April",
+		"august": "August",
+		"december": "Dezember",
+		"february": "Februar",
+		"january": "Januar",
+		"july": "Juli",
+		"june": "Juni",
+		"march": "März",
+		"may": "Mai",
+		"november": "November",
+		"oktober": "Oktober",
+		"september": "September"
 	},
 	"navigation": {
 		"login": {
@@ -235,6 +249,7 @@
 			"save": "Speichern"
 		},
 		"friday": "Freitag",
+		"holiday": "Ferien",
 		"monday": "Montag",
 		"saturday": "Samstag",
 		"summary": {
