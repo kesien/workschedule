@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { ScheduleDay } from 'src/app/shared/models/scheduleday.model';
 import { User } from 'src/app/shared/models/user.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -12,17 +13,8 @@ export class ScheduleDayComponent implements OnInit {
   @Input() day!: ScheduleDay;
   @Input() editMode!: boolean;
   @Output() arrowClick = new EventEmitter();
-  days = [
-    'Vasárnap',
-    'Hétfő',
-    'Kedd',
-    'Szerda',
-    'Csütörtök',
-    'Péntek',
-    'Szombat',
-  ];
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService, private translate: TranslateService) {}
 
   ngOnInit(): void {}
 
@@ -46,6 +38,6 @@ export class ScheduleDayComponent implements OnInit {
 
   getDay(date: string) {
     const d = new Date(date);
-    return this.days[d.getDay()];
+    return this.translate.instant('primeng.dayNames')[d.getDay()];
   }
 }

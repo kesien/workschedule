@@ -57,13 +57,31 @@
 		"username-placeholder": "Username"
 	},
 	"misc": {
+		"error": "Error",
+		"info": "Info",
 		"language-button-label": "Language",
 		"languages": {
 			"english": "English",
 			"german": "German",
 			"hungarian": "Hungarian"
 		},
-		"spinner-message": "Content is loading ..."
+		"spinner-message": "Content is loading ...",
+		"success": "Success",
+		"warning": "Warning"
+	},
+	"months": {
+		"april": "April",
+		"august": "August",
+		"december": "December",
+		"february": "February",
+		"january": "January",
+		"july": "July",
+		"june": "June",
+		"march": "March",
+		"may": "May",
+		"november": "November",
+		"oktober": "October",
+		"september": "September"
 	},
 	"navigation": {
 		"login": {
@@ -231,6 +249,7 @@
 			"save": "Save"
 		},
 		"friday": "Friday",
+		"holiday": "Holiday",
 		"monday": "Monday",
 		"saturday": "Saturday",
 		"summary": {

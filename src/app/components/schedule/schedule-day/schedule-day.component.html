@@ -10,7 +10,7 @@
   <div class="calendar__day">
     <div class="calendar__personholiday">
       <p *ngIf="day.day.usersOnHoliday.length">
-        <i class="fa fa-ban"></i> Szabadság:
+        <i class="fa fa-ban"></i> {{ 'schedule.holiday' | translate }}:
         <span *ngFor="let user of day.day.usersOnHoliday">
           {{ user.name }}
         </span>
