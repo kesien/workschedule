@@ -1,0 +1,7 @@
+.newsList {
+    list-style: none;
+}
+
+.newsList li {
+    padding: 5px 0;
+}

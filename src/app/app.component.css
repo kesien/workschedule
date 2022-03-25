@@ -1,0 +1,16 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 91vh;
+}
+
+.copyright {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: center;
+    color: #999;
+    padding: 10px;
+}
