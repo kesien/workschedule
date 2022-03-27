@@ -1,6 +1,6 @@
 export const months = [
   { label: 'months.january', value: 1 },
-  { label: 'months.febuary', value: 2 },
+  { label: 'months.february', value: 2 },
   { label: 'months.march', value: 3 },
   { label: 'months.april', value: 4 },
   { label: 'months.may', value: 5 },
