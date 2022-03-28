@@ -30,8 +30,11 @@
                             [showOperator]="false" [showAddButton]="false">
                             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                                 <p-dropdown [ngModel]="value" [options]="months" (onChange)="filter($event.value)"
-                                    placeholder="Any" optionLabel="value">
+                                    placeholder="Any">
                                     <ng-template let-option pTemplate="item">
+                                        <span>{{ option.label | translate }}</span>
+                                    </ng-template>
+                                    <ng-template let-option pTemplate="selectedItem">
                                         <span>{{ option.label | translate }}</span>
                                     </ng-template>
                                 </p-dropdown>

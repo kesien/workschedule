@@ -22,9 +22,12 @@
           <p-columnFilter field="month" matchMode="equals" display="menu" [showMatchModes]="false"
             [showOperator]="false" [showAddButton]="false">
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-              <p-dropdown [ngModel]="value" [options]="months" (onChange)="filter($event.value)" placeholder="Any" optionLabel="value">
+              <p-dropdown [ngModel]="value" [options]="months" (onChange)="filter($event.value)" placeholder="Any">
                 <ng-template let-option pTemplate="item">
                   <span>{{option.label | translate }}</span>
+                </ng-template>
+                <ng-template let-item pTemplate="selectedItem">
+                  <span>{{ item.label | translate }}</span>
                 </ng-template>
               </p-dropdown>
             </ng-template>
