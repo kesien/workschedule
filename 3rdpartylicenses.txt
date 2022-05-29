@@ -137,6 +137,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 font-awesome
 (OFL-1.1 AND MIT)
 
+ngx-device-detector
+MIT
+
 ngx-spinner
 MIT
 
