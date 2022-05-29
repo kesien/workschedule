@@ -10,6 +10,7 @@ import { Row } from 'src/app/shared/models/row.model';
 import { ScheduleDay } from 'src/app/shared/models/scheduleday.model';
 import * as signalR from '@microsoft/signalr';
 import { FileService } from 'src/app/shared/services/file.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-schedule',
@@ -31,8 +32,9 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   constructor(
     private alertService: AlertService,
     private scheduleService: ScheduleService,
-    public authService: AuthService,
-    private fileService: FileService
+    private fileService: FileService,
+    private deviceService: DeviceDetectorService,
+    public authService: AuthService
   ) {
     this.yearRange = `${new Date().getFullYear() - 6}:${new Date().getFullYear() + 10}`;
   }
@@ -74,15 +76,13 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     this.connection.on("RequestDeletedEvent", () => {  
       this.getSchedule();  
     });
+
+    this.mobile = this.deviceService.isMobile();
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    if (event.target.innerWidth <= 650) {
-      this.mobile = true;
-    } else {
-      this.mobile = false;
-    }
+    this.mobile = event.target.innerWidth <= 650;
   }
 
   getSchedule(year: number = this.filter.getFullYear(), month: number = this.filter.getMonth() + 1) {
