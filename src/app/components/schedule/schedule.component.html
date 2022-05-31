@@ -29,30 +29,17 @@
     </div>
   </div>
   <p-toolbar styleClass="mt-3" *ngIf="this.authService.decodedToken?.role === 'Administrator'">
-    <div class="p-toolbar-group-left"></div>
-    <div class="p-toolbar-group-right">
-      <p-button *ngIf="!schedule.isSaved" label="{{ 'schedule.buttons.create' | translate }}" icon="pi pi-check" styleClass="p-button-lg" (click)="createSchedule()"></p-button>
-      <div *ngIf="schedule.isSaved">
-        <p-button *ngIf="!editMode" label="{{ 'schedule.buttons.edit' | translate }}" icon="pi pi-pencil" styleClass="p-button-lg p-button-success mr-2" (click)="enableEditMode()"></p-button>
-        <p-button *ngIf="!editMode" label="{{ 'schedule.buttons.delete' | translate }}" icon="pi pi-trash" styleClass="p-button-lg p-button-danger mr-2" (click)="deleteSchedule()"></p-button>
-        <p-button *ngIf="schedule.wordFile && !editMode" label="{{ 'schedule.buttons.download' | translate }}" icon="pi pi-save" styleClass="p-button-lg p-button-primary" (click)="download(schedule.wordFile)"></p-button>
-        <p-button *ngIf="editMode" label="{{ 'schedule.buttons.cancel' | translate }}" icon="pi pi-close" styleClass="p-button-lg p-button-info mr-2" (click)="cancel()"></p-button>
-        <p-button *ngIf="editMode" label="{{ 'schedule.buttons.save' | translate }}" icon="pi pi-close" styleClass="p-button-lg p-button-success" (click)="saveChanges()"></p-button>
+      <div *ngIf="!schedule.isSaved" class="flex flex-1 flex-column md:flex-row justify-content-end">
+        <p-button label="{{ 'schedule.buttons.create' | translate }}" icon="pi pi-check" styleClass="w-12 p-button-lg" (click)="createSchedule()"></p-button>
       </div>
-    </div>
+      <div *ngIf="schedule.isSaved" class="flex flex-1 flex-column md:flex-row justify-content-end gap-1">
+        <p-button *ngIf="!editMode" label="{{ 'schedule.buttons.edit' | translate }}" icon="pi pi-pencil" styleClass="w-12 p-button-lg p-button-success" (click)="enableEditMode()"></p-button>
+        <p-button *ngIf="!editMode" label="{{ 'schedule.buttons.delete' | translate }}" icon="pi pi-trash" styleClass="w-12 p-button-lg p-button-danger" (click)="deleteSchedule()"></p-button>
+        <p-button *ngIf="schedule.wordFile && !editMode" label="{{ 'schedule.buttons.download' | translate }}" icon="pi pi-save" styleClass="w-12 p-button-lg p-button-primary" (click)="download(schedule.wordFile)"></p-button>
+        <p-button *ngIf="editMode" label="{{ 'schedule.buttons.cancel' | translate }}" icon="pi pi-close" styleClass="w-12 p-button-lg p-button-info" (click)="cancel()"></p-button>
+        <p-button *ngIf="editMode" label="{{ 'schedule.buttons.save' | translate }}" icon="pi pi-close" styleClass="w-12 p-button-lg p-button-success" (click)="saveChanges()"></p-button>
+      </div>
   </p-toolbar>
-    <!-- <div class="grid justify-content-end" *ngIf="schedule.isSaved">
-      <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="!editMode">
-      </div>
-      <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="!editMode">
-      </div>
-      <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="schedule.wordFile && !editMode">
-      </div>
-      <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="editMode">
-      </div>
-      <div class="col-12 lg:col-2 md:col-4 p-fluid" *ngIf="editMode">
-      </div>
-    </div> -->
   <div class="mx-auto mt-6 lg:w-5 md:w-6 xs:w-12">
     <app-summary
       [summaries]="schedule.summaries"

@@ -53,14 +53,14 @@
     <span class="calendar__daynumber">{{ day.day?.date | date: "dd" }}</span>
   </div>
 </div>
-<div class="cell calendar__weekend" *ngIf="day.day?.isWeekend">
+<div class="cell calendar__weekend" *ngIf="day.day?.isWeekend && !day.day?.isHoliday">
   <div>
     <span class="calendar__daynumber">{{ day.day?.date | date: "dd" }}</span>
   </div>
 </div>
 <div
   class="cell calendar__holiday"
-  *ngIf="!day.day?.isWeekend && day.day?.isHoliday && day.day"
+  *ngIf="day.day?.isHoliday && day.day"
   [attr.data-realdate]="day.day?.date | date"
   [attr.data-dayname]="getDay(day.day.date.toString())"
 >
