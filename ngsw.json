@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1654029063093,
+  "timestamp": 1656533693933,
   "index": "https://kesien.github.io/workschedule/index.html",
   "assetGroups": [
     {
@@ -71,7 +71,22 @@
       "patterns": []
     }
   ],
-  "dataGroups": [],
+  "dataGroups": [
+    {
+      "name": "api",
+      "patterns": [
+        "https:\\/\\/workschedule-flying\\.herokuapp\\.com\\/api\\/[^/]*"
+      ],
+      "strategy": "freshness",
+      "maxSize": 5,
+      "maxAge": 7200000,
+      "timeoutMs": 10000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    }
+  ],
   "hashTable": {
     "https://kesien.github.io/workschedule/assets/i18n/de.json": "3cc698a07dda185b9c028e0c3c875fe4bea2f03c",
     "https://kesien.github.io/workschedule/assets/i18n/en.json": "f6f99de501d2f518a969fd45bc4dfe3d0cf99d1a",
