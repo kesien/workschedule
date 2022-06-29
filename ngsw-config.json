@@ -26,5 +26,19 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "api",
+      "urls": [
+        "https://workschedule-flying.herokuapp.com/api/*"
+      ],
+      "cacheConfig": {
+        "maxSize": 5,
+        "maxAge": "2h",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    }
   ]
 }
