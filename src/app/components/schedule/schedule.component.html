@@ -28,7 +28,7 @@
       ></app-schedule-row>
     </div>
   </div>
-  <p-toolbar styleClass="mt-3" *ngIf="this.authService.decodedToken?.role === 'Administrator'">
+  <p-toolbar styleClass="mt-3" *ngIf="this.authService.decodedToken?.role === 'Administrator' || this.authService.decodedToken?.role === 'Superadmin'">
       <div *ngIf="!schedule.isSaved" class="flex flex-1 flex-column md:flex-row justify-content-end">
         <p-button label="{{ 'schedule.buttons.create' | translate }}" icon="pi pi-check" styleClass="w-12 p-button-lg" (click)="createSchedule()"></p-button>
       </div>
