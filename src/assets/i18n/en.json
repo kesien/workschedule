@@ -216,6 +216,7 @@
 		"username-label": "Username"
 	},
 	"requests": {
+		"period": "Period",
 		"button": "Add new",
 		"delete-success": "Successful deletion",
 		"new-request": {

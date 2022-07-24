@@ -1,11 +1,16 @@
 <div class="p-fluid">
   <div class="field">
     <label for="type">{{ 'requests.new-request.type-label' | translate }}</label>
-    <p-dropdown [options]="requestTypes" [(ngModel)]="request.type" optionLabel="label" optionValue="value" id="type"></p-dropdown>
+    <p-dropdown [options]="requestTypes" [(ngModel)]="type" optionLabel="label" optionValue="value" id="type"></p-dropdown>
+  </div>
+  <div class="field-checkbox">
+    <p-checkbox [(ngModel)]="isPeriod" [binary]="true" inputId="binary"></p-checkbox>
+    <label for="binary">{{ 'requests.period' | translate }}?</label>
   </div>
   <div class="field">
     <label for="date">{{ 'requests.new-request.date-label' | translate }}</label>
-    <p-calendar [(ngModel)]="request.date" [inline]="true" [showWeek]="true" id="date"></p-calendar>
+    <p-calendar [(ngModel)]="date" [disabledDays]="[0,6]" [inline]="true" selectionMode="range" [showWeek]="true" id="date" *ngIf="isPeriod"></p-calendar>
+    <p-calendar [(ngModel)]="date" [disabledDays]="[0,6]" [inline]="true" [showWeek]="true" id="date" *ngIf="!isPeriod"></p-calendar>
   </div>
   
   <div class="field">
