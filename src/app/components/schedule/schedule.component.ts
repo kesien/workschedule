@@ -11,6 +11,12 @@ import { ScheduleDay } from 'src/app/shared/models/scheduleday.model'
 import * as signalR from '@microsoft/signalr'
 import { FileService } from 'src/app/shared/services/file.service'
 import { DeviceDetectorService } from 'ngx-device-detector'
+import { RequestCreatedEvent } from 'src/app/events/requestcreated.event'
+import { RequestType } from 'src/app/shared/constants/requesttype.constant'
+import { User } from 'src/app/shared/models/user.model'
+import { RequestDeletedEvent } from 'src/app/events/requestdeleted.event'
+import { ScheduleCreatedEvent } from 'src/app/events/schedulecreated.event'
+import { ScheduleUpdatedEvent } from 'src/app/events/scheduleupdated.event'
 
 @Component({
   selector: 'app-schedule',
@@ -50,6 +56,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
     this.connection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Information)
+      .withAutomaticReconnect()
       .withUrl(environment.signalRUrl)
       .build()
 
@@ -62,24 +69,76 @@ export class ScheduleComponent implements OnInit, OnDestroy {
         return console.error(err.toString())
       })
 
-    this.connection.on('ScheduleCreatedEvent', () => {
-      this.getSchedule()
+    this.connection.on(
+      'ScheduleCreatedEvent',
+      (event: ScheduleCreatedEvent) => {
+        if (
+          this.schedule.year == event.schedule.year &&
+          this.schedule.month == event.schedule.month
+        ) {
+          this.schedule = event.schedule
+          this.generateRows()
+        }
+      },
+    )
+
+    this.connection.on(
+      'ScheduleUpdatedEvent',
+      (event: ScheduleUpdatedEvent) => {
+        if (
+          this.schedule.year == event.schedule.year &&
+          this.schedule.month == event.schedule.month
+        ) {
+          this.schedule = event.schedule
+          this.generateRows()
+        }
+      },
+    )
+
+    this.connection.on('RequestCreatedEvent', (event: RequestCreatedEvent) => {
+      if (
+        this.schedule.year == event.year &&
+        this.schedule.month == event.month
+      ) {
+        const day = this.schedule.days.find(
+          (d) => new Date(d.date).getDate() == event.day,
+        )
+        if (event.type == RequestType.MORNING) {
+          day?.usersScheduledForMorning.push({
+            name: event.name,
+            isRequest: true,
+            requestId: event.requestId,
+          } as User)
+        }
+        if (event.type == RequestType.FORENOON) {
+          day?.usersScheduledForForenoon.push({
+            name: event.name,
+            isRequest: true,
+            requestId: event.requestId,
+          } as User)
+        }
+        if (event.type == RequestType.HOLIDAY) {
+          day?.usersOnHoliday.push({
+            name: event.name,
+            isRequest: true,
+            requestId: event.requestId,
+          } as User)
+        }
+      }
     })
 
-    this.connection.on('ScheduleUpdatedEvent', () => {
-      this.getSchedule()
-    })
-
-    this.connection.on('ScheduleDeletedEvent', () => {
-      this.getSchedule()
-    })
-
-    this.connection.on('RequestCreatedEvent', () => {
-      this.getSchedule()
-    })
-
-    this.connection.on('RequestDeletedEvent', () => {
-      this.getSchedule()
+    this.connection.on('RequestDeletedEvent', (event: RequestDeletedEvent) => {
+      this.schedule.days.forEach((day) => {
+        day.usersOnHoliday = day.usersOnHoliday.filter(
+          (h) => h.requestId != event.requestId,
+        )
+        day.usersScheduledForMorning = day.usersScheduledForMorning.filter(
+          (m) => m.requestId != event.requestId,
+        )
+        day.usersScheduledForForenoon = day.usersScheduledForForenoon.filter(
+          (f) => f.requestId != event.requestId,
+        )
+      })
     })
 
     this.mobile = this.deviceService.isMobile()

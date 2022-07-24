@@ -1,20 +1,20 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, Query } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { Request } from '../models/request.model';
-import { Years } from '../models/years.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { Injectable, Query } from '@angular/core'
+import { environment } from 'src/environments/environment'
+import { Request } from '../models/request.model'
+import { Years } from '../models/years.model'
 
 @Injectable({
   providedIn: 'root',
 })
 export class RequestsService {
-  baseUrl = environment.baseApiUrl + 'requests';
+  baseUrl = environment.baseApiUrl + 'requests'
   constructor(private http: HttpClient) {}
 
   getRequestsForUser(userId: string, year: number, month: number) {
     return this.http.get<Request[]>(
-      this.baseUrl + `/${userId}/${year}/${month}`
-    );
+      this.baseUrl + `/${userId}/${year}/${month}`,
+    )
   }
 
   getAllRequestYearsForUser(userId: string) {
@@ -22,16 +22,29 @@ export class RequestsService {
   }
 
   getAllRequestsForUser(userId: string) {
-    return this.http.get<Request[]>(this.baseUrl + `/${userId}`);
+    return this.http.get<Request[]>(this.baseUrl + `/${userId}`)
   }
 
   createNewRequest(userId: string, data: Request) {
     const payload = {
       userId,
       type: data.type,
-      date: data.date.toLocaleString("en-CA").substring(0, 10)
-    };
-    return this.http.post<Request>(this.baseUrl, payload);
+      date: data.date.toLocaleString('en-CA').substring(0, 10),
+    }
+    return this.http.post(this.baseUrl, payload)
+  }
+
+  createNewRequestRange(userId: string, date: Date[], type: number) {
+    const range: string[] = []
+    date.forEach((d) => {
+      range.push(d.toLocaleString('en-CA').substring(0, 10))
+    })
+    const payload = {
+      userId,
+      range,
+      type,
+    }
+    return this.http.post(this.baseUrl + '/addrange', payload)
   }
 
   deleteRequest(id: string | undefined) {
@@ -40,9 +53,9 @@ export class RequestsService {
         'Content-Type': 'application/json',
       }),
       body: {
-        id: id
+        id: id,
       },
-    };
-    return this.http.delete(this.baseUrl, options);
+    }
+    return this.http.delete(this.baseUrl, options)
   }
 }
