@@ -216,6 +216,7 @@
 		"username-label": "Felhasználónév"
 	},
 	"requests": {
+		"period": "Időszak",
 		"button": "Új hozzáadása",
 		"delete-success": "Sikeres törlés",
 		"new-request": {
