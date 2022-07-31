@@ -1,0 +1,48 @@
+<div class="lg:mx-8 md:mx-4 mt-3">
+  <app-initer
+    [users]="users"
+    [progressValue]="(initerStep / 3) * 100"
+    (onUserSelected)="selectedUsers = $event"
+    (onDeadlineSelected)="selectedDeadline = $event"
+    (onAmountChanged)="selectedAmount = $event"
+    [step]="initerStep"
+  ></app-initer>
+  <div
+    class="flex flex-1 flex-column md:flex-row justify-content-end gap-1 mt-5"
+  >
+    <button
+      *ngIf="initerStep > 1"
+      pButton
+      pRipple
+      type="button"
+      label="Előző"
+      icon="pi pi-arrow-circle-left"
+      styleClass="p-button-lg"
+      (click)="decrement()"
+    ></button>
+    <button
+      *ngIf="initerStep != 3"
+      pButton
+      pRipple
+      type="button"
+      label="Következő"
+      icon="pi pi-arrow-circle-right"
+      iconPos="right"
+      styleClass="p-button-lg"
+      (click)="increment()"
+      [disabled]="!isStepValid()"
+    ></button>
+    <button
+      *ngIf="initerStep == 3"
+      pButton
+      pRipple
+      type="button"
+      label="Befejezés"
+      (click)="submit()"
+      icon="pi pi-check-circle"
+      styleClass="p-button-lg"
+      class="p-button-success"
+      [disabled]="!isStepValid()"
+    ></button>
+  </div>
+</div>

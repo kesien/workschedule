@@ -10,7 +10,7 @@ import { REQUEST_TYPES } from 'src/app/shared/constants/requesttypes.constant'
 })
 export class NewRequestComponent implements OnInit {
   requestTypes = REQUEST_TYPES
-  isPeriod = false
+  private _isPeriod = false
 
   date?: Date | Date[]
   type = 0
@@ -18,6 +18,17 @@ export class NewRequestComponent implements OnInit {
     private ref: DynamicDialogRef,
     private translate: TranslateService,
   ) {}
+
+  get isPeriod() {
+    return this._isPeriod
+  }
+
+  set isPeriod(value) {
+    if (!value && Array.isArray(this.date)) {
+      this.date = undefined
+    }
+    this._isPeriod = value
+  }
 
   ngOnInit(): void {
     this.requestTypes = this.requestTypes.map((rt) => {

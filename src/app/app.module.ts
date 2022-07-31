@@ -59,8 +59,14 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { GlobalErrorHandler } from './shared/errorhandler/error.handler'
 import { ServerErrorInterceptor } from './shared/interceptors/error.interceptor'
-import { ToolbarModule } from 'primeng/toolbar';
+import { ToolbarModule } from 'primeng/toolbar'
 import { MessageService } from 'primeng/api'
+import { ChristmassLayoutComponent } from './components/christmass-layout/christmass-layout.component'
+import { ChristmassAdminComponent } from './components/christmass-layout/christmass-admin/christmass-admin.component'
+import { ListboxModule } from 'primeng/listbox'
+import { ProgressBarModule } from 'primeng/progressbar'
+import { IniterComponent } from './components/christmass-layout/christmass-admin/initer/initer.component'
+import { InputNumberModule } from 'primeng/inputnumber'
 
 export function tokenGetter() {
   return localStorage.getItem('token')
@@ -86,6 +92,9 @@ export function tokenGetter() {
     SummaryComponent,
     EditUserComponent,
     StatisticsComponent,
+    ChristmassLayoutComponent,
+    ChristmassAdminComponent,
+    IniterComponent,
   ],
   imports: [
     ToastModule,
@@ -112,8 +121,11 @@ export function tokenGetter() {
     ButtonModule,
     DropdownModule,
     MultiSelectModule,
+    ProgressBarModule,
     TableModule,
     BrowserModule,
+    ListboxModule,
+    InputNumberModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     ToastrModule.forRoot({
@@ -149,9 +161,9 @@ export function tokenGetter() {
   ],
   providers: [
     MessageService,
-    { 
-      provide: ErrorHandler, 
-      useClass: GlobalErrorHandler 
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler,
     },
     {
       provide: HTTP_INTERCEPTORS,

@@ -63,7 +63,7 @@ export class RequestsComponent implements OnInit, OnDestroy, AfterViewInit {
           ] as FilterMetadata,
           month: [
             {
-              value: this.months[this.date.getMonth()].value,
+              value: this.months[this.date.getMonth() + 1].value,
               matchMode: 'equals',
             },
           ] as FilterMetadata,

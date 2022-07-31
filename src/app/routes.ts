@@ -1,12 +1,13 @@
-import { Routes } from '@angular/router';
-import { AdminComponent } from './components/admin/admin.component';
-import { HomeComponent } from './components/home/home.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { RequestsComponent } from './components/requests/requests.component';
-import { ScheduleComponent } from './components/schedule/schedule.component';
-import { StatisticsComponent } from './components/statistics/statistics.component';
-import { AdminGuard } from './shared/guard/admin.guard';
-import { AuthGuard } from './shared/guard/auth.guard';
+import { Routes } from '@angular/router'
+import { AdminComponent } from './components/admin/admin.component'
+import { ChristmassLayoutComponent } from './components/christmass-layout/christmass-layout.component'
+import { HomeComponent } from './components/home/home.component'
+import { ProfileComponent } from './components/profile/profile.component'
+import { RequestsComponent } from './components/requests/requests.component'
+import { ScheduleComponent } from './components/schedule/schedule.component'
+import { StatisticsComponent } from './components/statistics/statistics.component'
+import { AdminGuard } from './shared/guard/admin.guard'
+import { AuthGuard } from './shared/guard/auth.guard'
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -31,7 +32,11 @@ export const routes: Routes = [
         path: 'statistics',
         component: StatisticsComponent,
       },
+      {
+        path: 'xmass',
+        component: ChristmassLayoutComponent,
+      },
       { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
     ],
   },
-];
+]

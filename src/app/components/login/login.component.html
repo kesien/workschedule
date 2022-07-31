@@ -1,11 +1,13 @@
-<div class="p-fluid">
-  <div class="field">
-      <label for="username">{{ 'login.username-label' | translate }}</label>
-      <input [(ngModel)]="user.username" id="username" type="text" pInputText class="w-full" placeholder="{{'login.username-placeholder' | translate}}"> 
+<form [formGroup]="loginForm" (keydown)="checkBeforeSubmit($event)">
+  <div class="p-fluid">
+    <div class="field">
+        <label for="username">{{ 'login.username-label' | translate }}</label>
+        <input formControlName="username" id="username" type="text" pInputText class="w-full" placeholder="{{'login.username-placeholder' | translate}}"> 
+    </div>
+    <div class="field">
+        <label for="password">{{ 'login.password-label' | translate }}</label>
+        <p-password formControlName="password" id="password" [toggleMask]="true" [feedback]="false" placeholder="{{ 'login.password-placeholder' | translate }}" styleClass="p-password p-component p-inputwrapper p-input-icon-right"></p-password>
+    </div>
   </div>
-  <div class="field">
-      <label for="password">{{ 'login.password-label' | translate }}</label>
-      <p-password [(ngModel)]="user.password" id="password" [toggleMask]="true" [feedback]="false" placeholder="{{ 'login.password-placeholder' | translate }}"></p-password>
-  </div>
-</div>
-<p-button label="{{ 'login.button' | translate }}" (click)="login()" styleClass="w-full"></p-button>
+  <p-button label="{{ 'login.button' | translate }}" (click)="login()" styleClass="w-full" [disabled]="!loginForm.valid"></p-button>
+</form>

@@ -84,7 +84,11 @@ export class NavigationComponent implements OnInit {
           icon: 'pi pi-fw pi-calendar',
           routerLink: ['schedule'],
         },
-        //{ label: n.statistics, icon:'pi pi-fw pi-calendar', routerLink: ['statistics']},
+        {
+          label: n.christmass,
+          icon: 'fa fa-solid fa-gift',
+          routerLink: ['xmass'],
+        },
         {
           label: n.admin,
           icon: 'pi pi-fw pi-lock',

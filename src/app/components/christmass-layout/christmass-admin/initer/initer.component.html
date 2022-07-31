@@ -1,0 +1,20 @@
+<p-card styleClass="p-card-shadow lg:w-6 md:w-8 mx-auto">
+    <p-progressBar [value]="progressValue" [showValue]="false"></p-progressBar>
+</p-card>
+<p-card styleClass="p-card-shadow lg:w-6 md:w-8 mx-auto mt-2">
+    <div *ngIf="users && step == 1" class="field">
+        <h3>Válaszd ki a résztvevőket</h3>
+        <p-listbox [options]="users" [(ngModel)]="selectedUsers" optionLabel="name" [metaKeySelection]="false" [filter]="true" [checkbox]="true" [multiple]="true"></p-listbox>
+    </div>
+    <div *ngIf="step == 2" class="field">
+        <h3>Válaszd ki a határidőt</h3>
+        <div style="text-align: center">
+            <p-calendar [(ngModel)]="selectedDate" [inline]="true" [showWeek]="true"></p-calendar>
+        </div>
+    </div>
+    <div *ngIf="step == 3" class="field">
+        <h3>Add meg az összegkeretet</h3>
+        <p-inputNumber [(ngModel)]="selectAmount" mode="currency" currency="HUF" locale="hu-HU">
+        </p-inputNumber>
+    </div>
+</p-card>
